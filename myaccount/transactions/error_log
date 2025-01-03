@@ -1,0 +1,214 @@
+[25-May-2022 09:41:54 UTC] PHP Fatal error:  Uncaught ImagickException: no decode delegate for this image format `HEIC' @ error/constitute.c/ReadImage/566 in /home/travelex/public_html/myaccount/transactions/upload_uncommon.php:18
+Stack trace:
+#0 /home/travelex/public_html/myaccount/transactions/upload_uncommon.php(18): Imagick->__construct('/home/travelex/...')
+#1 /home/travelex/public_html/myaccount/transactions/upload_uncommon.php(77): genPdfThumbnail('/home/travelex/...', '/home/travelex/...')
+#2 {main}
+  thrown in /home/travelex/public_html/myaccount/transactions/upload_uncommon.php on line 18
+[14-Jun-2022 19:49:08 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-200586aKTXHHLkE03z%d' '-f/tmp/magick-200586lGrO1eNulmyx' '-f/tmp/magick-200586DCCyzVr16Liy'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[22-Jun-2022 06:53:55 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-1633924-IqsEwypQ26T%d' '-f/tmp/magick-1633924aKH692RB43MP' '-f/tmp/magick-1633924RgKJpX7ZQeTT'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--  in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[01-Aug-2022 07:01:28 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-645608O8GisQGOeOd5%d' '-f/tmp/magick-645608Ka3DGk24hMe2' '-f/tmp/magick-645608V6zKr9WG8gQ2'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload_uncommon.php on line 18
+[11-Aug-2022 06:07:10 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-25044500_cRAxocHykY%d' '-f/tmp/magick-25044502_rivOT3ErjY' '-f/tmp/magick-2504450PrKbc7MFBSLY'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--  in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[11-Aug-2022 06:10:59 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-2505021rGzG9xEmFTV7%d' '-f/tmp/magick-2505021JpG_v3kEItt7' '-f/tmp/magick-2505021PHMxCAegqzF6'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--  in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[06-Sep-2022 07:52:39 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-3148696d3CFjnjWdGeN%d' '-f/tmp/magick-3148696JakbvRjv2XEQ' '-f/tmp/magick-3148696jlrFD_MUFdvM'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--  in /home/travelex/public_html/myaccount/transactions/upload_uncommon.php on line 18
+[08-Sep-2022 12:36:44 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-3558129jsW6PJOIwSjf%d' '-f/tmp/magick-3558129Sp9Li46Umj0d' '-f/tmp/magick-3558129ShG2sQhIakAd'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--  in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[13-Sep-2022 19:18:33 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-308731Nyzkhr3USbC1%d' '-f/tmp/magick-308731jM5haVNPfeSY' '-f/tmp/magick-3087311twtXizXCxX0'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[14-Sep-2022 04:56:57 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-374036hNfHo_rkodg2%d' '-f/tmp/magick-374036zXcgM5AKdaz1' '-f/tmp/magick-374036sWlb1hoQRnN2'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[15-Sep-2022 11:32:18 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-652112DRPYJVUPZZeP%d' '-f/tmp/magick-652112h176fmxVHslR' '-f/tmp/magick-652112dkaHhFIj5W9R'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[04-Oct-2022 21:54:17 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-668141wCP6RERj35n%d' '-f/tmp/magick-66814leLO2a4v2WSk' '-f/tmp/magick-668147radoCafGjNk'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   --di in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[17-Oct-2022 07:23:49 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-7623228hE5IjyngNqo%d' '-f/tmp/magick-762322VdYRFx71Libp' '-f/tmp/magick-76232221_38lzqXWTq'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[18-Oct-2022 05:19:14 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-929419OFzJVcGQiVAx%d' '-f/tmp/magick-929419EoHjGHJ7314t' '-f/tmp/magick-929419rh7c75Lvg4Iv'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:730/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/200(L)--   --dict:80/200(L)--   --dict:133/256(ro)(G)--   - in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[22-Oct-2022 10:45:38 UTC] PHP Warning:  session_start(): open(/var/cpanel/php/sessions/ea-php74/sess_0356a44173acfe00059cf8fbe48a9300, O_RDWR) failed: Permission denied (13) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[22-Oct-2022 10:45:38 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/ea-php74) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[22-Oct-2022 10:49:22 UTC] PHP Warning:  session_start(): open(/var/cpanel/php/sessions/ea-php74/sess_0356a44173acfe00059cf8fbe48a9300, O_RDWR) failed: Permission denied (13) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[22-Oct-2022 10:49:22 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/ea-php74) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[22-Oct-2022 10:49:31 UTC] PHP Warning:  session_start(): open(/var/cpanel/php/sessions/ea-php74/sess_0356a44173acfe00059cf8fbe48a9300, O_RDWR) failed: Permission denied (13) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[22-Oct-2022 10:49:31 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/ea-php74) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[31-Oct-2022 07:52:00 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-isWtv87tA8YOjYsq-XqmFF65psAuql0c%d' '-f/tmp/magick-qv13v1zXrvkzlW--9eyJQeryxGqfFBx2' '-f/tmp/magick-z88nmlY16Shl9-UmkGcM_sM7rv93cSCR'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[19-Nov-2022 15:04:59 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-ufGGwedSuh07uePXBj0Iz_vREeLh5CoY%d' '-f/tmp/magick-m9TZPcYOxqkDFA9WilZezeSoOj8QXQsh' '-f/tmp/magick-iytCv566_od8c01LFO8Ien2AfaBV1el7'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[19-Nov-2022 15:05:46 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-3uaCaLIw4BSNExDNLue2KMCI2fqaN1Lh%d' '-f/tmp/magick-IyHR-8eFn4HXWmZRclB7gAnK88jckWKn' '-f/tmp/magick-T8NGqI2kW9H5nLACFjS5kZuYxv8H711G'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[19-Nov-2022 15:08:49 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-h4o20xLfLz54ExHshD8eV7qwUnG8Phnx%d' '-f/tmp/magick-qmWWlPBTAjLQfE6CVSF-Bh5Z_l1D6PKv' '-f/tmp/magick-1jV0UZuyMAZ7SvrOb7KUln-ZQUszjmq9'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[21-Nov-2022 02:49:25 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-85lhO_irQCepsrd5mgcfuBkLi60F3Qu7%d' '-f/tmp/magick-u5OemtK-zbw5VcDxsW9CTpbbh41dYviT' '-f/tmp/magick-FKTDRdXO_YQlJT72G-RShKlrHHrgfVrS'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[21-Nov-2022 02:49:34 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-G2KVD56tmnjEfdr-3x-W4apA2cVFZNwH%d' '-f/tmp/magick-9m9sGIQla3P43xUjh1Z5mg2LsdSRR7Zh' '-f/tmp/magick-singGl4er7cQXQhIFhkPc4KloPIaivhm'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[05-Dec-2022 17:11:28 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-lR6Z7J82SxJxWOVmHKJP9TaPdSjkqkDs%d' '-f/tmp/magick-cqMbAhRVXSKdFUwKmynzRbjW1h7ynLRD' '-f/tmp/magick-Ij_Z3Wr69Wt-zLRPh56W_mBHF9OeRzmA'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[14-Dec-2022 00:27:32 UTC] PHP Warning:  session_start(): open(/var/cpanel/php/sessions/ea-php74/sess_c3cf861692d4a02383c574564c10357c, O_RDWR) failed: No space left on device (28) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[14-Dec-2022 00:27:32 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/ea-php74) in /home/travelex/public_html/myaccount/transactions/index.php on line 2
+[21-Dec-2022 09:48:02 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-F8-Ofvd36sKdFCBZQMduHLtZd5bExqZC%d' '-f/tmp/magick-jaqZLbK52L6f6CzhLkFVP-rHhm12pOj5' '-f/tmp/magick-9ifVDtbDnp-ZSv8OHXH2z0x8WpryxGRZ'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[02-Feb-2023 06:54:58 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-L0WbCFqg8X9jd1bzO-8DTLvxNEIeuLzA%d' '-f/tmp/magick-jaVsG6TDvp9lID418lEOmx713jdoL4wU' '-f/tmp/magick-QR7vv_uEnzByk82xlQnJCAqk963OV9OL'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[01-Mar-2023 05:36:38 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-_J_XzFz4YMSpMBB-qzYC9Y7BFdx7T5aE%d' '-f/tmp/magick-cUe7CtMKi6Wtyks2HLeceKYNGRYq7dVx' '-f/tmp/magick-VSGsjV5YhDSHpNcTkqCTTlN9mTVK8W1q'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[01-Mar-2023 05:41:06 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-e5Eggn-W9PVKooOh3yxWrFeh3B7BC0Ck%d' '-f/tmp/magick-rYC4ZEZlx_7yvkFyDI6lENlLGRV86ozw' '-f/tmp/magick-y2pvLKafTiS79sKGk1mVIhz84oH4qYN5'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17
+[01-Mar-2023 05:43:39 UTC] PHP Fatal error:  Uncaught ImagickException: Postscript delegate failed `[ghostscript library 9.27] -sstdout=%stderr -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 '-sDEVICE=pngalpha' -dTextAlphaBits=4 -dGraphicsAlphaBits=4 '-r72x72' -dPrinted=false -dFirstPage=1 -dLastPage=1 '-sOutputFile=/tmp/magick-7EfvMOV1y_LIABpLxOakIneqE63t99KM%d' '-f/tmp/magick-yqb3zj77R9zG5v0eRzKFXBGSsVxZqTTB' '-f/tmp/magick-36utYYKOxpPYkibBBv-jzuec6tcvQGsQ'':    **** This file requires a password for access.
+Error: /invalidfileaccess in pdf_process_Encrypt
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   runpdf   --nostringval--   2   %stopped_push   --nostringval--   runpdf   runpdf   false   1   %stopped_push   1992   1   3   %oparray_pop   1991   1   3   %oparray_pop   1979   1   3   %oparray_pop   1980   1   3   %oparray_pop   runpdf   runpdf   runpdf   runpdf   false   1   %stopped_push
+Dictionary stack:
+   --dict:731/1123(ro)(G)--   --dict:1/20(G)--   --dict:80/2 in /home/travelex/public_html/myaccount/transactions/upload.php on line 17

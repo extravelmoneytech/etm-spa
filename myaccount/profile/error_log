@@ -1,0 +1,10 @@
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Connection refused in /home/travelex/public_html/includes/dbconnect.php on line 4
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Connection refused in /home/travelex/public_html/includes/dbconnect.php on line 5
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/travelex/public_html/myaccount/profile/index.php on line 35
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_fetch_object() expects parameter 1 to be mysqli_result, null given in /home/travelex/public_html/myaccount/profile/index.php on line 36
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/travelex/public_html/myaccount/profile/index.php on line 40
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/travelex/public_html/myaccount/profile/index.php on line 42
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_fetch_object() expects parameter 1 to be mysqli_result, null given in /home/travelex/public_html/myaccount/profile/index.php on line 43
+[30-Nov-2021 07:30:06 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/travelex/public_html/myaccount/profile/index.php on line 49
+[22-Oct-2022 10:46:16 UTC] PHP Warning:  session_start(): open(/var/cpanel/php/sessions/ea-php74/sess_0356a44173acfe00059cf8fbe48a9300, O_RDWR) failed: Permission denied (13) in /home/travelex/public_html/myaccount/profile/index.php on line 2
+[22-Oct-2022 10:46:16 UTC] PHP Warning:  session_start(): Failed to read session data: files (path: /var/cpanel/php/sessions/ea-php74) in /home/travelex/public_html/myaccount/profile/index.php on line 2

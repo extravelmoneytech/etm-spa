@@ -1,0 +1,545 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.locationSection {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    column-gap: 3rem;
+}
+
+.locationRow {
+    display: flex;
+    column-gap: 2rem;
+}
+
+.location {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.32px;
+    color: black;
+    display: flex;
+    border-radius: 2rem;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+}
+.locationNormal {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.32px;
+    color: black;
+    display: flex;
+    border-radius: 2rem;
+    padding: 0.3rem 1rem;
+    align-items:center;
+    
+    border: 1px solid rgba(0, 0, 0, 0.10);
+}
+.location:hover {
+    background-color: #0E51A0;
+    color: white;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.location .locationBtnArrow {
+    width: 1.2rem;
+}
+
+.location .locationBtnArrow path {
+    transition: 0.2s;
+    fill: black !important;
+}
+
+.location:hover .locationBtnArrow path {
+    fill: white !important;
+}
+
+.cityPageContainer {
+    padding: 3rem 5rem;
+    font-family: "Plus Jakarta Sans";
+}
+
+.headerSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    padding-bottom: 3rem;
+}
+
+.headings h2 {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    color: #040815;
+    letter-spacing: -0.96px;
+}
+
+.headings span {
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    font-size: 1.5rem;
+    color: #0E51A0;
+    letter-spacing: -1.2px;
+}
+
+.flags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.flags .flag {
+    width: 5rem;
+    border-radius: 100%;
+}
+
+.flags .flagConnector {
+    width: 15rem;
+}
+
+.bodySection {
+    padding-top: 2rem;
+}
+
+.contents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headingText {
+    color: #040815;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2.3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -1.2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.headingText::before {
+    background: #E31D1C;
+    content: '';
+    width: 6px;
+    height: 100%;
+    display: block;
+    height: 2.2rem;
+}
+
+.contentText {
+    color: rgba(0, 0, 0, 0.60);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.32px;
+}
+
+.contentList {
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.contentList li {
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+.contentListFaq{
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.contentListFaq li {
+    margin-left: 1.5rem;
+    font-size: 0.8rem;
+    font-style: normal;
+    line-height: 150%;
+    color: rgb(0 0 0 / 0.6);
+}
+.tableSection .tableContainer {
+    border: 1px solid #E4E7EC;
+    border-radius: 0.5rem;
+}
+
+.tableHeader {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tableHeader span {
+    color: #101828;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.tableHeading {
+    background: #F9FAFB;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #E4E7EC;
+    border-top: 1px solid #E4E7EC;
+    gap: 2rem;
+}
+
+.tableHeading span {
+    color: #475467;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    width: 33.33%;
+}
+
+.tableBody .tableRow {
+    display: flex;
+    border-bottom: 1px solid #E4E7EC;
+    padding: 8px 20px;
+    gap: 2rem;
+}
+
+.tableBody .columnSpec {
+    width: 33.33%;
+    display: flex;
+    align-items: center;
+}
+
+.tableBody .currencyDetails {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.currencyFlag {
+    width: 2rem;
+    border-radius: 100%;
+}
+
+.currencyShort {
+    color: #101828;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.currencyFull {
+    color: #475467;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.buyValue, .sellValue {
+    color: #475467;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.tableRow:hover {
+    background-color: #0E51A0;
+}
+
+.tableRow:hover .currencyShort, .tableRow:hover .currencyFull, 
+.tableRow:hover .buyValue, .tableRow:hover .sellValue {
+    color: white !important;
+}
+
+.stepsSection .stepsContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.step {
+    width: 20%;
+}
+
+.stepHeader {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.stepHeader span {
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -1.687px;
+    background: linear-gradient(180deg, #0E51A0 0%, #E31D1C 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 1rem;
+}
+
+.stepHeader .horizontalLine {
+    height: 2.8rem;
+    width: 11rem;
+    background: linear-gradient(270deg, rgba(227, 29, 28, 0.20) -21.87%, rgba(244, 163, 162, 0.20) 42.44%, rgba(255, 255, 255, 0.20) 126.92%);
+}
+
+.stepHeader .verticalLine {
+    width: 2.8rem;
+    height: 5rem;
+    background: linear-gradient(270deg, rgba(227, 29, 28, 0.20) -21.87%, rgba(244, 163, 162, 0.20) 42.44%, rgba(255, 255, 255, 0.20) 126.92%);
+    display: none;
+}
+
+.stepContentHeader {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.stepContentHeader span {
+            margin-left: -3rem;
+            font-size: 1.3rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: -0.6px;
+            margin-top: 1rem;
+y}
+
+
+.stepContentHeader p {
+    color: rgba(0, 0, 0, 0.40);
+    margin-left: 1.2rem;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.42px;
+}
+.stepContentHeader div{
+   display: flex;
+   justify-content: start; 
+} 
+
+.popularCitySection .popularCityContainer {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 1335px){
+    .popularCitySection .popularCityContainer {
+    grid-template-columns: auto auto auto;
+    }
+}
+
+@media (max-width: 1020px){
+    .popularCitySection .popularCityContainer {
+    grid-template-columns: auto auto;
+    }
+}
+
+.cityCard {
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid rgba(14, 81, 160, 0.02);
+    background: linear-gradient(127deg, rgba(255, 255, 255, 0.20) -3.92%, rgba(14, 81, 160, 0.20) 136.58%);
+    width: 18rem;
+    display: flex;
+    z-index: 1;
+    position: relative;
+    padding: 1rem;
+    justify-content: space-between;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+.cityCard .leftSec {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cityCard .leftSec .logoContainer {
+    width: 4rem;
+    height: 2rem;
+}
+
+.cityCard .leftSec .transparentLogo {
+    position: absolute;
+    width: 100%;
+}
+
+.cityCard .leftSec .colourLogo {
+    width: 100%;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cityCard .leftSec .locName {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin-top: 0.5rem;
+    letter-spacing: -0.32px;
+}
+
+.cityCard .rightSec {
+    display: flex;
+    align-items: end;
+}
+
+.cityCard .rightSec .imgSvg {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cityCard .viewBtn {
+    color: #0E51A0;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.24px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.5rem;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cityCard:hover {
+    border: 1px solid rgba(14, 81, 160, 0.02);
+    background: linear-gradient(127deg, rgba(255, 255, 255, 0.20) -3.92%, rgba(227, 29, 28, 0.20) 136.58%);
+}
+
+.cityCard:hover .viewBtn, .cityCard:hover .rightSec .imgSvg, 
+.cityCard:hover .leftSec .colourLogo {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cityCard:hover .leftSec .transparentLogo {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+}
+.locationContainer {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 2rem;
+        column-gap: 3rem;
+    }
+@media (max-width: 940px) {
+    .headingText {
+        font-size: 1.8rem !important;
+    }
+    .headerSection {
+        flex-direction: column;
+        align-items: start;
+        row-gap: 3rem;
+    }
+    .flags .flag {
+        width: 4rem;
+    }
+    .flags .flagConnector {
+        width: 10rem;
+    }
+    .locationContainer {
+        row-gap: 1rem !important;
+        column-gap: 1rem !important;
+    }
+    .bodySection .contents {
+        flex-direction: column;
+        align-items: start;
+        row-gap: 3rem;
+    }
+    .contents div{
+        width:100%;
+    }
+    .tableBody .currencyFlag {
+        display: none;
+    }
+    .stepsSection .stepsContainer {
+        flex-direction: column;
+        align-items: start;
+        row-gap: 2rem;
+    }
+    .step {
+        width: 100%;
+        display: flex;
+        gap: 2rem;
+    }
+    .stepHeader {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+    }
+    .stepHeader .horizontalLine {
+        display: none;
+    }
+    .stepHeader .verticalLine {
+        display: block;
+    }
+    .popularCityContainer {
+        grid-template-columns: auto auto !important;
+        gap: 1rem;
+    }
+    .cityCard {
+        width: 100%;
+    }
+}
+.faqHeader {
+    cursor:pointer;
+}
+@media (max-width: 640px) {
+    .cityPageContainer {
+        padding: 3rem 2rem;
+    }
+}

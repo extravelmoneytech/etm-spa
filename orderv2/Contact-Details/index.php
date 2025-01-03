@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php
+
+    
+    $fold = "../../";  
+    $contactDetailsPage = true;
+    $title="Contact Details";
+    include $fold . 'includesv2/head.php';
+?>
+
+<body>
+    <div class="flex flex-col items-center justify-center">
+        <div class="w-full chooseCityOverlayMain  relative" style="max-width: 103rem;">
+
+            <?php 
+                include $fold . 'includesv2/header.php';
+            ?>
+
+            <div class="progressBar mb-8">
+                <div class="w-full justify-start items-center progressBar hidden md:inline-flex mt-8">
+                    <div class="grow shrink basis-0 h-0.5  bg-[#20bc73]"></div>
+                    <div class="flex flex-col relative">
+                        <div
+                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold ">1</span>
+                        </div>
+                        <span
+                            class="text-black text-lg font-bold  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Get
+                            Rates</span>
+                    </div>
+
+                    <div class="grow shrink basis-0 h-0.5  bg-[#20bc73]"></div>
+                    <div class="flex flex-col relative">
+                        <div
+                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold ">2</span>
+                        </div>
+                        <span
+                            class="text-black text-lg font-bold  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Choose Provider</span>
+                    </div>
+                    <div class="grow shrink basis-0 h-0.5  bg-[#20bc73]"></div>
+                    <div class="flex flex-col relative">
+                        <div
+                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold ">3</span>
+                        </div>
+                        <span
+                            class="text-black text-lg font-bold  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Contact
+                            Details</span>
+                    </div>
+                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
+                    <div class="flex flex-col relative">
+                        <div
+                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold ">4</span>
+                        </div>
+                        <span
+                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Review
+                            & Payment</span>
+                    </div>
+                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
+                    <div class="flex flex-col relative">
+                        <div
+                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold ">5</span>
+                        </div>
+                        <span
+                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Complete
+                            KYC</span>
+                    </div>
+                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
+                </div>
+
+            </div>
+
+            <section>
+                <div class="px-5 sm:px-12 md:px-16 py-5 pb-36 customMd:pb-8">
+                    <div
+                        class=" w-full p-2.5 bg-primary-blue/10 rounded-lg justify-center items-center gap-2.5 inline-flex md:hidden">
+                        <div class="text-primary-blue text-base font-bold" id="productNameIdentifier">Currency Exchange</div>
+                    </div>
+
+                    <div class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6 md:hidden">
+                        <div
+                            class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
+                            <div><span class="text-primary-blue text-lg font-bold ">3</span><span
+                                    class="text-black/40 text-base font-medium ">/5</span></div>
+                        </div>
+                        <div class="text-black text-base font-bold leading-none">Contact Details</div>
+                        <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 bg-primary-blue basis-4 w-[198px]"
+                            role="progressbar"></div>
+                    </div>
+
+
+                    <div class="flex flex-col md:flex-row gap-4 customMd:gap-8 md:border border-black/10 rounded-xl md:px-10 md:py-4 md:mt-12">
+                        <div class="mt-4 border border-primary-blue/10 md:border-0 rounded-2xl w-full">
+
+
+
+                            <div class="flex flex-col pb-6 pt-6">
+
+
+
+
+
+                                
+                                
+                                <div class="px-2 flex flex-col">
+
+                                    <span class="text-black/60 text-sm font-semibold pl-2">Enter Your Full Name</span>
+
+                                    <input
+                                        class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none"
+                                        type="text" id="customerName" data-save>
+
+                                </div>
+
+
+                                <div class="px-2 flex flex-col mt-4">
+
+                                    <span class="text-black/60 text-sm font-semibold pl-2">Enter Your Email</span>
+
+                                    <input
+                                        class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none"
+                                        type="text" id="customerEmail" data-save>
+
+                                </div>
+
+                                <div class="px-2 flex flex-col mt-4">
+
+                                    <span class="text-black/60 text-sm font-semibold pl-2">Phone Number</span>
+
+                                    
+                                        <div class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none flex items-center justify-between cursor-not-allowed" id="customerMobile" >
+                                        <span></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,300,250">
+                                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><circle cx="24" cy="24" r="20" fill="#0e51a0"></circle><path d="M22.491,30.69c-0.576,0 -1.152,-0.22 -1.591,-0.659l-6.083,-6.084c-0.879,-0.878 -0.879,-2.303 0,-3.182c0.878,-0.879 2.304,-0.879 3.182,0l6.083,6.084c0.879,0.878 0.879,2.303 0,3.182c-0.439,0.439 -1.015,0.659 -1.591,0.659z" fill="#ffffff"></path><path d="M22.491,30.69c-0.576,0 -1.152,-0.22 -1.591,-0.659c-0.879,-0.878 -0.879,-2.303 0,-3.182l9.539,-9.539c0.878,-0.879 2.304,-0.879 3.182,0c0.879,0.878 0.879,2.303 0,3.182l-9.539,9.539c-0.439,0.439 -1.015,0.659 -1.591,0.659z" fill="#ffffff"></path></g></g>
+                                        </svg>
+                                        </div>
+
+                                </div>
+
+                                
+
+                                <!-- <div class="px-2 flex flex-col mt-4"></div>
+
+                                    <span class="text-black/60 text-sm font-semibold pl-2">Enter Phone Number</span>
+
+                                    <input
+                                        class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none"
+                                        type="text" id="customerUniversityName" >
+
+                                </div> -->
+
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="md:mt-4 mt-6 md: w-full">
+                            <div class="border border-primary-blue/80 rounded-2xl py-4 ">
+                                <div id="universityNameContainer" class="px-2 flex flex-col moneyT">
+
+                                    <span class="text-black/60 text-sm font-semibold pl-2">Enter University Name (Optional)</span>
+
+                                    <input class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none" type="text" id="universityName" data-save="">
+
+                                </div>
+
+                                <div class="px-2 flex flex-col forexContainer">
+    
+                                    <span class="text-black text-sm font-bold pl-2">When are you travelling<span
+                                            class="text-[#ff8685] text-sm leading-7 ml-[2px]">*</span></span>
+    
+    
+                                    <div id="datePickerWrapper" class=" mt-1">
+                                        <div id="datePicker">
+    
+                                            <div id="datePickerSelector"
+                                                class="flex items-center justify-start px-3 gap-2 border border-black/10 py-2 rounded-lg cursor-pointer">
+    
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M19.5 3.5H17.25V2.75C17.25 2.55109 17.171 2.36032 17.0303 2.21967C16.8897 2.07902 16.6989 2 16.5 2C16.3011 2 16.1103 2.07902 15.9697 2.21967C15.829 2.36032 15.75 2.55109 15.75 2.75V3.5H8.25V2.75C8.25 2.55109 8.17098 2.36032 8.03033 2.21967C7.88968 2.07902 7.69891 2 7.5 2C7.30109 2 7.11032 2.07902 6.96967 2.21967C6.82902 2.36032 6.75 2.55109 6.75 2.75V3.5H4.5C4.10218 3.5 3.72064 3.65804 3.43934 3.93934C3.15804 4.22064 3 4.60218 3 5V20C3 20.3978 3.15804 20.7794 3.43934 21.0607C3.72064 21.342 4.10218 21.5 4.5 21.5H19.5C19.8978 21.5 20.2794 21.342 20.5607 21.0607C20.842 20.7794 21 20.3978 21 20V5C21 4.60218 20.842 4.22064 20.5607 3.93934C20.2794 3.65804 19.8978 3.5 19.5 3.5ZM6.75 5V5.75C6.75 5.94891 6.82902 6.13968 6.96967 6.28033C7.11032 6.42098 7.30109 6.5 7.5 6.5C7.69891 6.5 7.88968 6.42098 8.03033 6.28033C8.17098 6.13968 8.25 5.94891 8.25 5.75V5H15.75V5.75C15.75 5.94891 15.829 6.13968 15.9697 6.28033C16.1103 6.42098 16.3011 6.5 16.5 6.5C16.6989 6.5 16.8897 6.42098 17.0303 6.28033C17.171 6.13968 17.25 5.94891 17.25 5.75V5H19.5V8H4.5V5H6.75ZM19.5 20H4.5V9.5H19.5V20ZM13.125 12.875C13.125 13.0975 13.059 13.315 12.9354 13.5C12.8118 13.685 12.6361 13.8292 12.4305 13.9144C12.225 13.9995 11.9988 14.0218 11.7805 13.9784C11.5623 13.935 11.3618 13.8278 11.2045 13.6705C11.0472 13.5132 10.94 13.3127 10.8966 13.0945C10.8532 12.8762 10.8755 12.65 10.9606 12.4445C11.0458 12.2389 11.19 12.0632 11.375 11.9396C11.56 11.816 11.7775 11.75 12 11.75C12.2984 11.75 12.5845 11.8685 12.7955 12.0795C13.0065 12.2905 13.125 12.5766 13.125 12.875ZM17.25 12.875C17.25 13.0975 17.184 13.315 17.0604 13.5C16.9368 13.685 16.7611 13.8292 16.5555 13.9144C16.35 13.9995 16.1238 14.0218 15.9055 13.9784C15.6873 13.935 15.4868 13.8278 15.3295 13.6705C15.1722 13.5132 15.065 13.3127 15.0216 13.0945C14.9782 12.8762 15.0005 12.65 15.0856 12.4445C15.1708 12.2389 15.315 12.0632 15.5 11.9396C15.685 11.816 15.9025 11.75 16.125 11.75C16.4234 11.75 16.7095 11.8685 16.9205 12.0795C17.1315 12.2905 17.25 12.5766 17.25 12.875ZM9 16.625C9 16.8475 8.93402 17.065 8.8104 17.25C8.68679 17.435 8.51109 17.5792 8.30552 17.6644C8.09995 17.7495 7.87375 17.7718 7.65552 17.7284C7.43729 17.685 7.23684 17.5778 7.0795 17.4205C6.92217 17.2632 6.81502 17.0627 6.77162 16.8445C6.72821 16.6262 6.75049 16.4 6.83564 16.1945C6.92078 15.9889 7.06498 15.8132 7.24998 15.6896C7.43499 15.566 7.6525 15.5 7.875 15.5C8.17337 15.5 8.45952 15.6185 8.6705 15.8295C8.88147 16.0405 9 16.3266 9 16.625ZM13.125 16.625C13.125 16.8475 13.059 17.065 12.9354 17.25C12.8118 17.435 12.6361 17.5792 12.4305 17.6644C12.225 17.7495 11.9988 17.7718 11.7805 17.7284C11.5623 17.685 11.3618 17.5778 11.2045 17.4205C11.0472 17.2632 10.94 17.0627 10.8966 16.8445C10.8532 16.6262 10.8755 16.4 10.9606 16.1945C11.0458 15.9889 11.19 15.8132 11.375 15.6896C11.56 15.566 11.7775 15.5 12 15.5C12.2984 15.5 12.5845 15.6185 12.7955 15.8295C13.0065 16.0405 13.125 16.3266 13.125 16.625ZM17.25 16.625C17.25 16.8475 17.184 17.065 17.0604 17.25C16.9368 17.435 16.7611 17.5792 16.5555 17.6644C16.35 17.7495 16.1238 17.7718 15.9055 17.7284C15.6873 17.685 15.4868 17.5778 15.3295 17.4205C15.1722 17.2632 15.065 17.0627 15.0216 16.8445C14.9782 16.6262 15.0005 16.4 15.0856 16.1945C15.1708 15.9889 15.315 15.8132 15.5 15.6896C15.685 15.566 15.9025 15.5 16.125 15.5C16.4234 15.5 16.7095 15.6185 16.9205 15.8295C17.1315 16.0405 17.25 16.3266 17.25 16.625Z"
+                                                        fill="black" />
+                                                </svg>
+    
+                                                <span id="selectedDate"
+                                                    class="md:text-[#9a9a9a] text-base font-semibold leading-7">
+                                                </span>
+    
+    
+    
+                                            </div>
+    
+                                            <div id="calendar" class="sm:max-w-96 calendar-hidden select-none">
+                                                <div class="navigation">
+                                                    <span id="prevMonth"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" viewBox="0 0 16 16" fill="none">
+                                                            <path
+                                                                d="M9.64597 2.64622L4.64597 7.64622C4.59948 7.69265 4.5626 7.7478 4.53744 7.8085C4.51228 7.86919 4.49933 7.93426 4.49933 7.99997C4.49933 8.06567 4.51228 8.13074 4.53744 8.19144C4.5626 8.25214 4.59948 8.30728 4.64597 8.35372L9.64597 13.3537C9.73979 13.4475 9.86704 13.5002 9.99972 13.5002C10.1324 13.5002 10.2597 13.4475 10.3535 13.3537C10.4473 13.2599 10.5 13.1326 10.5 13C10.5 12.8673 10.4473 12.74 10.3535 12.6462L5.7066 7.99997L10.3535 3.35372C10.3999 3.30726 10.4368 3.25211 10.4619 3.19141C10.4871 3.13072 10.5 3.06566 10.5 2.99997C10.5 2.93427 10.4871 2.86921 10.4619 2.80852C10.4368 2.74782 10.3999 2.69267 10.3535 2.64622C10.307 2.59976 10.2519 2.56291 10.1912 2.53777C10.1305 2.51263 10.0654 2.49969 9.99972 2.49969C9.93402 2.49969 9.86897 2.51263 9.80827 2.53777C9.74758 2.56291 9.69243 2.59976 9.64597 2.64622Z"
+                                                                fill="black" stroke="#0E51A0" />
+                                                        </svg></span>
+                                                    <span id="monthYear"></span>
+                                                    <span id="nextMonth"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" viewBox="0 0 16 16" fill="none">
+                                                            <path
+                                                                d="M6.35403 2.64622L11.354 7.64622C11.4005 7.69265 11.4374 7.7478 11.4626 7.8085C11.4877 7.86919 11.5007 7.93426 11.5007 7.99997C11.5007 8.06567 11.4877 8.13074 11.4626 8.19144C11.4374 8.25214 11.4005 8.30728 11.354 8.35372L6.35403 13.3537C6.26021 13.4475 6.13296 13.5002 6.00028 13.5002C5.8676 13.5002 5.74035 13.4475 5.64653 13.3537C5.55271 13.2599 5.5 13.1326 5.5 13C5.5 12.8673 5.55271 12.74 5.64653 12.6462L10.2934 7.99997L5.64653 3.35372C5.60007 3.30726 5.56322 3.25211 5.53808 3.19141C5.51294 3.13072 5.5 3.06566 5.5 2.99997C5.5 2.93427 5.51294 2.86921 5.53808 2.80852C5.56322 2.74782 5.60007 2.69267 5.64653 2.64622C5.69298 2.59976 5.74813 2.56291 5.80883 2.53777C5.86953 2.51263 5.93458 2.49969 6.00028 2.49969C6.06598 2.49969 6.13103 2.51263 6.19173 2.53777C6.25242 2.56291 6.30757 2.59976 6.35403 2.64622Z"
+                                                                fill="black" stroke="#0E51A0" />
+                                                        </svg></span>
+                                                </div>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Mo</th>
+                                                            <th>Tu</th>
+                                                            <th>We</th>
+                                                            <th>Th</th>
+                                                            <th>Fr</th>
+                                                            <th>Sa</th>
+                                                            <th>Su</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="calendarDays">
+                                                        <!-- Calendar days will be dynamically generated here -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+    
+                                </div>
+
+                                <div class="px-2 flex flex-col mt-4 moneyT" id="branchDropDownContainer">
+
+                                    <span class="text-black/60 text-sm font-semibold pl-2">Choose Branch Nearby</span>
+
+                                    <div id="branchDropDownMain"  class="dropdownMain select-none"  data-search="true"  dataval="" >
+                                        <div class="selectedItem">
+    
+                                        </div>
+                                        <ul id="branchDropDown" class="dropdownList overflow-scroll">
+                                            <li value="aluva" id="branchDropdownItem" class="dropdownItem template" >
+                                                <span>Aluva2, Ernakulam</span>
+                                            </li>
+                                            
+                                        </ul>
+                                        <svg class="dropdownArrow" xmlns="http://www.w3.org/2000/svg" width="16" height="17"
+                                            viewBox="0 0 16 17" fill="none">
+                                            <path
+                                                d="M13.354 6.85354L8.35403 11.8535C8.30759 11.9 8.25245 11.9369 8.19175 11.9621C8.13105 11.9872 8.06599 12.0002 8.00028 12.0002C7.93457 12.0002 7.86951 11.9872 7.80881 11.9621C7.74811 11.9369 7.69296 11.9 7.64653 11.8535L2.64653 6.85354C2.55271 6.75972 2.5 6.63247 2.5 6.49979C2.5 6.36711 2.55271 6.23986 2.64653 6.14604C2.74035 6.05222 2.8676 5.99951 3.00028 5.99951C3.13296 5.99951 3.26021 6.05222 3.35403 6.14604L8.00028 10.7929L12.6465 6.14604C12.693 6.09958 12.7481 6.06273 12.8088 6.03759C12.8695 6.01245 12.9346 5.99951 13.0003 5.99951C13.066 5.99951 13.131 6.01245 13.1917 6.03759C13.2524 6.06273 13.3076 6.09958 13.354 6.14604C13.4005 6.19249 13.4373 6.24764 13.4625 6.30834C13.4876 6.36904 13.5006 6.43409 13.5006 6.49979C13.5006 6.56549 13.4876 6.63054 13.4625 6.69124C13.4373 6.75193 13.4005 6.80708 13.354 6.85354Z"
+                                                fill="black" />
+                                        </svg>
+                                    </div>
+
+                                </div>
+    
+                                <div class="px-2 flex flex-col mt-4 forexContainer">
+    
+                                    <span class="text-black text-sm font-bold pl-2">Purpose of travelling<span
+                                            class="text-[#ff8685] text-sm leading-7 ml-[2px]">*</span></span>
+    
+    
+                                    <div class="dropdownMain select-none mt-1" id="purposeSelector" dataval="">
+                                        <div class="selectedItem text-[#9a9a9a]">
+    
+                                        </div>
+                                        <ul class="dropdownList">
+                                            <li value="holidayLeisure">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M22.3357 21.4687C22.2742 21.5457 22.1981 21.6098 22.1118 21.6574C22.0254 21.7049 21.9306 21.735 21.8326 21.7459C21.7347 21.7568 21.6356 21.7482 21.5409 21.7208C21.4463 21.6933 21.3579 21.6475 21.281 21.5859C21.2463 21.5578 17.6416 18.7499 11.9998 18.7499C6.35788 18.7499 2.75226 21.5624 2.71851 21.5868C2.6415 21.6484 2.55312 21.6942 2.45842 21.7216C2.36372 21.749 2.26454 21.7575 2.16656 21.7465C1.96868 21.7245 1.78767 21.6247 1.66335 21.4692C1.53903 21.3136 1.48159 21.1151 1.50365 20.9172C1.52571 20.7193 1.62548 20.5383 1.78101 20.414C1.93382 20.2921 5.39226 17.5771 10.9957 17.2781C10.7042 16.1167 10.6001 14.9163 10.6873 13.7221C10.8504 11.6868 11.711 8.97557 14.7185 6.92713C14.2054 6.79988 13.6777 6.74031 13.1491 6.74995C11.3679 6.80807 10.2485 7.84776 9.72726 9.92995C9.68706 10.0925 9.59359 10.237 9.46174 10.3403C9.32989 10.4436 9.16726 10.4998 8.99976 10.4999C8.93842 10.5003 8.8773 10.4927 8.81788 10.4774C8.62495 10.4292 8.45909 10.3063 8.35677 10.1357C8.25445 9.96521 8.22405 9.76101 8.27226 9.56807C9.13945 6.10401 11.3763 5.30995 13.1004 5.25557C13.7851 5.24067 14.4687 5.31793 15.1329 5.48526C14.7738 4.89182 14.2488 4.27307 13.5194 3.96182C12.5819 3.56432 11.441 3.73776 10.1154 4.47838C9.94134 4.57535 9.73589 4.59921 9.54426 4.54471C9.35262 4.49021 9.19048 4.36181 9.09351 4.18776C8.99654 4.01371 8.97268 3.80827 9.02718 3.61663C9.08169 3.42499 9.21009 3.26285 9.38413 3.16588C11.141 2.1862 12.7329 1.99026 14.1166 2.58463C15.2876 3.08713 16.0601 4.06401 16.5419 4.92838C17.1213 4.02463 17.8432 3.41245 18.641 3.15276C19.7529 2.78995 20.951 3.08526 22.2035 4.0312C22.3552 4.15347 22.4534 4.32997 22.4772 4.52334C22.501 4.7167 22.4487 4.91176 22.3313 5.06721C22.2138 5.22267 22.0405 5.32632 21.848 5.35623C21.6554 5.38613 21.4588 5.33995 21.2998 5.22745C20.4644 4.59651 19.7276 4.37807 19.1107 4.57776C18.4273 4.79807 17.9041 5.51526 17.576 6.13495C18.2506 6.2717 18.8997 6.51305 19.4998 6.85026C20.8694 7.63307 22.4998 9.29245 22.4998 12.7509C22.4998 12.9498 22.4207 13.1406 22.2801 13.2812C22.1394 13.4219 21.9487 13.5009 21.7498 13.5009C21.5508 13.5009 21.3601 13.4219 21.2194 13.2812C21.0788 13.1406 20.9998 12.9498 20.9998 12.7509C20.9998 10.5515 20.2432 9.00089 18.7498 8.15714C18.5758 8.05833 18.3958 7.97065 18.2107 7.89463C18.6829 8.85466 18.8485 9.93668 18.6851 10.994C18.5672 11.7763 18.284 12.5244 17.8544 13.1887C17.7395 13.3499 17.5654 13.4592 17.3702 13.4925C17.175 13.5259 16.9745 13.4807 16.8125 13.3669C16.6505 13.253 16.5401 13.0797 16.5054 12.8847C16.4707 12.6898 16.5145 12.489 16.6273 12.3262C16.6966 12.224 18.1582 10.0406 16.3216 7.69776C13.7904 9.1237 12.3944 11.1899 12.1816 13.8468C12.0987 14.9978 12.2203 16.1544 12.5407 17.2631C18.4141 17.4328 22.0582 20.294 22.2157 20.4187C22.3702 20.5424 22.4696 20.7223 22.4921 20.919C22.5145 21.1157 22.4583 21.3133 22.3357 21.4687ZM2.24976 13.1249C2.24976 12.6058 2.40371 12.0983 2.69215 11.6666C2.98059 11.2349 3.39056 10.8984 3.87021 10.6998C4.34987 10.5011 4.87767 10.4491 5.38687 10.5504C5.89607 10.6517 6.3638 10.9017 6.73091 11.2688C7.09803 11.6359 7.34803 12.1036 7.44932 12.6128C7.55061 13.122 7.49862 13.6498 7.29994 14.1295C7.10126 14.6091 6.76481 15.0191 6.33313 15.3076C5.90145 15.596 5.39393 15.7499 4.87476 15.7499C4.17857 15.7499 3.51089 15.4734 3.0186 14.9811C2.52632 14.4888 2.24976 13.8211 2.24976 13.1249ZM3.74976 13.1249C3.74976 13.3475 3.81574 13.565 3.93936 13.75C4.06297 13.935 4.23867 14.0792 4.44424 14.1643C4.64981 14.2495 4.87601 14.2717 5.09424 14.2283C5.31246 14.1849 5.51292 14.0778 5.67025 13.9204C5.82759 13.7631 5.93473 13.5627 5.97814 13.3444C6.02155 13.1262 5.99927 12.9 5.91412 12.6944C5.82897 12.4889 5.68478 12.3132 5.49978 12.1895C5.31477 12.0659 5.09726 11.9999 4.87476 11.9999C4.57639 11.9999 4.29024 12.1185 4.07926 12.3295C3.86828 12.5404 3.74976 12.8266 3.74976 13.1249Z"
+                                                        fill="black" />
+                                                </svg>
+                                                <span>Holiday / Leisure Travel</span>
+                                            </li>
+                                            <li value="education">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="Frame">
+<path id="Vector" d="M22.5443 6.6971L12.3301 2.0713C12.2267 2.02433 12.1141 2 12.0001 2C11.8862 2 11.7736 2.02433 11.6701 2.0713L1.456 6.6971C1.31962 6.75903 1.20419 6.85804 1.12342 6.9824C1.04265 7.10675 0.999918 7.25122 1.00029 7.39868C0.996323 7.54205 1.03319 7.68367 1.10676 7.80761C1.18032 7.93155 1.28766 8.0329 1.41671 8.10026L4.96809 9.97371V16.5501C4.59129 16.8598 4.28629 17.2449 4.07354 17.6797C3.8608 18.1145 3.74521 18.5889 3.73454 19.0711C3.75185 19.6243 3.90346 20.1654 4.17677 20.6494C4.45009 21.1335 4.8372 21.5466 5.30595 21.8543C5.43977 21.949 5.60058 22 5.76558 22C5.93058 22 6.0914 21.949 6.22522 21.8543C6.69396 21.5466 7.08108 21.1335 7.35439 20.6494C7.62771 20.1654 7.77932 19.6243 7.79663 19.0711C7.78743 18.5894 7.67329 18.1152 7.46188 17.6804C7.25047 17.2456 6.94669 16.8602 6.57093 16.5501V15.6403L11.6151 18.7704C11.7402 18.8465 11.8845 18.8866 12.0316 18.8861C12.1787 18.8866 12.323 18.8465 12.448 18.7704L18.7336 14.9156C18.8469 14.8462 18.9402 14.7496 19.0048 14.6349C19.0694 14.5202 19.1032 14.3913 19.1029 14.2603V9.91203L22.5757 8.07713C22.7026 8.01261 22.8092 7.91534 22.884 7.79579C22.9588 7.67624 22.9989 7.53894 23 7.39868C23.0004 7.25122 22.9576 7.10675 22.8769 6.9824C22.7961 6.85804 22.6807 6.75903 22.5443 6.6971ZM5.7538 20.1659C5.47239 19.8582 5.3134 19.4613 5.30595 19.048C5.32208 18.6734 5.46597 18.315 5.71451 18.0303H5.78523H5.84808C6.0853 18.3191 6.21796 18.6771 6.22522 19.048C6.20783 19.4636 6.04079 19.8597 5.7538 20.1659ZM17.5394 13.8131L12.0394 17.2054L6.57879 13.8131V10.7832L11.6701 13.4739C11.7838 13.5333 11.9106 13.5644 12.0394 13.5644C12.1682 13.5644 12.295 13.5333 12.4087 13.4739L17.5786 10.7447L17.5394 13.8131ZM12.0394 11.9165L7.96948 9.76555L12.3066 8.22361C12.4969 8.15004 12.6504 8.00655 12.7346 7.82364C12.8188 7.64073 12.827 7.43282 12.7574 7.24409C12.6878 7.05536 12.546 6.90068 12.362 6.81294C12.1781 6.7252 11.9665 6.7113 11.7723 6.77419L6.06022 8.78642L3.54597 7.45265L12.0001 3.62094L20.4543 7.47578L12.0394 11.9165Z" fill="#231F20"/>
+</g>
+                                                </svg>
+
+                                                <span>Travel for Education</span>
+                                            </li>
+                                            <li value="immigration">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="immigration 1">
+<g id="Group">
+<path id="Vector" d="M13.8117 18.9826C14.4472 18.9826 14.9623 18.4684 14.9623 17.8341C14.9623 17.1998 14.4472 16.6855 13.8117 16.6855C13.1763 16.6855 12.6611 17.1998 12.6611 17.8341C12.6611 18.4684 13.1763 18.9826 13.8117 18.9826Z" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M10.6239 18.6775H3.03463C2.4632 18.6775 2 18.2129 2 17.6397V4.05235C2 3.47925 2.4632 3.01465 3.03463 3.01465H12.7892C13.3607 3.01465 13.8239 3.47925 13.8239 4.05235V14.356" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M7.91163 12.2355C9.70414 12.2355 11.1572 10.7781 11.1572 8.98019C11.1572 7.18232 9.70414 5.72485 7.91163 5.72485C6.11913 5.72485 4.66602 7.18232 4.66602 8.98019C4.66602 10.7781 6.11913 12.2355 7.91163 12.2355Z" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M7.91228 12.2355C8.61081 12.2355 9.17709 10.7781 9.17709 8.98019C9.17709 7.18232 8.61081 5.72485 7.91228 5.72485C7.21374 5.72485 6.64746 7.18232 6.64746 8.98019C6.64746 10.7781 7.21374 12.2355 7.91228 12.2355Z" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M4.74805 8.97998H11.0755" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M5.8252 14.2083H9.99964" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_7" d="M22.0939 4.92418C22.0939 7.1715 19.1871 8.92208 19.1871 8.92208C19.1871 8.92208 16.2803 7.17146 16.2803 4.92418C16.2803 3.30919 17.5817 2 19.1871 2C20.7925 2 22.0939 3.30919 22.0939 4.92418Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_8" d="M18.4317 10.6406L16.8145 13.8849" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_9" d="M16.9544 17.7284C16.9544 20.1295 13.8244 21.9999 13.8244 21.9999C13.8244 21.9999 10.6943 20.1295 10.6943 17.7284C10.6943 16.0028 12.0957 14.604 13.8244 14.604C15.5531 14.604 16.9544 16.0028 16.9544 17.7284Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+                                                </svg>
+
+                                                <span>Immigration</span>
+                                            </li>
+                                            <li value="employment">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="Briefcase">
+<path id="Vector" d="M20.25 5.25H16.5V4.5C16.5 3.90326 16.2629 3.33097 15.841 2.90901C15.419 2.48705 14.8467 2.25 14.25 2.25H9.75C9.15326 2.25 8.58097 2.48705 8.15901 2.90901C7.73705 3.33097 7.5 3.90326 7.5 4.5V5.25H3.75C3.35218 5.25 2.97064 5.40804 2.68934 5.68934C2.40804 5.97064 2.25 6.35218 2.25 6.75V18.75C2.25 19.1478 2.40804 19.5294 2.68934 19.8107C2.97064 20.092 3.35218 20.25 3.75 20.25H20.25C20.6478 20.25 21.0294 20.092 21.3107 19.8107C21.592 19.5294 21.75 19.1478 21.75 18.75V6.75C21.75 6.35218 21.592 5.97064 21.3107 5.68934C21.0294 5.40804 20.6478 5.25 20.25 5.25ZM9 4.5C9 4.30109 9.07902 4.11032 9.21967 3.96967C9.36032 3.82902 9.55109 3.75 9.75 3.75H14.25C14.4489 3.75 14.6397 3.82902 14.7803 3.96967C14.921 4.11032 15 4.30109 15 4.5V5.25H9V4.5ZM20.25 6.75V10.6509C17.7185 12.0289 14.8822 12.7505 12 12.75C9.11794 12.7505 6.28165 12.0292 3.75 10.6519V6.75H20.25ZM20.25 18.75H3.75V12.3412C6.31868 13.5977 9.1405 14.2506 12 14.25C14.8596 14.2501 17.6813 13.5969 20.25 12.3403V18.75ZM9.75 10.5C9.75 10.3011 9.82902 10.1103 9.96967 9.96967C10.1103 9.82902 10.3011 9.75 10.5 9.75H13.5C13.6989 9.75 13.8897 9.82902 14.0303 9.96967C14.171 10.1103 14.25 10.3011 14.25 10.5C14.25 10.6989 14.171 10.8897 14.0303 11.0303C13.8897 11.171 13.6989 11.25 13.5 11.25H10.5C10.3011 11.25 10.1103 11.171 9.96967 11.0303C9.82902 10.8897 9.75 10.6989 9.75 10.5Z" fill="black"/>
+</g>
+                                                </svg>
+
+                                                <span>Employment</span>
+                                            </li>
+                                        </ul>
+                                        <svg class="dropdownArrow" xmlns="http://www.w3.org/2000/svg" width="16" height="17"
+                                            viewBox="0 0 16 17" fill="none">
+                                            <path
+                                                d="M13.354 6.85354L8.35403 11.8535C8.30759 11.9 8.25245 11.9369 8.19175 11.9621C8.13105 11.9872 8.06599 12.0002 8.00028 12.0002C7.93457 12.0002 7.86951 11.9872 7.80881 11.9621C7.74811 11.9369 7.69296 11.9 7.64653 11.8535L2.64653 6.85354C2.55271 6.75972 2.5 6.63247 2.5 6.49979C2.5 6.36711 2.55271 6.23986 2.64653 6.14604C2.74035 6.05222 2.8676 5.99951 3.00028 5.99951C3.13296 5.99951 3.26021 6.05222 3.35403 6.14604L8.00028 10.7929L12.6465 6.14604C12.693 6.09958 12.7481 6.06273 12.8088 6.03759C12.8695 6.01245 12.9346 5.99951 13.0003 5.99951C13.066 5.99951 13.131 6.01245 13.1917 6.03759C13.2524 6.06273 13.3076 6.09958 13.354 6.14604C13.4005 6.19249 13.4373 6.24764 13.4625 6.30834C13.4876 6.36904 13.5006 6.43409 13.5006 6.49979C13.5006 6.56549 13.4876 6.63054 13.4625 6.69124C13.4373 6.75193 13.4005 6.80708 13.354 6.85354Z"
+                                                fill="black" />
+                                        </svg>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="px-2">
+                                    <div
+                                        class=" p-4 customGradient2 rounded-lg border border-black/0 flex-col justify-center items-start gap-2 inline-flex mt-8 w-full">
+                                        <p class=" text-xl font-semibold ">KYC Documents</p>
+                                        <p class="text-black text-sm font-medium ">You need to submit the following
+                                            documents
+                                            after placing the order.</p>
+                                        <div id="document-list"
+                                            class="self-stretch py-1.5 rounded-lg flex-col justify-center items-start gap-1.5 flex">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+
+
+                            <div class="bg-white py-4 rounded-t-3xl  md:static fixed bottom-0 left-0 w-full flex items-center justify-center">
+                            <div
+                                class="h-12 px-2 py-3 bg-primary-blue rounded-lg justify-center items-center gap-1 inline-flex customMd:mt-10 mt-4 cursor-pointer w-[90%] md:w-full" id="contactUpdateBtn">
+                                <div class="text-white text-sm font-bold">Proceed to Next</div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M15.781 12.7823L8.28104 20.2823C8.21136 20.3519 8.12863 20.4072 8.03759 20.4449C7.94654 20.4826 7.84896 20.5021 7.75042 20.5021C7.65187 20.5021 7.55429 20.4826 7.46324 20.4449C7.3722 20.4072 7.28947 20.3519 7.21979 20.2823C7.15011 20.2126 7.09483 20.1299 7.05712 20.0388C7.01941 19.9478 7 19.8502 7 19.7516C7 19.6531 7.01941 19.5555 7.05712 19.4645C7.09483 19.3734 7.15011 19.2907 7.21979 19.221L14.1901 12.2516L7.21979 5.28226C7.07906 5.14153 7 4.95066 7 4.75164C7 4.55261 7.07906 4.36174 7.21979 4.22101C7.36052 4.08028 7.55139 4.00122 7.75042 4.00122C7.94944 4.00122 8.14031 4.08028 8.28104 4.22101L15.781 11.721C15.8508 11.7907 15.9061 11.8734 15.9438 11.9644C15.9816 12.0555 16.001 12.1531 16.001 12.2516C16.001 12.3502 15.9816 12.4478 15.9438 12.5388C15.9061 12.6299 15.8508 12.7126 15.781 12.7823Z"
+                                        fill="white" />
+                                </svg>
+                            </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+    <footer>
+
+        <div class="loadingAnimationContainer flex items-center justify-center h-screen fixed top-0 left-0 w-full bg-white z-50">
+            <div class="loading">
+                <svg viewBox="0 0 187.3 93.7" height="200px" width="300px" class="svgbox">
+                 <defs>
+                   <linearGradient y2="0%" x2="100%" y1="0%" x1="0%" id="gradient">
+                     <stop stop-color="#2C5AA2" offset="0%"></stop>
+                        <stop stop-color="#E3373A" offset="100%"></stop>
+                   </linearGradient>
+                 </defs>
+                 <path stroke="url(#gradient)" d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z"></path>
+               </svg>
+            </div>
+        </div>
+
+
+
+        <?php 
+    include $fold . 'includesv2/footerScripts.php';
+    ?>
+
+    </footer>
+</body>
+
+</html>
