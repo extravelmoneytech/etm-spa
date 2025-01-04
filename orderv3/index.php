@@ -119,7 +119,7 @@ include $fold . 'includesv2/head.php';
                 <div class="pb-32 md:pb-8 px-5 sm:px-12 md:px-16 py-5 md:flex gap-5 md:gap-10 forexContainer flex-col md:flex-row "
                     style="padding-bottom:25rem;">
 
-                    <div class="w-full md:w-2/3">
+                    <div class="w-full md:w-2/3" id="sectionContainer">
 
 
                         <div id="cardContainer" class="flex flex-col gap-4">
@@ -293,6 +293,12 @@ include $fold . 'includesv2/head.php';
                 EDITING_PRODUCT: 'editingProduct',
                 DELETING_PRODUCT: 'deletingProduct',
                 RATE_CALCULATION: 'exchangeRateCalculation'
+            },
+            ORDER_STATES:{
+                GET_RATES: 'getRates',
+                DELIVERY_DETAILS: 'deliveryDetails',
+                CONTACT_DETAILS: 'contact_details',
+                REVIEW_PAYMENT: 'reviewAndPayment'
             }
         };
         const currencyNames = {
@@ -341,7 +347,7 @@ include $fold . 'includesv2/head.php';
         const AppState = {
             nextBtnState: {
                 active: false,
-                status: 'getRates'
+                status: CONSTANTS.ORDER_STATES.GET_RATES
             },
             processingStates: {
                 initialDataLoading: false,
@@ -784,10 +790,12 @@ include $fold . 'includesv2/head.php';
                     return;
                 }
 
-                if (AppState.nextBtnState.status === 'getRates') {
+                if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
                     // Your navigation logic here
-                    console.log('Proceeding to next step');
+                    console.log('getRates Completed');
                 }
+
+                
             }
 
         };
