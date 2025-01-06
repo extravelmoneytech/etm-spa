@@ -61,6 +61,7 @@ if (isset($indexPage) && $indexPage) {
 }
 if (isset($orderV3Page) && $orderV3Page) {
     loadPageScripts([
+        'alert',
         'dropDownNew',
     ], $SCRIPTS);
 }

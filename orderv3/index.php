@@ -104,8 +104,10 @@ include $fold . 'includesv2/head.php';
                 <div class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6 md:hidden">
                     <div
                         class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div><span class="text-primary-blue text-lg font-bold ">1</span><span
-                                class="text-black/40 text-base font-medium ">/5</span></div>
+                        <div>
+                            <span class="text-primary-blue text-lg font-bold ">1</span>
+                            <span class="text-black/40 text-base font-medium ">/5</span>
+                        </div>
                     </div>
                     <div class="text-black text-base font-bold leading-none">Get Rates</div>
                     <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 bg-primary-blue basis-4 w-[198px]"
@@ -120,44 +122,48 @@ include $fold . 'includesv2/head.php';
                     style="padding-bottom:25rem;">
 
                     <div class="w-full md:w-2/3" id="sectionContainer">
+                        <div class="" id="getRatesContainer">
 
 
-                        <div id="cardContainer" class="flex flex-col gap-4">
+                            <div id="cardContainer" class="flex flex-col gap-4">
 
-                        </div>
-
-
-
-
-                        <div class="mt-6" id="addBtnContainer">
-                            <div class="flex  md:gap-8 items-center flex-col md:flex-row">
-                                <div id="addForexCardBtn"
-                                    class="w-full h-10 mt-3 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                        fill="none">
-                                        <path
-                                            d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
-                                            fill="#0E51A0" />
-                                    </svg>
-                                    <p class="text-primary-blue text-xs font-semibold ">Add Another Forex Card</p>
-                                </div>
-
-                                <div id="addCurrencyCardBtn"
-                                    class="w-full h-10 mt-2 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                        fill="none">
-                                        <path
-                                            d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
-                                            fill="#0E51A0" />
-                                    </svg>
-                                    <p class="text-primary-blue text-xs font-semibold ">Add Another Currency</p>
-                                </div>
                             </div>
 
+
+
+
+                            <div class="mt-6" id="addBtnContainer">
+                                <div class="flex  md:gap-8 items-center flex-col md:flex-row">
+                                    <div id="addForexCardBtn"
+                                        class="w-full h-10 mt-3 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                            fill="none">
+                                            <path
+                                                d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
+                                                fill="#0E51A0" />
+                                        </svg>
+                                        <p class="text-primary-blue text-xs font-semibold ">Add Another Forex Card</p>
+                                    </div>
+
+                                    <div id="addCurrencyCardBtn"
+                                        class="w-full h-10 mt-2 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                            fill="none">
+                                            <path
+                                                d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
+                                                fill="#0E51A0" />
+                                        </svg>
+                                        <p class="text-primary-blue text-xs font-semibold ">Add Another Currency</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
-
-
                     </div>
+
+
 
                     <div class="md:static fixed  left-1/2  transform -translate-x-1/2   md:translate-x-0 md:translate-y-0 bottom-0 w-full md:w-1/3 mt-2  md:mt-0 bg-white md:h-full px-5 sm:px-12 md:px-0 pb-4 md:pb-0">
                         <div class="  rounded-2xl border border-black/10 w-full">
@@ -294,7 +300,7 @@ include $fold . 'includesv2/head.php';
                 DELETING_PRODUCT: 'deletingProduct',
                 RATE_CALCULATION: 'exchangeRateCalculation'
             },
-            ORDER_STATES:{
+            ORDER_STATES: {
                 GET_RATES: 'getRates',
                 DELIVERY_DETAILS: 'deliveryDetails',
                 CONTACT_DETAILS: 'contact_details',
@@ -371,6 +377,12 @@ include $fold . 'includesv2/head.php';
                 currencyQuantityEdit: null,
                 exchangeRateEdit: null,
                 currencyRateEdit: null
+            },
+            deliveryState: {
+                doorDelivery: 1,
+                branch: null,
+                ddAddress:null,
+                ddLandMark:null
             },
             cardDataState: [],
             setState(key, value, state) {
@@ -536,6 +548,62 @@ include $fold . 'includesv2/head.php';
                     return [];
                 } finally {
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.EDITING_PRODUCT, false);
+                }
+            },
+            async getDeliveryDetails() {
+                try {
+                    console.log('calling')
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
+                    const params = new URLSearchParams({
+                        action: 'get_delivery_details',
+                        token: AppState.getState('token', 'mainState'),
+                    });
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: params.toString()
+                    });
+                    if (!response.ok) throw new Error('Rate fetch failed');
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('API Error:', error);
+                    return [];
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                }
+            },
+
+            async updateDeliveryDetails() {
+
+                return
+                try {
+                    const apiUrl = 'https://mvc.extravelmoney.com/api-etm/';
+                    const params = new URLSearchParams({
+                        action: 'update_delivery_details',
+                        token: AppState.mainState.token, // Ensure `token` is defined
+                        dd_status: AppState.deliveryState.doorDelivery, // Ensure `doorDelivery` is defined
+                        landmark: AppState.deliveryState.ddLandMark,
+                        address: AppState.deliveryState.ddAddress,
+                        selected_area: AppState.deliveryState.branch
+                    });
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params.toString(),
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                    const resp = await response.json();
+                    return resp;
+                } catch (error) {
+                    console.error('Error fetching data:', error);
                 }
             }
 
@@ -790,12 +858,173 @@ include $fold . 'includesv2/head.php';
                     return;
                 }
 
-                if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
-                    // Your navigation logic here
-                    console.log('getRates Completed');
+                try {
+                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
+                        // Hide current content
+                        const getRatesContainer = document.querySelector('#getRatesContainer');
+                        if (getRatesContainer) getRatesContainer.style.display = 'none';
+
+                        // Load and append delivery details template
+                        const template = await TemplateCache.get('deliveryDetails');
+                        const deliverySection = document.createElement('div');
+                        deliverySection.id = 'deliveryDetailsSection';
+                        deliverySection.innerHTML = template;
+
+                        const sectionContainer = document.getElementById('sectionContainer');
+                        sectionContainer.appendChild(deliverySection);
+
+                        // Update app state
+                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
+
+                        // Initialize any required components for delivery details
+                        await this.initializeDeliveryDetailsComponents();
+                        return
+                    }
+                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
+
+
+                        
+                        let ddLandMark = document.querySelector('#ddLandMark').value;
+                        let ddAddress = document.querySelector('#ddAddress').value;
+                        console.log(ddLandMark,'ddLandMark')
+                        let branch = AppState.deliveryState.branch;
+
+                        AppState.setState('ddAddress',ddAddress,'deliveryState');
+                        AppState.setState('ddLandMark',ddLandMark,'deliveryState');
+                        console.log(AppState.getState('ddAddress','deliveryState'))
+                        console.log(AppState.getState('ddLandMark','deliveryState'));
+
+                        if (!branch) {
+                            insertAlertBelowElement(document.querySelector('#cityDropDown'), 'Select a branch')
+                            return
+                        } else {
+                            removeAlertBelowElement(document.querySelector('#cityDropDown'))
+                        }
+                        // Simple validation
+
+
+                        if (AppState.deliveryState.doorDelivery) {
+                            if (ddAddress === "") {
+                                insertAlertBelowElement(document.querySelector('#ddAddress'), 'Enter a valid address')
+                                return
+                            } else {
+                                removeAlertBelowElement(document.querySelector('#ddAddress'))
+                            }
+                            if (ddLandMark === "") {
+                                insertAlertBelowElement(document.querySelector('#ddLandMark'), 'Enter a valid landmark')
+                                return
+                            } else {
+                                removeAlertBelowElement(document.querySelector('#ddLandMark'))
+                            }
+                        }
+
+                        console.log(APIService.updateDeliveryDetails());
+                        
+
+
+                        return
+
+                    }
+
+
+
+                } catch (error) {
+                    console.error('Error switching templates:', error);
+                    // Handle error appropriately
+                }
+            },
+
+            async initializeDeliveryDetailsComponents() {
+                let data = await APIService.getDeliveryDetails()
+
+                if (data) {
+                    console.log(data)
+                    const districtName = document.getElementById('districtName');
+                    if (districtName) {
+                        districtName.textContent = data.district || '';
+                    }
+
+                    const cities = data.areas;
+                    const dropdownList = document.querySelector('#cityDropDown').querySelector('.dropdownList');
+                    const templateItem = document.querySelector('#cityDropDown').querySelector('.dropdownItem');
+
+
+                    // Ensure the template item is hidden
+                    templateItem.style.display = 'none';
+
+                    templateItem.classList.remove('template')
+
+                    // Remove all existing items except the template
+                    dropdownList.querySelectorAll('.dropdownItem:not([value="template"])').forEach(item => item.remove());
+
+                    // Add an initial "Select" option with a null value
+                    const selectItem = templateItem.cloneNode(true);
+                    selectItem.style.display = 'flex'; // Make the cloned item visible
+                    selectItem.setAttribute('value', 'Select'); // Set value to an empty string (null equivalent)
+                    selectItem.querySelector('span').textContent = 'Select'; // Set the text to 'Select'
+                    selectItem.querySelector('svg').style.display = 'none'
+                    selectItem.setAttribute('selected', '')
+                    dropdownList.appendChild(selectItem); // Append the "Select" item to the dropdown
+
+                    // Populate the dropdown list with cities
+                    cities.forEach(city => {
+                        // Clone the template item
+                        const newItem = templateItem.cloneNode(true);
+                        newItem.style.display = 'flex'; // Make the cloned item visible
+                        newItem.setAttribute('value', city); // Set the value attribute
+                        newItem.querySelector('span').textContent = `${city}`; // Update city name
+
+                        // Append the new item to the dropdown list
+                        dropdownList.appendChild(newItem);
+                    });
+
+                    Dropdown.init('cityDropDown', {
+                        searchable: true,
+
+
+                        customSelected: (item) => {
+                            const value = item.getAttribute('value');
+                            return ` <div class="custom-selected-item"> <span class="custom-value">${value}</span> </div> `;
+                        },
+                        onSelect: (value) => {
+                            AppState.deliveryState.branch = value;
+                        }
+                    });
+
+
+                    document.getElementById('radio1').addEventListener('click', function() {
+                        AppState.deliveryState.doorDelivery = 1;
+                        UIManager.toggleRadio(this, 'radio2');
+
+                        // document.querySelector('#cartContent').style.display = 'block'
+                        // document.querySelector('#cartContentStorePickup').style.display = 'none'
+                    });
+
+                    document.getElementById('radio2').addEventListener('click', function() {
+                        AppState.deliveryState.doorDelivery = 0;
+                        UIManager.toggleRadio(this, 'radio1');
+                        // document.querySelector('#cartContent').style.display = 'none'
+                        // document.querySelector('#cartContentStorePickup').style.display = 'block'
+                    });
+
                 }
 
-                
+
+
+            },
+            toggleRadio(selected, other) {
+                selected.classList.add('selectedRadio');
+                selected.classList.remove('radio');
+                document.getElementById(other).classList.add('radio');
+                document.getElementById(other).classList.remove('selectedRadio');
+
+                // Show or hide the doorDeliveryDetails div with a smooth height transition
+                const doorDeliveryDetails = document.getElementById('doorDeliveryDetails');
+                if (selected.id === 'radio1') {
+                    doorDeliveryDetails.classList.add('show');
+                } else {
+                    doorDeliveryDetails.classList.remove('show');
+                }
             }
 
         };
