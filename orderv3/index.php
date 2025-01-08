@@ -117,98 +117,7 @@ include $fold . 'includesv2/head.php';
 
 
 
-            <section class="md:mt-12">
-                <div class="pb-32 md:pb-8 px-5 sm:px-12 md:px-16 py-5 md:flex gap-5 md:gap-10 forexContainer flex-col md:flex-row "
-                    style="padding-bottom:25rem;">
-
-                    <div class="w-full md:w-2/3" id="sectionContainer">
-                        <div class="" id="getRatesContainer">
-
-
-                            <div id="cardContainer" class="flex flex-col gap-4">
-
-                            </div>
-
-
-
-
-                            <div class="mt-6" id="addBtnContainer">
-                                <div class="flex  md:gap-8 items-center flex-col md:flex-row">
-                                    <div id="addForexCardBtn"
-                                        class="w-full h-10 mt-3 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                            fill="none">
-                                            <path
-                                                d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
-                                                fill="#0E51A0" />
-                                        </svg>
-                                        <p class="text-primary-blue text-xs font-semibold ">Add Another Forex Card</p>
-                                    </div>
-
-                                    <div id="addCurrencyCardBtn"
-                                        class="w-full h-10 mt-2 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                            fill="none">
-                                            <path
-                                                d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
-                                                fill="#0E51A0" />
-                                        </svg>
-                                        <p class="text-primary-blue text-xs font-semibold ">Add Another Currency</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-
-
-                    <div class="md:static fixed  left-1/2  transform -translate-x-1/2   md:translate-x-0 md:translate-y-0 bottom-0 w-full md:w-1/3 mt-2  md:mt-0 bg-white md:h-full px-5 sm:px-12 md:px-0 pb-4 md:pb-0">
-                        <div class="  rounded-2xl border border-black/10 w-full">
-                            <div
-                                class="w-full h-10 customGradient3  rounded-tl-2xl z-20 rounded-tr-xl justify-center items-center inline-flex">
-                                <div
-                                    class="grow shrink basis-0 self-stretch px-3 py-1 justify-start items-center gap-1.5 inline-flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21"
-                                        fill="none">
-                                        <path
-                                            d="M17.5769 6.47083C17.3387 6.35406 17.0686 6.31905 16.8085 6.37121C16.5483 6.42338 16.3126 6.55981 16.1378 6.75941L13.5741 9.52261L10.8482 3.40916C10.8481 3.40662 10.8481 3.40408 10.8482 3.40154C10.7508 3.19013 10.5947 3.01107 10.3987 2.88557C10.2026 2.76006 9.97468 2.69336 9.74188 2.69336C9.50908 2.69336 9.28115 2.76006 9.08508 2.88557C8.88901 3.01107 8.73301 3.19013 8.63554 3.40154C8.63566 3.40408 8.63566 3.40662 8.63554 3.40916L5.90965 9.52261L3.34594 6.75941C3.17003 6.55977 2.93359 6.42322 2.67276 6.37061C2.41193 6.31801 2.14105 6.35224 1.9015 6.46809C1.66196 6.58393 1.46693 6.77501 1.34621 7.01214C1.2255 7.24926 1.18573 7.51939 1.233 7.78124C1.233 7.78961 1.233 7.79723 1.23833 7.8056L2.96523 15.7145C3.01839 15.993 3.16702 16.2442 3.38551 16.4249C3.604 16.6056 3.87866 16.7044 4.16219 16.7043H15.3223C15.6057 16.7042 15.8802 16.6053 16.0985 16.4247C16.3169 16.244 16.4654 15.9929 16.5185 15.7145L18.2454 7.8056C18.2454 7.79723 18.2454 7.78961 18.2508 7.78124C18.2989 7.51906 18.2589 7.24831 18.137 7.01126C18.0151 6.7742 17.8182 6.58417 17.5769 6.47083ZM15.3269 15.4617L15.3223 15.4861H4.16142L4.15686 15.4617L2.43224 7.56728L2.4429 7.57946L5.64087 11.0241C5.70934 11.0981 5.79512 11.154 5.8905 11.1867C5.98587 11.2193 6.08787 11.2278 6.18734 11.2114C6.28681 11.1949 6.38064 11.154 6.46041 11.0924C6.54019 11.0307 6.60341 10.9502 6.64442 10.8581L9.74188 3.91246L12.8401 10.8604C12.8811 10.9525 12.9443 11.033 13.0241 11.0947C13.1039 11.1563 13.1977 11.1972 13.2972 11.2137C13.3967 11.2301 13.4987 11.2216 13.594 11.1889C13.6894 11.1563 13.7752 11.1004 13.8437 11.0264L17.0416 7.58175L17.0515 7.56728L15.3269 15.4617Z"
-                                            fill="white" />
-                                    </svg>
-                                    <p class="text-white text-xs font-bold ">We Promise the Best Rates in the Forex market.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="px-4 mt-6 flex justify-between flex-col h-full">
-
-                                <div class="w-full py-[12px] rounded-md justify-between items-center inline-flex">
-                                    <div class="w-[102px] text-black text-base font-semibold ">Total Amount</div>
-                                    <div class="text-black text-xl font-bold leading-tight">₹ 1,84,472</div>
-                                </div>
-
-                                <div class="bg-white py-4 rounded-t-3xl   w-full flex items-center justify-center flex-col">
-                                    <div class=" h-12 px-2 py-3 cursor-pointer bg-primary-blue rounded-lg justify-center items-center gap-1 inline-flex mt-4 mb-0 md:mb-4   z-10 w-full"
-                                        id="proceedBtn">
-                                        <div class="text-white text-sm font-bold">Proceed to Next</div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none">
-                                            <path
-                                                d="M15.781 12.7823L8.28104 20.2823C8.21136 20.3519 8.12863 20.4072 8.03759 20.4449C7.94654 20.4826 7.84896 20.5021 7.75042 20.5021C7.65187 20.5021 7.55429 20.4826 7.46324 20.4449C7.3722 20.4072 7.28947 20.3519 7.21979 20.2823C7.15011 20.2126 7.09483 20.1299 7.05712 20.0388C7.01941 19.9478 7 19.8502 7 19.7516C7 19.6531 7.01941 19.5555 7.05712 19.4645C7.09483 19.3734 7.15011 19.2907 7.21979 19.221L14.1901 12.2516L7.21979 5.28226C7.07906 5.14153 7 4.95066 7 4.75164C7 4.55261 7.07906 4.36174 7.21979 4.22101C7.36052 4.08028 7.55139 4.00122 7.75042 4.00122C7.94944 4.00122 8.14031 4.08028 8.28104 4.22101L15.781 11.721C15.8508 11.7907 15.9061 11.8734 15.9438 11.9644C15.9816 12.0555 16.001 12.1531 16.001 12.2516C16.001 12.3502 15.9816 12.4478 15.9438 12.5388C15.9061 12.6299 15.8508 12.7126 15.781 12.7823Z"
-                                                fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
+            <section class="md:mt-12" id="templateContainer">
 
 
             </section>
@@ -289,6 +198,10 @@ include $fold . 'includesv2/head.php';
 
     <script>
         const CONSTANTS = {
+            ORDER_TYPES: {
+                moneyTransfer: 'mt',
+                forexTransfer: 'fx'
+            },
             PRODUCT_TYPES: {
                 currency: 'currency',
                 forexCard: 'forexCard'
@@ -305,6 +218,10 @@ include $fold . 'includesv2/head.php';
                 DELIVERY_DETAILS: 'deliveryDetails',
                 CONTACT_DETAILS: 'contact_details',
                 REVIEW_PAYMENT: 'reviewAndPayment'
+            },
+            TEMPLATE_NAMES: {
+                FOREX_CONTAINER: 'forexContainerMain',
+                MONEYTRANSFER_CONTAINER: 'mtContainerMain'
             }
         };
         const currencyNames = {
@@ -364,7 +281,8 @@ include $fold . 'includesv2/head.php';
             },
             mainState: {
                 currentCity: 'Ernakulam',
-                token: sessionStorage.getItem('token')
+                token: sessionStorage.getItem('token'),
+                orderType: sessionStorage.getItem('productPage')
             },
             addProductState: {
                 selectedCurrency: null,
@@ -381,8 +299,8 @@ include $fold . 'includesv2/head.php';
             deliveryState: {
                 doorDelivery: 1,
                 branch: null,
-                ddAddress:null,
-                ddLandMark:null
+                ddAddress: null,
+                ddLandMark: null
             },
             cardDataState: [],
             setState(key, value, state) {
@@ -440,8 +358,10 @@ include $fold . 'includesv2/head.php';
         };
         const APIService = {
             async getRates(city) {
+
                 try {
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
+
                     const params = new URLSearchParams({
                         action: 'get_city_rate',
                         token: AppState.getState('token', 'mainState'),
@@ -456,7 +376,7 @@ include $fold . 'includesv2/head.php';
                     });
                     if (!response.ok) throw new Error('Rate fetch failed');
                     const data = await response.json();
-                    console.log(data)
+
                     return data.products;
                 } catch (error) {
                     console.error('API Error:', error);
@@ -465,6 +385,7 @@ include $fold . 'includesv2/head.php';
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                 }
             },
+
             async addProduct(type, rowId) {
 
                 try {
@@ -519,7 +440,7 @@ include $fold . 'includesv2/head.php';
                 }
             },
             async editProduct(rowId, quantity) {
-                console.log(rowId, quantity)
+
 
                 try {
 
@@ -550,9 +471,37 @@ include $fold . 'includesv2/head.php';
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.EDITING_PRODUCT, false);
                 }
             },
+            async getRatesMt(city) {
+
+                try {
+                    // AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
+
+                    const params = new URLSearchParams({
+                        action: 'get_city_rate_mt',
+                        token: AppState.getState('token', 'mainState'),
+                        city: city
+                    });
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: params.toString()
+                    });
+                    if (!response.ok) throw new Error('Rate fetch failed');
+                    const data = await response.json();
+
+                    return data;
+                } catch (error) {
+                    console.error('API Error:', error);
+                    return [];
+                } finally {
+                    // AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                }
+            },
             async getDeliveryDetails() {
                 try {
-                    console.log('calling')
+
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
                     const params = new URLSearchParams({
                         action: 'get_delivery_details',
@@ -578,9 +527,8 @@ include $fold . 'includesv2/head.php';
 
             async updateDeliveryDetails() {
 
-                return
                 try {
-                    const apiUrl = 'https://mvc.extravelmoney.com/api-etm/';
+
                     const params = new URLSearchParams({
                         action: 'update_delivery_details',
                         token: AppState.mainState.token, // Ensure `token` is defined
@@ -601,9 +549,41 @@ include $fold . 'includesv2/head.php';
                     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
                     const resp = await response.json();
+
+
                     return resp;
                 } catch (error) {
                     console.error('Error fetching data:', error);
+                }
+            },
+            async getContactDetails() {
+                try {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
+                    const params = new URLSearchParams({
+                        action: 'get_contact_details',
+                        token: AppState.mainState.token
+                    });
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params.toString(),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+
+                    }
+
+                    const resp = await response.json();
+                    return resp
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                 }
             }
 
@@ -612,23 +592,52 @@ include $fold . 'includesv2/head.php';
         const UIManager = {
             elements: {},
             dropdownInstances: {},
-            async init() {
+            async init(orderType) {
                 this.cacheStaticElements();
-                await this.loadInitialData();
-                this.setupStaticListeners();
+                if (orderType === CONSTANTS.ORDER_TYPES.moneyTransfer) {
+
+                    let moneyTransferTemplate = await TemplateCache.get(CONSTANTS.TEMPLATE_NAMES.MONEYTRANSFER_CONTAINER);
+                    console.log(this.elements.templateContainer)
+                    this.elements.templateContainer.innerHTML = moneyTransferTemplate;
+                    this.cacheMoneyTransferElements();
+                    await this.loadMoneyTransferData();
+                    this.setupMoneyTransferListeners();
+
+                } else if (orderType === CONSTANTS.ORDER_TYPES.forexTransfer) {
+
+
+                    let forexContainer = await TemplateCache.get(CONSTANTS.TEMPLATE_NAMES.FOREX_CONTAINER);
+                    this.elements.templateContainer.innerHTML = forexContainer;
+                    this.cacheForexElements();
+                    await this.loadForexData();
+                    this.setupForexListeners();
+                }
             },
             cacheStaticElements() {
+                this.elements = {
+                    templateContainer: document.querySelector('#templateContainer'),
+                };
+            },
+            cacheForexElements() {
                 this.elements = {
                     addCurrencyBtn: document.querySelector('#addCurrencyCardBtn'),
                     addForexBtn: document.querySelector('#addForexCardBtn'),
                     bottomSheetMain: document.querySelector('.bottomSheetMain'),
                     nextBtn: document.querySelector('#proceedBtn')
-                };
+                }
             },
-            setupStaticListeners() {
+            cacheMoneyTransferElements() {
+                this.elements = {
+
+                }
+            },
+            setupForexListeners() {
                 this.elements.addCurrencyBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.currency, 'addProduct'));
                 this.elements.addForexBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.forexCard, 'addProduct'));
                 this.elements.nextBtn.addEventListener('click', () => this.handleNextBtn())
+            },
+            setupMoneyTransferListeners() {
+
             },
             setupAddBottomSheetListeners(type) {
                 const closeButton = document.querySelector('#closeBottomSheet');
@@ -666,14 +675,14 @@ include $fold . 'includesv2/head.php';
                 if (editProductBtn) {
                     editProductBtn.addEventListener('click', async () => {
                         const response = await APIService.editProduct(rowID, AppState.getState('currencyQuantityEdit', 'editProductState'));
-                        console.log(response, 'bvcc')
+
                         if (response.status) {
                             const clickedCard = AppState.cardDataState.find((item) => item.rowID === rowID);
                             if (clickedCard) {
                                 clickedCard.amount = AppState.getState('currencyQuantityEdit', 'editProductState');
                                 clickedCard.totalINR = AppState.getState('exchangeRateEdit', 'editProductState');
                             }
-                            console.log(AppState.cardDataState, 'app2')
+
                             calculations.processCardData(AppState.cardDataState);
                             this.closeBottomSheet();
 
@@ -685,10 +694,18 @@ include $fold . 'includesv2/head.php';
             },
 
 
-            async loadInitialData() {
+            async loadForexData() {
+
                 const rates = await APIService.getRates(AppState.getState('currentCity', 'mainState'));
+
                 calculations.processCardData(rates);
                 AppState.nextBtnState.active = true;
+            },
+            async loadMoneyTransferData() {
+                const data = await APIService.getRatesMt(AppState.getState('currentCity', 'mainState'));
+
+                UIManager.renderCardsMt(data.store_list)
+
             },
             initializeAddCurrencyDropdown(type) {
                 const cachedItems = DropdownCache.getCache(type);
@@ -819,6 +836,87 @@ include $fold . 'includesv2/head.php';
                     console.error('Card render error:', error);
                 }
             },
+            async renderCardsMt(data) {
+                const container = document.getElementById('mtcardContainer');
+                if (!container || !data?.length) return;
+
+                try {
+                    // Get the template
+                    const template = await TemplateCache.get('getRatesCardMt');
+                    const fragment = document.createDocumentFragment();
+
+                    data.forEach((item) => {
+                        const div = document.createElement('div');
+                        div.className = 'mb-4';
+
+                        // Create a temporary container with the template HTML
+                        let cardHTML = template;
+
+                        // Create the card element
+                        div.innerHTML = cardHTML;
+                        const card = div.firstElementChild;
+
+                        // Update card elements directly
+                        const bankLogo = card.querySelector('.bank-logo');
+                        if (bankLogo) {
+                            bankLogo.src = `/assets/images/banklogos/${item.logo}.png`;
+                            bankLogo.alt = `${item.vendor_name} Logo`;
+                        }
+
+                        const bankName = card.querySelector('.bank-name');
+                        if (bankName) {
+                            bankName.textContent = item.vendor_name;
+                        }
+
+                        const supportedServices = card.querySelector('.supported-services');
+                        if (supportedServices) {
+                            let services = [];
+                            if (item.online_kyc === "1") services.push("Online KYC");
+                            if (item.pg === "1") services.push("Online Payment");
+                            if (item.zero_benf_bank_charge) services.push("Zero Beneficiary Bank Charges");
+                            supportedServices.textContent = services.join(" • ");
+                        }
+
+                        const bankCharges = card.querySelector('.bank-charges');
+                        if (bankCharges) {
+                            bankCharges.textContent = item.bank_charges === "0" ?
+                                "Free" :
+                                `₹ ${parseInt(item.bank_charges).toLocaleString('en-IN')}`;
+                        }
+
+                        const totalAmount = card.querySelector('.total-amount');
+                        if (totalAmount) {
+                            totalAmount.textContent = `₹ ${parseInt(item.inr_total).toLocaleString('en-IN')}`;
+                        }
+
+                        // Add click handler for select button
+                        const selectButton = card.querySelector('.select-button');
+                        if (selectButton) {
+                            selectButton.addEventListener('click', () => {
+                                // Handle selection - you can add your selection logic here
+                                console.log(`Selected bank: ${item.vendor_name}`);
+                            });
+                        }
+
+                        // Add branches information if available
+                        if (item.branch_locations && item.branch_locations.length > 0) {
+                            const supportedServices = card.querySelector('.supported-services');
+                            if (supportedServices) {
+                                supportedServices.textContent += ` • ${item.branch_locations.length} Branches Available`;
+                            }
+                        }
+
+                        fragment.appendChild(card);
+                    });
+
+                    // Clear container and append new cards
+                    container.innerHTML = '';
+                    container.appendChild(fragment);
+
+                } catch (error) {
+                    console.error('Card render error:', error);
+                }
+            },
             async handleEditProduct(product) {
                 this.openBottomSheet(product.productType, 'editProduct', product.rowID);
             },
@@ -883,16 +981,15 @@ include $fold . 'includesv2/head.php';
                     if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
 
 
-                        
+
                         let ddLandMark = document.querySelector('#ddLandMark').value;
                         let ddAddress = document.querySelector('#ddAddress').value;
-                        console.log(ddLandMark,'ddLandMark')
+
                         let branch = AppState.deliveryState.branch;
 
-                        AppState.setState('ddAddress',ddAddress,'deliveryState');
-                        AppState.setState('ddLandMark',ddLandMark,'deliveryState');
-                        console.log(AppState.getState('ddAddress','deliveryState'))
-                        console.log(AppState.getState('ddLandMark','deliveryState'));
+                        AppState.setState('ddAddress', ddAddress, 'deliveryState');
+                        AppState.setState('ddLandMark', ddLandMark, 'deliveryState');
+
 
                         if (!branch) {
                             insertAlertBelowElement(document.querySelector('#cityDropDown'), 'Select a branch')
@@ -918,12 +1015,37 @@ include $fold . 'includesv2/head.php';
                             }
                         }
 
-                        console.log(APIService.updateDeliveryDetails());
-                        
+                        let status = await APIService.updateDeliveryDetails();
+                        if (status) {
+
+                            // Hide current content
+                            const deliveryDetailsContainer = document.querySelector('#deliveryDetailsSection');
+                            if (deliveryDetailsContainer) deliveryDetailsContainer.style.display = 'none';
+
+                            // Load and append delivery details template
+                            const template = await TemplateCache.get('contactDetails');
+                            const contactSection = document.createElement('div');
+                            contactSection.id = 'contactDetailsSection';
+                            contactSection.innerHTML = template;
+
+                            const sectionContainer = document.getElementById('sectionContainer');
+                            const cartContainer =document.getElementById('cartSection')
+                            cartContainer.style.display='none'
+                            sectionContainer.classList.remove('md:w-2/3');
+                            sectionContainer.appendChild(contactSection);
+
+                            AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
+                            await this.initializeContactDetailsComponents()
+                        }
+
 
 
                         return
 
+                    }
+                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
+
+                        return
                     }
 
 
@@ -938,7 +1060,7 @@ include $fold . 'includesv2/head.php';
                 let data = await APIService.getDeliveryDetails()
 
                 if (data) {
-                    console.log(data)
+
                     const districtName = document.getElementById('districtName');
                     if (districtName) {
                         districtName.textContent = data.district || '';
@@ -1025,17 +1147,21 @@ include $fold . 'includesv2/head.php';
                 } else {
                     doorDeliveryDetails.classList.remove('show');
                 }
+            },
+            async initializeContactDetailsComponents() {
+                let data = await APIService.getContactDetails()
+                console.log(data, 'contact details')
             }
 
         };
         const calculations = {
             ibrData: (() => {
                 const storedIbrData = sessionStorage.getItem('ibrData');
-                console.log(storedIbrData, 'bvc')
+
                 return storedIbrData ? JSON.parse(storedIbrData) : null;
             })(),
             getExchangeRateAddProduct(currency, quantity, productType) {
-                console.log(calculations.ibrData, 'knb')
+
                 AppState.setState('exchangeRate', calculations.ibrData[currency][productType] * quantity, 'addProductState')
             },
             getExchangeRateEditProduct(rate, quantity) {
@@ -1083,7 +1209,9 @@ include $fold . 'includesv2/head.php';
         };
         async function initializeApp() {
             try {
-                await UIManager.init();
+                let orderType = AppState.mainState.orderType
+
+                await UIManager.init(orderType);
             } catch (error) {
                 console.error('Init failed:', error);
             }

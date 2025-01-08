@@ -159,11 +159,6 @@ let deliveryUpdateBtn = document.querySelector('#deliveryUpdateBtn');
 deliveryUpdateBtn.addEventListener('click', async () => {
 
 
-
-
-    console.log('clicked')
-    
-
     let ddLandMark = document.querySelector('#ddLandMark').value;
     let ddAddress = document.querySelector('#ddAddress').value;
     let branch = document.querySelector('#cityDropDown').getAttribute('dataval')
