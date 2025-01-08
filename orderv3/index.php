@@ -946,6 +946,14 @@ include $fold . 'includesv2/head.php';
                 AppState.nextBtnState.active = false;
             },
             async handleNextBtn() {
+                if (!userCheck()) {
+                    let body = document.body;
+                    const template = await TemplateCache.get('loginWidget');
+                    body.innerHTML += template;
+                    await this.initializeLoginWidget();
+
+                    return
+                }
                 if (AppState.isProcessing()) {
                     console.log('Processing in progress, please wait...');
                     return;
@@ -1029,8 +1037,8 @@ include $fold . 'includesv2/head.php';
                             contactSection.innerHTML = template;
 
                             const sectionContainer = document.getElementById('sectionContainer');
-                            const cartContainer =document.getElementById('cartSection')
-                            cartContainer.style.display='none'
+                            const cartContainer = document.getElementById('cartSection')
+                            cartContainer.style.display = 'none'
                             sectionContainer.classList.remove('md:w-2/3');
                             sectionContainer.appendChild(contactSection);
 
@@ -1151,6 +1159,16 @@ include $fold . 'includesv2/head.php';
             async initializeContactDetailsComponents() {
                 let data = await APIService.getContactDetails()
                 console.log(data, 'contact details')
+            },
+            async initializeLoginWidget() {
+
+                document.querySelector('#loginWidgetContainer').style.display = 'flex'
+                document.querySelector('.otpWidget').style.display = 'flex'
+
+                loginManager.init();
+
+
+
             }
 
         };
@@ -1207,6 +1225,140 @@ include $fold . 'includesv2/head.php';
 
 
         };
+        const loginManager = {
+            otpInputs: null,
+            countryCodeDropDown: null,
+            countryCodeMain: null,
+            optSendDiv: null,
+
+            init() {
+                this.otpInputs = document.querySelectorAll('.otpInputBlock input');
+                this.countryCodeDropDown = document.getElementById('countryCodeDropDown');
+                this.countryCodeMain = document.querySelector('#contryCodeMain');
+                this.optSendDiv = document.querySelector('#optSend');
+
+                this.setupOTPInputs();
+                this.setupCountryCodeDropdown();
+            },
+
+            // OTP Related Functions
+            setupOTPInputs() {
+                this.otpInputs.forEach((input, index) => {
+                    input.addEventListener('keydown', (e) => this.handleOTPKeyDown(e, index));
+                    input.addEventListener('input', (e) => this.handleOTPInput(e, index));
+                    input.addEventListener('focus', (e) => e.target.select());
+                });
+            },
+
+            handleOTPKeyDown(event, index) {
+                if (!/[0-9]/.test(event.key) &&
+                    !['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(event.key)) {
+                    event.preventDefault();
+                    return;
+                }
+
+                if (event.key === 'Backspace') {
+                    const currentInput = event.target;
+                    currentInput.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
+
+                    if (currentInput.value === '' && index > 0) {
+                        this.otpInputs[index - 1].focus();
+                    }
+                }
+            },
+
+            handleOTPInput(event, index) {
+                const currentInput = event.target;
+                currentInput.value = currentInput.value.replace(/\D/g, '').slice(0, 1);
+
+                if (currentInput.value) {
+                    currentInput.style.backgroundColor = 'rgba(14, 81, 160, 1)';
+
+                    if (index < this.otpInputs.length - 1) {
+                        this.otpInputs[index + 1].focus();
+                    } else if (this.areAllInputsFilled()) {
+                        console.log('Final OTP:', this.getOtpValue());
+                    }
+                }
+            },
+
+            getOtpValue() {
+                return Array.from(this.otpInputs)
+                    .map(input => input.value)
+                    .join('');
+            },
+
+            areAllInputsFilled() {
+                return Array.from(this.otpInputs)
+                    .every(input => input.value !== '');
+            },
+
+            // Country Code Related Functions
+            setupCountryCodeDropdown() {
+                const countryData = this.getCountryData();
+                this.populateCountryDropdown(countryData);
+                this.initializeDropdown();
+            },
+
+            getCountryData() {
+                const countryData = intlTelInputGlobals.getCountryData();
+                return countryData.sort((a, b) => {
+                    if (a.name === 'India') return -1;
+                    if (b.name === 'India') return 1;
+                    return 0;
+                });
+            },
+
+            populateCountryDropdown(countryData) {
+                countryData.forEach(country => {
+                    console.log(country)
+                    const li = document.createElement('li');
+                    const dialCode = `+${country.dialCode}`;
+                    const isIndia = country.iso2 === 'in';
+
+                    li.className = 'text-sm';
+                    li.setAttribute('value', country.iso2.toUpperCase());
+                    li.setAttribute('alternativeName', country.name);
+                    li.setAttribute('mob-code', dialCode);
+
+                    // Add selected attribute for India
+                    if (isIndia) {
+                        li.setAttribute('selected', 'true');
+                    }
+
+                    li.innerHTML = `<span>${dialCode}</span> <span>${country.name}</span>`;
+
+                    this.countryCodeDropDown.appendChild(li);
+                });
+            },
+
+            toggleOptSendVisibility(show) {
+                this.optSendDiv.style.display = show ? 'inline-flex' : 'none';
+                this.optSendDiv.style.pointerEvents = show ? 'auto' : 'none';
+            },
+
+            initializeDropdown() {
+                Dropdown.init('contryCodeMain', {
+                    searchable: true,
+                    customSelected: (item) => {
+                        const value = item.getAttribute('value');
+                        const mobCode=item.getAttribute('mob-code')
+                        return ` <div class="custom-selected-item gap-2 flex"><span>${mobCode}</span> <span class="custom-value">${value}</span> </div> `;
+                    },
+                    onSelect: (item) => {
+                        console.log(item)
+                        const selectedCountry = item;
+                        this.toggleOptSendVisibility(selectedCountry === 'IN');
+                    }
+                });
+            }
+        };
+
+        
+
+
+
+
         async function initializeApp() {
             try {
                 let orderType = AppState.mainState.orderType
