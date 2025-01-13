@@ -211,7 +211,7 @@ const Dropdown = {
 
     getValue(elementId) {
         const instance = this.instances.get(elementId);
-        return instance ? instance.state.selectedValue : null;
+        return instance ? instance.state.selectedItem : null;
     },
 
     setValue(elementId, value) {

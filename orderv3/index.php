@@ -303,6 +303,13 @@ include $fold . 'includesv2/head.php';
                 ddLandMark: null
             },
             cardDataState: [],
+            userData: {
+                countryCode: null,
+                email: null,
+                name: null,
+                mobile: null,
+                uid: null,
+            },
             setState(key, value, state) {
                 this[state][key] = value;
                 this.updateDOM(key, value);
@@ -585,6 +592,63 @@ include $fold . 'includesv2/head.php';
                 } finally {
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                 }
+            },
+            async sendOtp(otpMode, countryCode, mobNumber) {
+
+                try {
+
+                    const params = new URLSearchParams({
+                        action: 'send_otp',
+                        token: AppState.mainState.token,
+                        country_code: countryCode,
+                        mobile: mobNumber,
+                        mode: otpMode
+                    });
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params.toString(),
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                    const resp = await response.json(); // Use await to handle the promise returned by response.json()
+                    return resp.status;
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    // location.href='error.html'
+                }
+
+            },
+            async verifyOtp(fetchOtp, aff_token) {
+                try {
+                    const params = new URLSearchParams({
+                        action: 'check_otp',
+                        token: AppState.mainState.token,
+                        otp: fetchOtp,
+                        aff_token: aff_token
+                    });
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params.toString(),
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                    const resp = await response.json(); // Use await to handle the promise returned by response.json()
+
+                    return resp;
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    // location.href='error.html'
+                }
             }
 
 
@@ -625,6 +689,7 @@ include $fold . 'includesv2/head.php';
                     bottomSheetMain: document.querySelector('.bottomSheetMain'),
                     nextBtn: document.querySelector('#proceedBtn')
                 }
+                console.log("Next button cached:", this.elements.nextBtn); // Add this line
             },
             cacheMoneyTransferElements() {
                 this.elements = {
@@ -634,7 +699,18 @@ include $fold . 'includesv2/head.php';
             setupForexListeners() {
                 this.elements.addCurrencyBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.currency, 'addProduct'));
                 this.elements.addForexBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.forexCard, 'addProduct'));
-                this.elements.nextBtn.addEventListener('click', () => this.handleNextBtn())
+
+                // Log before attaching event
+                console.log("Setting up next button listener, button:", this.elements.nextBtn);
+
+                if (this.elements.nextBtn) {
+                    this.elements.nextBtn.addEventListener('click', () => {
+                        console.log('Next button clicked');
+                        this.handleNextBtn();
+                    });
+                } else {
+                    console.warn("Next button element not found");
+                }
             },
             setupMoneyTransferListeners() {
 
@@ -946,11 +1022,19 @@ include $fold . 'includesv2/head.php';
                 AppState.nextBtnState.active = false;
             },
             async handleNextBtn() {
+
+
                 if (!userCheck()) {
-                    let body = document.body;
-                    const template = await TemplateCache.get('loginWidget');
-                    body.innerHTML += template;
-                    await this.initializeLoginWidget();
+                    if (loginManager.loginWidgetContainer) {
+                        loginManager.openOtpWidget()
+                    } else {
+                        let body = document.body;
+                        const template = await TemplateCache.get('loginWidget');
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = template;
+                        body.appendChild(tempDiv.firstElementChild);
+                        await this.initializeLoginWidget();
+                    }
 
                     return
                 }
@@ -1161,11 +1245,11 @@ include $fold . 'includesv2/head.php';
                 console.log(data, 'contact details')
             },
             async initializeLoginWidget() {
-
-                document.querySelector('#loginWidgetContainer').style.display = 'flex'
-                document.querySelector('.otpWidget').style.display = 'flex'
-
                 loginManager.init();
+
+                loginManager.openOtpWidget()
+
+
 
 
 
@@ -1232,13 +1316,47 @@ include $fold . 'includesv2/head.php';
             optSendDiv: null,
 
             init() {
+                this.loginWidgetContainer = document.querySelector('#loginWidgetContainer')
+                this.otpWidget = document.querySelector('.otpWidget')
                 this.otpInputs = document.querySelectorAll('.otpInputBlock input');
+                this.otpContainer = document.querySelector('.otpInputBlock')
                 this.countryCodeDropDown = document.getElementById('countryCodeDropDown');
                 this.countryCodeMain = document.querySelector('#contryCodeMain');
                 this.optSendDiv = document.querySelector('#optSend');
+                this.whatsappOtpSendDiv = document.querySelector('#whatsappOtpSend');
+                this.mobNumberInput = document.querySelector('#mobNumber')
+                this.otpInputContainer = document.querySelector('#otpMobileContainer');
+                this.sendOtpContainer = document.querySelector('#sendOtpMain');
+                this.verifyOtpContainer = document.querySelector('#verifyOtpMain');
+                this.otpVerify = document.querySelector('#otpVerify');
+                this.changeNumberBtn = document.querySelector('#changeNumberBtn');
+                this.otpTimer = document.querySelector('.otpTimer');
+                this.resendBtn = document.querySelector('.otpResendBtn');
 
                 this.setupOTPInputs();
                 this.setupCountryCodeDropdown();
+                this.setupLoginListeners();
+
+            },
+            async openOtpWidget() {
+                this.loginWidgetContainer.style.display = 'flex'
+                this.otpWidget.style.display = 'flex'
+                document.querySelector('body').classList.add('snipContainer');
+                this.mobNumberInput.focus()
+            },
+            async closeOtpWidget() {
+
+                if (this.loginWidgetContainer) {
+                    // Reset widget state properly
+                    this.loginWidgetContainer.style.display = 'none';
+                    this.otpWidget.style.display = 'none';
+
+                    // Remove the body class properly
+                    document.querySelector('body').classList.remove('snipContainer');
+
+
+
+                }
             },
 
             // OTP Related Functions
@@ -1308,10 +1426,19 @@ include $fold . 'includesv2/head.php';
                     return 0;
                 });
             },
+            getMobileData() {
+                let countryCode = Dropdown.getValue('contryCodeMain').getAttribute('mob-code')
+                let mobNumber = this.mobNumberInput.value
+                let mobileData = {
+                    countryCode: countryCode,
+                    mobNumber: mobNumber
+                }
+                return mobileData
+            },
 
             populateCountryDropdown(countryData) {
                 countryData.forEach(country => {
-                    console.log(country)
+
                     const li = document.createElement('li');
                     const dialCode = `+${country.dialCode}`;
                     const isIndia = country.iso2 === 'in';
@@ -1342,7 +1469,7 @@ include $fold . 'includesv2/head.php';
                     searchable: true,
                     customSelected: (item) => {
                         const value = item.getAttribute('value');
-                        const mobCode=item.getAttribute('mob-code')
+                        const mobCode = item.getAttribute('mob-code')
                         return ` <div class="custom-selected-item gap-2 flex"><span>${mobCode}</span> <span class="custom-value">${value}</span> </div> `;
                     },
                     onSelect: (item) => {
@@ -1351,10 +1478,172 @@ include $fold . 'includesv2/head.php';
                         this.toggleOptSendVisibility(selectedCountry === 'IN');
                     }
                 });
+            },
+            setupLoginListeners() {
+                this.optSendDiv.addEventListener('click', () => {
+                    this.handleSendOtp('sms')
+
+                })
+                this.whatsappOtpSendDiv.addEventListener('click', () => {
+                    this.handleSendOtp('wa')
+                })
+                this.mobNumberInput.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        loginManager.handleSendOtp('wa')
+                    }
+                });
+                this.otpVerify.addEventListener('click', () => {
+                    this.handleVerifyOtp();
+                })
+
+                this.otpInputs[3].addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Prevent form submission or other default actions
+
+                        loginManager.handleVerifyOtp();
+                    }
+                })
+                this.changeNumberBtn.addEventListener('click', () => {
+
+                    this.otpInputs.forEach((input) => {
+                        input.value = '' // Clears each OTP input field
+                        input.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
+                    });
+
+                    this.sendOtpContainer.style.display = 'flex';
+                    this.verifyOtpContainer.style.display = 'none';
+                })
+                this.resendBtn.addEventListener('click', function() {
+
+                    if (loginManager.isResendEnabled) { // Check if resend is enabled
+
+
+                        // Revert the changes
+                        loginManager.otpTimer.style.display = 'block'; // Make the timer visible again
+                        loginManager.resendBtn.style.opacity = '0.5'; // Reduce opacity to indicate it's disabled
+                        loginManager.resendBtn.style.pointerEvents = 'none'; // Disable the resend button by blocking pointer events
+                        loginManager.isResendEnabled = false; // Disable further resends
+
+                        // Call the function to send OTP
+                        APIService.sendOtp();
+
+                        // Restart the countdown
+                        loginManager.activeResendOtp();
+                    } else {
+                        console.log('Resend is disabled. Please wait for the timer.');
+                    }
+                });
+                this.loginWidgetContainer.addEventListener('click', (event) => {
+
+                    if (!this.otpWidget.contains(event.target)) {
+                        loginManager.closeOtpWidget(); // Only close if the click was outside the otpWidget
+                    }
+                });
+
+            },
+            async handleSendOtp(otpMode) {
+
+                let mobileData = this.getMobileData();
+                let countryCode = mobileData.countryCode;
+                let mobNumber = mobileData.mobNumber;
+
+                if (countryCode === "91" && mobNumber !== 10) {
+                    insertAlertBelowElement(this.otpInputContainer, 'Invalid mobile number');
+                    return;
+                } else if (mobNumber === "" || !/^\d+$/.test(mobNumber)) {
+                    insertAlertBelowElement(this.otpInputContainer, 'Invalid mobile number');
+                    return;
+                } else {
+                    removeAlertBelowElement(this.otpInputContainer);
+                }
+                let response = await APIService.sendOtp(otpMode, countryCode, mobNumber)
+
+                if (response) {
+                    console.log(response);
+                    this.sendOtpContainer.style.display = 'none';
+                    this.verifyOtpContainer.style.display = 'flex';
+                    document.querySelector('#mobNum').textContent = countryCode + " " + mobNumber
+                    this.otpInputs[0].focus();
+                    this.activeResendOtp()
+                } else {
+                    console.log('some error occurred')
+                }
+
+            },
+            async handleVerifyOtp() {
+                let fetchOtp = this.getOtpValue()
+
+                var aff_token = getCookie('etmref');
+
+                removeAlertBelowElement(this.otpContainer);
+
+                if (fetchOtp.length < 4) {
+                    insertAlertBelowElement(this.otpContainer, 'Enter a valid otp');
+                    return
+                } else {
+                    removeAlertBelowElement(this.otpContainer)
+                }
+
+                let response = await APIService.verifyOtp(fetchOtp, aff_token);
+
+                if (response.verified) {
+                    console.log(response)
+
+
+                    sessionStorage.setItem('userId', response.uid)
+                    
+                    AppState.userData.countryCode=response.customer_country_code;
+                    AppState.userData.email=response.customer_email;
+                    AppState.userData.mobile=response.customer_mobile;
+                    AppState.userData.name=response.customer_name;
+
+                    // Store the object as a JSON string
+                    const userInfo = {
+                        userId: response.uid,
+                        countryCode: response.customer_country_code,
+                        mobNum: response.customer_mobile
+                    };
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+
+                    loginManager.closeOtpWidget()
+                    UIManager.handleNextBtn()
+                } else {
+                    insertAlertBelowElement(this.otpContainer, 'Incorrect OTP');
+                    return
+                }
+            },
+            isResendEnabled: false,
+            countdown: null,
+            async activeResendOtp() {
+
+                let timeLeft = 30; // Start the countdown from 30 seconds
+
+                // Clear any previous timer if it's running
+                if (this.countdown) {
+                    clearInterval(this.countdown);
+                }
+
+                // Initialize the countdown timer
+                this.countdown = setInterval(() => {
+                    this.otpTimer.textContent = `In ${timeLeft}s`; // Update the displayed time
+
+                    timeLeft--; // Decrease the time
+
+                    if (timeLeft < 0) {
+                        clearInterval(this.countdown); // Stop the countdown when it reaches 0
+                        this.otpTimer.style.display = 'none'; // Hide the timer
+                        this.resendBtn.style.opacity = '1'; // Make the resend button fully visible
+                        this.resendBtn.style.pointerEvents = 'auto'; // Enable clicking on the resend button
+                        this.isResendEnabled = true; // Enable resend when countdown ends
+                    }
+                }, 1000); // Run this function every 1 second (1000ms)
             }
+
         };
 
-        
+
 
 
 
