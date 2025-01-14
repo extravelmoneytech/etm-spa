@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadinggg(true)
     console.log('tokenb', token)
     try {
-        const apiUrl = 'https://mvc.extravelmoney.com/api-etm/';
+       
         const params = new URLSearchParams({
             action: 'get_delivery_details',
             token: token // Ensure token is defined in your scope
@@ -193,7 +193,7 @@ deliveryUpdateBtn.addEventListener('click', async () => {
 
 
     try {
-        const apiUrl = 'https://mvc.extravelmoney.com/api-etm/';
+        
         const params = new URLSearchParams({
             action: 'update_delivery_details',
             token: token,  // Ensure `token` is defined

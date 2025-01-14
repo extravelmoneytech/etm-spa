@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadinggg(true)
 
     try {
-        const apiUrl = 'https://mvc.extravelmoney.com/api-etm/';
+        
         const params = new URLSearchParams({
             action: 'summary',
             token: token
@@ -167,7 +167,7 @@ const getUserIP = async () => {
           }
   
           
-          const apiUrl = 'https://mvc.extravelmoney.com/api-etm/';
+          
           const params = new URLSearchParams({
               action: 'create_order',
               token: token,

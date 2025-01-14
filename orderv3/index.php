@@ -211,7 +211,8 @@ include $fold . 'includesv2/head.php';
                 ADDING_PRODUCT: 'addingProduct',
                 EDITING_PRODUCT: 'editingProduct',
                 DELETING_PRODUCT: 'deletingProduct',
-                RATE_CALCULATION: 'exchangeRateCalculation'
+                RATE_CALCULATION: 'exchangeRateCalculation',
+
             },
             ORDER_STATES: {
                 GET_RATES: 'getRates',
@@ -303,12 +304,44 @@ include $fold . 'includesv2/head.php';
                 ddLandMark: null
             },
             cardDataState: [],
-            userData: {
+            contactData: {
                 countryCode: null,
                 email: null,
                 name: null,
                 mobile: null,
                 uid: null,
+                travelDate: null,
+                travelPurpose: null
+            },
+            kycData: {
+                education: [
+                    "Passport",
+                    "Pan Card",
+                    "Confirmed Air Ticket",
+                    "Valid Visa",
+                    "University Admission Letter"
+                ],
+                immigration: [
+                    "Passport",
+                    "Pan Card",
+                    "Confirmed Air Ticket",
+                    "Valid Visa",
+                    "Immigration Letter"
+                ],
+                employment: [
+                    "Passport",
+                    "Pan Card",
+                    "Confirmed Air Ticket",
+                    "Valid Visa",
+                    "Work Contract Letter"
+                ],
+                holidayLeisure: [
+                    "Passport",
+                    "Pan Card",
+                    "Onward Air Ticket",
+                    "Valid Visa",
+                    "Return Air Ticket"
+                ]
             },
             setState(key, value, state) {
                 this[state][key] = value;
@@ -508,7 +541,6 @@ include $fold . 'includesv2/head.php';
             },
             async getDeliveryDetails() {
                 try {
-
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
                     const params = new URLSearchParams({
                         action: 'get_delivery_details',
@@ -535,7 +567,7 @@ include $fold . 'includesv2/head.php';
             async updateDeliveryDetails() {
 
                 try {
-
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
                     const params = new URLSearchParams({
                         action: 'update_delivery_details',
                         token: AppState.mainState.token, // Ensure `token` is defined
@@ -561,6 +593,8 @@ include $fold . 'includesv2/head.php';
                     return resp;
                 } catch (error) {
                     console.error('Error fetching data:', error);
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false)
                 }
             },
             async getContactDetails() {
@@ -585,12 +619,49 @@ include $fold . 'includesv2/head.php';
                     }
 
                     const resp = await response.json();
+
                     return resp
 
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 } finally {
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                }
+            },
+            async updateContactDetails() {
+                try {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
+
+                    const params = new URLSearchParams({
+                        action: 'save_contact_details',
+                        token: AppState.mainState.token,
+                        full_name: AppState.contactData.name,
+                        email: AppState.contactData.email,
+                        travel_date: AppState.contactData.travelDate,
+                        purpose: AppState.contactData.travelPurpose,
+                    });
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params.toString(),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+
+                    }
+
+                    const resp = await response.json();
+
+                    return resp
+
+                } catch (error) {
+                    console.log(error)
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false)
                 }
             },
             async sendOtp(otpMode, countryCode, mobNumber) {
@@ -649,6 +720,78 @@ include $fold . 'includesv2/head.php';
                     console.error('Error fetching data:', error);
                     // location.href='error.html'
                 }
+            },
+            async getSummaryDetails() {
+                try {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
+                    const params = new URLSearchParams({
+                        action: 'summary',
+                        token: AppState.getState('token', 'mainState')
+                    });
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: params.toString()
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                    const data = await response.json();
+                    return data;
+
+                } catch (error) {
+                    console.error('Error fetching summary:', error);
+                    window.location.href = '/error.html';
+                    return null;
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                }
+            },
+            async getUserIP() {
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const data = await response.json();
+                    return data.ip;
+                } catch (error) {
+                    console.error('Error fetching user IP:', error);
+                    return null;
+                }
+            },
+            async placeOrder() {
+                console.log('placing order');
+
+                try {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
+                    const userIP = await this.getUserIP();
+                    if (!userIP) throw new Error("Could not retrieve user IP address.");
+
+                    const params = new URLSearchParams({
+                        action: 'create_order',
+                        token: AppState.getState('token', 'mainState'),
+                        userip: userIP
+                    });
+                
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: params.toString()
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                    const data = await response.json();
+
+                    return data;
+
+                } catch (error) {
+                    console.error('Error placing order:', error);
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                }
             }
 
 
@@ -703,14 +846,7 @@ include $fold . 'includesv2/head.php';
                 // Log before attaching event
                 console.log("Setting up next button listener, button:", this.elements.nextBtn);
 
-                if (this.elements.nextBtn) {
-                    this.elements.nextBtn.addEventListener('click', () => {
-                        console.log('Next button clicked');
-                        this.handleNextBtn();
-                    });
-                } else {
-                    console.warn("Next button element not found");
-                }
+                this.assignNextButton(this.elements.nextBtn);
             },
             setupMoneyTransferListeners() {
 
@@ -1001,8 +1137,9 @@ include $fold . 'includesv2/head.php';
                 calculations.processCardData(data)
             },
             updateProceedButtonState() {
-                const proceedBtn = this.elements.nextBtn;
 
+                const proceedBtn = this.elements.nextBtn;
+                console.log(proceedBtn)
                 if (AppState.isProcessing()) {
                     proceedBtn.classList.add('opacity-50', 'cursor-not-allowed');
                     proceedBtn.disabled = true;
@@ -1020,6 +1157,16 @@ include $fold . 'includesv2/head.php';
                 proceedBtn.classList.add('opacity-50', 'cursor-not-allowed');
                 proceedBtn.disabled = true;
                 AppState.nextBtnState.active = false;
+            },
+
+            assignNextButton(element) {
+                if (element) {
+                    UIManager.elements.nextBtn = element
+                    element.addEventListener('click', () => this.handleNextBtn());
+
+                } else {
+                    console.warn("No element provided for next button");
+                }
             },
             async handleNextBtn() {
 
@@ -1093,13 +1240,14 @@ include $fold . 'includesv2/head.php';
 
 
                         if (AppState.deliveryState.doorDelivery) {
-                            if (ddAddress === "") {
+                            if (!ddAddress || ddAddress.trim() === "") {
                                 insertAlertBelowElement(document.querySelector('#ddAddress'), 'Enter a valid address')
                                 return
                             } else {
                                 removeAlertBelowElement(document.querySelector('#ddAddress'))
                             }
-                            if (ddLandMark === "") {
+
+                            if (!ddLandMark || ddLandMark.trim() === "") {
                                 insertAlertBelowElement(document.querySelector('#ddLandMark'), 'Enter a valid landmark')
                                 return
                             } else {
@@ -1129,14 +1277,58 @@ include $fold . 'includesv2/head.php';
                             AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
                             await this.initializeContactDetailsComponents()
                         }
-
-
-
                         return
 
                     }
                     if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
 
+
+                        if (!AppState.contactData.name || AppState.contactData.name.trim() === "") {
+                            insertAlertBelowElement(document.querySelector('#customerName'), 'Enter a valid name')
+                            return
+                        } else {
+                            removeAlertBelowElement(document.querySelector('#customerName'))
+                        }
+
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!AppState.contactData.email || AppState.contactData.email.trim() === "" || !emailRegex.test(AppState.contactData.email)) {
+                            insertAlertBelowElement(document.querySelector('#customerEmail'), 'Enter a valid email')
+                            return
+                        } else {
+                            removeAlertBelowElement(document.querySelector('#customerEmail'))
+                        }
+
+
+                        let response = await APIService.updateContactDetails()
+
+                        if (response.status) {
+                            // Hide current content
+                            const contactDetailsSection = document.querySelector('#contactDetailsSection');
+                            if (contactDetailsSection) contactDetailsSection.style.display = 'none';
+
+                            // Load and append delivery details template
+                            const template = await TemplateCache.get('summary');
+                            const summarySection = document.createElement('div');
+                            summarySection.id = 'summarySection';
+                            summarySection.innerHTML = template;
+
+                            sectionContainer.appendChild(summarySection);
+
+                            AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.REVIEW_PAYMENT;
+                            await this.initializeSummaryComponents()
+                        }
+
+                        return
+                    }
+                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
+                        let data= await APIService.placeOrder();
+                        console.log(data)
+                        if (data.status) {
+                            sessionStorage.setItem('orderId', data.orderID);
+                            sessionStorage.setItem('customerName',AppState.contactData.name);
+                            window.location.href = '/orderv2/Complete-KYC';
+                        }
+                        
                         return
                     }
 
@@ -1241,8 +1433,156 @@ include $fold . 'includesv2/head.php';
                 }
             },
             async initializeContactDetailsComponents() {
+
+                let nextBtn = document.querySelector('#contactUpdateBtn');
+                this.assignNextButton(nextBtn);
+
                 let data = await APIService.getContactDetails()
-                console.log(data, 'contact details')
+
+                if (data) {
+                    this.nameInput = document.querySelector('#customerName');
+                    this.emailInput = document.querySelector('#customerEmail');
+                    this.mobileField = document.querySelector('#customerMobile');
+
+                    AppState.contactData.countryCode = data.country_code;
+                    AppState.contactData.email = data.customer_email;
+                    AppState.contactData.name = data.customer_name;
+                    AppState.contactData.mobile = data.mobile;
+
+
+
+                    AppState.contactData.uid = data.uid;
+
+                    this.nameInput.value = AppState.contactData.name;
+                    this.emailInput.value = AppState.contactData.email;
+                    this.mobileField.textContent = AppState.contactData.mobile;
+
+                    this.nameInput.addEventListener('input', (e) => {
+                        AppState.contactData.name = e.target.value;
+                    })
+
+                    this.emailInput.addEventListener('input', (e) => {
+                        AppState.contactData.email = e.target.value;
+                    })
+
+                    const script = document.createElement('script');
+                    script.src = 'orderv3/components/modules/datepicker.js';
+                    script.async = true;
+
+                    await new Promise((resolve, reject) => {
+                        script.onload = resolve;
+                        script.onerror = reject;
+                        document.head.appendChild(script);
+                    });
+
+
+                    // Initialize with callback
+                    window.initializeDatePicker({
+                        onSelect: (date) => {
+                            AppState.contactData.travelDate = window.getFormatedDate(date);
+                        }
+                    });
+
+
+
+                    Dropdown.init('purposeSelector', {
+                        searchable: false,
+                        onSelect: (value) => {
+                            this.updateKycList(value)
+                            AppState.contactData.travelPurpose = value;
+                        }
+                    });
+
+                    if (data.travel_date != "") {
+                        console.log('previous date available')
+                        console.log(data.travel_date)
+                        // AppState.contactData.travelDate = data.travel_date;
+                        // window.setPickerDate(new Date(data.travel_date));
+                        AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
+                    } else {
+                        console.log(' no previous date available')
+                        AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
+                    }
+                    if (data.travel_purpose != "") {
+                        AppState.contactData.travelPurpose = data.travel_purpose;
+                        Dropdown.setValue('purposeSelector', data.travel_purpose)
+                    } else {
+                        AppState.contactData.travelPurpose = Dropdown.getValue('purposeSelector').getAttribute('value')
+                    }
+
+                    this.updateKycList(Dropdown.getValue('purposeSelector').getAttribute('value'));
+
+
+                }
+            },
+            updateKycList(value) {
+                const documentContainer = document.querySelector('#document-list');
+                documentContainer.innerHTML = ''
+                let docs = AppState.kycData[value]
+                console.log(docs)
+                docs.forEach((item, index) => {
+                    let kyc = document.createElement('p');
+                    kyc.className = 'text-black text-sm font-normal'
+                    kyc.textContent = `${index+1}. ${item}`
+                    documentContainer.appendChild(kyc)
+                })
+            },
+            async initializeSummaryComponents() {
+
+                const placeOrderBtn = document.querySelector('#summaryConfirm');
+                this.assignNextButton(placeOrderBtn);
+
+                const summaryData = await APIService.getSummaryDetails();
+                if (!summaryData) return;
+
+                // Get required elements when they're needed
+                const doorDeliveryElement = document.querySelector('#doorDeliveryData');
+                const paymentInfoText = document.querySelector('#paymentInfoText');
+                const deliveryFee = document.querySelector('#deliveryFee');
+                const totalAmount = document.querySelector('#totalAmnt');
+                const gst = document.querySelector('#gst');
+                const productList = document.getElementById('productList');
+
+
+                // Update UI based on delivery option
+                if (summaryData.delivery_opted === '0') {
+                    doorDeliveryElement.style.display = "none";
+                    paymentInfoText.innerHTML = `Visit store before <b>${summaryData.delivery_on}</b>. Full/partial payment required before store visit. Payment instructions will be shared on your registered email after KYC verification.`;
+                } else {
+                    deliveryFee.innerHTML = '₹' + summaryData.door_fee;
+                    paymentInfoText.textContent = 'Full payment required before delivery. Payment instructions will be shared on your registered email after KYC verification.';
+                }
+
+                // Update totals
+                totalAmount.innerHTML = this.formatAmount(summaryData.total);
+                gst.innerHTML = '₹' + summaryData.gst;
+
+                // Render product list
+                this.renderProductList(productList, summaryData.order_details);
+
+            },
+
+            renderProductList(container, products) {
+                container.innerHTML = '';
+                products.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('justify-between', 'items-start', 'inline-flex');
+
+                    const rateParagraph = document.createElement('p');
+                    rateParagraph.classList.add('text-[#677489]', 'text-sm', 'font-medium', 'tracking-tight');
+                    rateParagraph.textContent = `${product.amount} ${product.currency} (${product.product === 'Forex Card' ? 'Card' : 'Note'}) @ ${product.rate}`;
+
+                    const amountParagraph = document.createElement('p');
+                    amountParagraph.classList.add('text-[#111729]', 'text-sm', 'font-medium', 'tracking-tight');
+                    amountParagraph.textContent = this.formatAmount(product.amount * product.rate);
+
+                    productDiv.appendChild(rateParagraph);
+                    productDiv.appendChild(amountParagraph);
+                    container.appendChild(productDiv);
+                });
+            },
+            formatAmount(amount) {
+                return `₹ ${parseFloat(amount).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
             },
             async initializeLoginWidget() {
                 loginManager.init();
@@ -1592,11 +1932,8 @@ include $fold . 'includesv2/head.php';
 
 
                     sessionStorage.setItem('userId', response.uid)
-                    
-                    AppState.userData.countryCode=response.customer_country_code;
-                    AppState.userData.email=response.customer_email;
-                    AppState.userData.mobile=response.customer_mobile;
-                    AppState.userData.name=response.customer_name;
+
+
 
                     // Store the object as a JSON string
                     const userInfo = {
