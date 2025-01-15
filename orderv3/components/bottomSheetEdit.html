@@ -1,73 +1,67 @@
-<div class="absolute bottom-0 left-0 w-full z-50 md:w-[30%] md:right-0 md:left-auto md:top-0">
-    <div
-        class="bg-white rounded-tl-[32px] rounded-tr-[32px] rounded-bl-lg rounded-br-lg md:rounded-none md:h-full w-full min-h-[20rem] flex flex-col items-center py-6 pb-12 md:pt-12 bottomSheet">
-
-        <div class="w-full h-8 justify-between items-center gap-2 flex px-4">
+<div class="w-full h-8 justify-between items-center gap-2 flex px-4">
 
 
-            <div class="editCurrencyComponent flex gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M21.3113 6.87821L17.1216 2.68946C16.9823 2.55014 16.8169 2.43962 16.6349 2.36421C16.4529 2.28881 16.2578 2.25 16.0608 2.25C15.8638 2.25 15.6687 2.28881 15.4867 2.36421C15.3047 2.43962 15.1393 2.55014 15 2.68946L3.43969 14.2498C3.2998 14.3886 3.18889 14.5538 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.3101V19.4998C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9998 4.50001 20.9998H20.25C20.4489 20.9998 20.6397 20.9208 20.7803 20.7801C20.921 20.6395 21 20.4487 21 20.2498C21 20.0509 20.921 19.8601 20.7803 19.7194C20.6397 19.5788 20.4489 19.4998 20.25 19.4998H10.8113L21.3113 8.99977C21.4506 8.86048 21.5611 8.69511 21.6365 8.5131C21.7119 8.33109 21.7507 8.136 21.7507 7.93899C21.7507 7.74198 21.7119 7.5469 21.6365 7.36489C21.5611 7.18288 21.4506 7.0175 21.3113 6.87821ZM8.68969 19.4998H4.50001V15.3101L12.75 7.06009L16.9397 11.2498L8.68969 19.4998ZM18 10.1895L13.8113 5.99977L16.0613 3.74977L20.25 7.93946L18 10.1895Z" fill="black"/>
-                  </svg>
-                <div class="grow shrink basis-0 flex-col justify-center items-start gap-1 inline-flex">
-                    <div class="self-stretch text-black text-base font-semibold ">Edit Amount</div>
-                </div>
+    <div class="editCurrencyComponent flex gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M21.3113 6.87821L17.1216 2.68946C16.9823 2.55014 16.8169 2.43962 16.6349 2.36421C16.4529 2.28881 16.2578 2.25 16.0608 2.25C15.8638 2.25 15.6687 2.28881 15.4867 2.36421C15.3047 2.43962 15.1393 2.55014 15 2.68946L3.43969 14.2498C3.2998 14.3886 3.18889 14.5538 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.3101V19.4998C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9998 4.50001 20.9998H20.25C20.4489 20.9998 20.6397 20.9208 20.7803 20.7801C20.921 20.6395 21 20.4487 21 20.2498C21 20.0509 20.921 19.8601 20.7803 19.7194C20.6397 19.5788 20.4489 19.4998 20.25 19.4998H10.8113L21.3113 8.99977C21.4506 8.86048 21.5611 8.69511 21.6365 8.5131C21.7119 8.33109 21.7507 8.136 21.7507 7.93899C21.7507 7.74198 21.7119 7.5469 21.6365 7.36489C21.5611 7.18288 21.4506 7.0175 21.3113 6.87821ZM8.68969 19.4998H4.50001V15.3101L12.75 7.06009L16.9397 11.2498L8.68969 19.4998ZM18 10.1895L13.8113 5.99977L16.0613 3.74977L20.25 7.93946L18 10.1895Z" fill="black"/>
+          </svg>
+        <div class="grow shrink basis-0 flex-col justify-center items-start gap-1 inline-flex">
+            <div class="self-stretch text-black text-base font-semibold ">Edit Amount</div>
+        </div>
 
-            </div>
-            <div id="closeBottomSheet" class="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path
-                        d="M23.7656 22.6336C23.8399 22.708 23.8988 22.7962 23.9391 22.8933C23.9793 22.9904 24 23.0945 24 23.1996C24 23.3047 23.9793 23.4088 23.9391 23.5059C23.8988 23.603 23.8399 23.6912 23.7656 23.7656C23.6912 23.8399 23.603 23.8988 23.5059 23.9391C23.4088 23.9793 23.3047 24 23.1996 24C23.0945 24 22.9904 23.9793 22.8933 23.9391C22.7962 23.8988 22.708 23.8399 22.6336 23.7656L16 17.1309L9.36637 23.7656C9.21626 23.9157 9.01268 24 8.8004 24C8.58812 24 8.38454 23.9157 8.23443 23.7656C8.08433 23.6155 8 23.4119 8 23.1996C8 22.9873 8.08433 22.7837 8.23443 22.6336L14.8691 16L8.23443 9.36637C8.08433 9.21626 8 9.01268 8 8.8004C8 8.58812 8.08433 8.38454 8.23443 8.23443C8.38454 8.08433 8.58812 8 8.8004 8C9.01268 8 9.21626 8.08433 9.36637 8.23443L16 14.8691L22.6336 8.23443C22.7837 8.08433 22.9873 8 23.1996 8C23.4119 8 23.6155 8.08433 23.7656 8.23443C23.9157 8.38454 24 8.58812 24 8.8004C24 9.01268 23.9157 9.21626 23.7656 9.36637L17.1309 16L23.7656 22.6336Z"
-                        fill="#1A1A1A" />
-                </svg>
+    </div>
+    <div id="closeBottomSheet" class="cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path
+                d="M23.7656 22.6336C23.8399 22.708 23.8988 22.7962 23.9391 22.8933C23.9793 22.9904 24 23.0945 24 23.1996C24 23.3047 23.9793 23.4088 23.9391 23.5059C23.8988 23.603 23.8399 23.6912 23.7656 23.7656C23.6912 23.8399 23.603 23.8988 23.5059 23.9391C23.4088 23.9793 23.3047 24 23.1996 24C23.0945 24 22.9904 23.9793 22.8933 23.9391C22.7962 23.8988 22.708 23.8399 22.6336 23.7656L16 17.1309L9.36637 23.7656C9.21626 23.9157 9.01268 24 8.8004 24C8.58812 24 8.38454 23.9157 8.23443 23.7656C8.08433 23.6155 8 23.4119 8 23.1996C8 22.9873 8.08433 22.7837 8.23443 22.6336L14.8691 16L8.23443 9.36637C8.08433 9.21626 8 9.01268 8 8.8004C8 8.58812 8.08433 8.38454 8.23443 8.23443C8.38454 8.08433 8.58812 8 8.8004 8C9.01268 8 9.21626 8.08433 9.36637 8.23443L16 14.8691L22.6336 8.23443C22.7837 8.08433 22.9873 8 23.1996 8C23.4119 8 23.6155 8.08433 23.7656 8.23443C23.9157 8.38454 24 8.58812 24 8.8004C24 9.01268 23.9157 9.21626 23.7656 9.36637L17.1309 16L23.7656 22.6336Z"
+                fill="#1A1A1A" />
+        </svg>
+    </div>
+
+</div>
+<div class="w-full h-[0px] border border-black/10 my-4"></div>
+
+<div class="editCurrencyComponent px-4 w-full">
+    <div class="flex flex-col">
+
+
+        <div class="justify-between items-center inline-flex mt-6">
+            <span class="text-black/60 text-sm font-medium leading-[21px]">Buy <span data-bind="selectedCurrencyEdit"></span></span>
+            <div class="flex-col justify-center items-center gap-1 inline-flex ">
+                <span
+                    class="text-[#2c5aa2] text-[13px] font-normal leading-[13px] tracking-tight">Calculate
+                    in
+                    INR</span>
+                <div class="h-[0px] border border-[#2c5aa2] w-full"></div>
             </div>
 
         </div>
-        <div class="w-full h-[0px] border border-black/10 my-4"></div>
 
-        <div class="editCurrencyComponent px-4 w-full">
-            <div class="flex flex-col">
-
-
-                <div class="justify-between items-center inline-flex mt-6">
-                    <span class="text-black/60 text-sm font-medium leading-[21px]">Buy <span data-bind="selectedCurrencyEdit"></span></span>
-                    <div class="flex-col justify-center items-center gap-1 inline-flex ">
-                        <span
-                            class="text-[#2c5aa2] text-[13px] font-normal leading-[13px] tracking-tight">Calculate
-                            in
-                            INR</span>
-                        <div class="h-[0px] border border-[#2c5aa2] w-full"></div>
-                    </div>
-
-                </div>
-
-                <input class="h-12 px-3 py-2 rounded-lg border border-black/10 outline-none mt-2" value="1000" type="text" id="editCurrencyQuantity">
+        <input class="h-12 px-3 py-2 rounded-lg border border-black/10 outline-none mt-2" value="1000" type="text" id="editCurrencyQuantity">
 
 
 
 
 
 
-                <div class="justify-start items-center gap-[5px] inline-flex mt-4">
-                    <span class="text-[#777777] text-[13px] font-semibold leading-tight">
-                        Exchange Rate</span>
-                    <span class="text-[#0e51a0] text-base font-extrabold  leading-normal" id="exchangeRateBottomSheet" data-bind="exchangeRateEdit">
-                        
-                    </span>
-                </div>
-
-                <div
-                    class="h-12 px-4 py-3.5 bg-[#0e51a0] rounded-lg justify-center items-center gap-1 inline-flex mt-6" id="editProductBtn">
-                    <div class="text-white text-base font-bold ">Save</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
-                        fill="none">
-                        <path
-                            d="M15.781 12.9549L8.28104 20.4549C8.21136 20.5246 8.12863 20.5798 8.03759 20.6175C7.94654 20.6553 7.84896 20.6747 7.75042 20.6747C7.65187 20.6747 7.55429 20.6553 7.46324 20.6175C7.3722 20.5798 7.28947 20.5246 7.21979 20.4549C7.15011 20.3852 7.09483 20.3025 7.05712 20.2114C7.01941 20.1204 7 20.0228 7 19.9242C7 19.8257 7.01941 19.7281 7.05712 19.6371C7.09483 19.546 7.15011 19.4633 7.21979 19.3936L14.1901 12.4242L7.21979 5.45487C7.07906 5.31414 7 5.12327 7 4.92425C7 4.72522 7.07906 4.53435 7.21979 4.39362C7.36052 4.25289 7.55139 4.17383 7.75042 4.17383C7.94944 4.17383 8.14031 4.25289 8.28104 4.39362L15.781 11.8936C15.8508 11.9633 15.9061 12.046 15.9438 12.137C15.9816 12.2281 16.001 12.3257 16.001 12.4242C16.001 12.5228 15.9816 12.6204 15.9438 12.7115C15.9061 12.8025 15.8508 12.8852 15.781 12.9549Z"
-                            fill="white" />
-                    </svg>
-                </div>
-
-            </div>
+        <div class="justify-start items-center gap-[5px] inline-flex mt-4">
+            <span class="text-[#777777] text-[13px] font-semibold leading-tight">
+                Exchange Rate</span>
+            <span class="text-[#0e51a0] text-base font-extrabold  leading-normal" id="exchangeRateBottomSheet" data-bind="exchangeRateEdit">
+                
+            </span>
         </div>
+
+        <div
+            class="h-12 px-4 py-3.5 bg-[#0e51a0] rounded-lg justify-center items-center gap-1 inline-flex mt-6" id="editProductBtn">
+            <div class="text-white text-base font-bold ">Save</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
+                fill="none">
+                <path
+                    d="M15.781 12.9549L8.28104 20.4549C8.21136 20.5246 8.12863 20.5798 8.03759 20.6175C7.94654 20.6553 7.84896 20.6747 7.75042 20.6747C7.65187 20.6747 7.55429 20.6553 7.46324 20.6175C7.3722 20.5798 7.28947 20.5246 7.21979 20.4549C7.15011 20.3852 7.09483 20.3025 7.05712 20.2114C7.01941 20.1204 7 20.0228 7 19.9242C7 19.8257 7.01941 19.7281 7.05712 19.6371C7.09483 19.546 7.15011 19.4633 7.21979 19.3936L14.1901 12.4242L7.21979 5.45487C7.07906 5.31414 7 5.12327 7 4.92425C7 4.72522 7.07906 4.53435 7.21979 4.39362C7.36052 4.25289 7.55139 4.17383 7.75042 4.17383C7.94944 4.17383 8.14031 4.25289 8.28104 4.39362L15.781 11.8936C15.8508 11.9633 15.9061 12.046 15.9438 12.137C15.9816 12.2281 16.001 12.3257 16.001 12.4242C16.001 12.5228 15.9816 12.6204 15.9438 12.7115C15.9061 12.8025 15.8508 12.8852 15.781 12.9549Z"
+                    fill="white" />
+            </svg>
+        </div>
+
     </div>
 </div>

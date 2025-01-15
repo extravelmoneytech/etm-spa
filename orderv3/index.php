@@ -11,10 +11,90 @@ $orderV3Page = true;
 include $fold . 'includesv2/head.php';
 
 ?>
+<style>
+    .bottomSheetMain {
+        display: none;
+    }
 
+    .bottomSheetMainVisible {
+        display: flex;
+    }
+
+
+    .bottomSheet {
+        transform: translateX(100%);
+        transition: 0.3s;
+    }
+
+    .popBottomSheet {
+        transform: translateX(0%);
+    }
+
+    @media (max-width:950px) {
+        .bottomSheet {
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .popBottomSheet {
+            transform: translateY(0%);
+        }
+    }
+
+    /* Progress bar animations */
+    [role="progressbar"] {
+        transition: width 300ms ease-in-out;
+    }
+
+    .text-black.text-base.font-bold {
+        transition: opacity 200ms ease-in-out;
+    }
+
+    .fade-out {
+        opacity: 0;
+    }
+
+    /* Optional: Add animation for the number transition */
+    .text-lg.font-bold {
+        transition: transform 200ms ease-in-out;
+    }
+
+    .text-lg.font-bold.animate {
+        transform: scale(1.1);
+    }
+
+    /* Add to your CSS */
+    .grow.shrink.basis-0.h-0\\.5 {
+        transition: all 400ms ease-in-out;
+    }
+
+    .rounded-\[30px\] {
+        transition: all 400ms ease-in-out;
+    }
+
+    span.text-lg {
+        transition: all 400ms ease-in-out;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .animate-pulse {
+        animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+</style>
 
 <body>
-    <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-center justify-center" id="containerWholeMain">
         <div class="w-full chooseCityOverlayMain  relative" style="max-width: 103rem;">
 
             <?php
@@ -22,95 +102,22 @@ include $fold . 'includesv2/head.php';
             include $fold . 'includesv2/header.php';
             ?>
 
-            <div class="progressBar mb-0 md:mb-8">
-                <div class="w-full justify-start items-center progressBar hidden md:inline-flex mt-8">
-                    <div class="grow shrink basis-0 h-0.5  bg-[#20bc73]"></div>
-                    <div class="flex flex-col relative">
-                        <div
-                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold ">1</span>
-                        </div>
-                        <span
-                            class="text-black text-lg font-bold  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Get
-                            Rates</span>
-                    </div>
-
-                    <div class="forexContainer grow shrink basis-0 h-0.5 bg-[#eaeef4]"></div>
-                    <div class="forexContainer flex flex-col relative">
-                        <div
-                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold ">2</span>
-                        </div>
-                        <span
-                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Choose
-                            Provider</span>
-                    </div>
-
-                    <div class="moneyT grow shrink basis-0 h-0.5 bg-[#20bc73]"></div>
-                    <div class="moneyT flex flex-col relative">
-                        <div
-                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold ">2</span>
-                        </div>
-                        <span
-                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Choose
-                            Provider</span>
-                    </div>
-
-
-                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div
-                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold ">3</span>
-                        </div>
-                        <span
-                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Contact
-                            Details</span>
-                    </div>
-                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div
-                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold ">4</span>
-                        </div>
-                        <span
-                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Review
-                            & Payment</span>
-                    </div>
-                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div
-                            class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold ">5</span>
-                        </div>
-                        <span
-                            class="text-black text-opacity-60 text-lg font-normal  absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Complete
-                            KYC</span>
-                    </div>
-                    <div class="grow shrink basis-0 h-0.5 bg-[#20bc73] border border-[#eaeef4]"></div>
-                </div>
-
-
+            <div id="backBtn" class="px-5 sm:px-12 md:px-16 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M27.9998 15.9999C27.9998 16.2652 27.8945 16.5195 27.7069 16.7071C27.5194 16.8946 27.265 16.9999 26.9998 16.9999H7.41356L14.7073 24.2924C14.8002 24.3854 14.8739 24.4957 14.9242 24.6171C14.9745 24.7384 15.0004 24.8686 15.0004 24.9999C15.0004 25.1313 14.9745 25.2614 14.9242 25.3828C14.8739 25.5042 14.8002 25.6145 14.7073 25.7074C14.6144 25.8004 14.5041 25.8741 14.3827 25.9243C14.2613 25.9746 14.1312 26.0005 13.9998 26.0005C13.8684 26.0005 13.7383 25.9746 13.6169 25.9243C13.4955 25.8741 13.3852 25.8004 13.2923 25.7074L4.29231 16.7074C4.19933 16.6146 4.12557 16.5043 4.07525 16.3829C4.02493 16.2615 3.99902 16.1314 3.99902 15.9999C3.99902 15.8685 4.02493 15.7384 4.07525 15.617C4.12557 15.4956 4.19933 15.3853 4.29231 15.2924L13.2923 6.29245C13.4799 6.1048 13.7344 5.99939 13.9998 5.99939C14.2652 5.99939 14.5197 6.1048 14.7073 6.29245C14.895 6.48009 15.0004 6.73458 15.0004 6.99995C15.0004 7.26531 14.895 7.5198 14.7073 7.70745L7.41356 14.9999H26.9998C27.265 14.9999 27.5194 15.1053 27.7069 15.2928C27.8945 15.4804 27.9998 15.7347 27.9998 15.9999Z" fill="black" />
+                </svg>
             </div>
-
             <div class="progressContainer px-5 sm:px-12 md:px-16">
-                <div
-                    class="hidden w-full p-2.5 bg-primary-blue/10 rounded-lg justify-center items-center gap-2.5 inline-flex md:hidden">
-                    <div class="text-primary-blue text-base font-bold" id="productNameIdentifier">Currency Exchange
-                    </div>
-                </div>
 
-                <div class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6 md:hidden">
+                <div id="progressBarMain"
+                    class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6">
                     <div
-                        class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div>
-                            <span class="text-primary-blue text-lg font-bold ">1</span>
-                            <span class="text-black/40 text-base font-medium ">/5</span>
-                        </div>
+                        class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary flex-col justify-center items-center gap-2.5 inline-flex">
+                        <div><span class="text-primary text-lg font-bold " id="numberElement">1</span><span
+                                class="text-black/40 text-base font-medium " id="">/5</span></div>
                     </div>
-                    <div class="text-black text-base font-bold leading-none">Get Rates</div>
-                    <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 bg-primary-blue basis-4 w-[198px]"
+                    <div class="text-black text-base font-bold leading-none" id="stageNameElement">Get Rates</div>
+                    <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary basis-4 w-[198px]"
                         role="progressbar"></div>
                 </div>
             </div>
@@ -127,7 +134,11 @@ include $fold . 'includesv2/head.php';
     </div>
 
     <div class="fixed top-0 left-0 w-full h-[100vh] bg-black/20 z-20 bottomSheetMain">
+        <div class="absolute bottom-0 left-0 w-full z-50 md:w-[30%] md:right-0 md:left-auto md:top-0">
+            <div class="bg-white rounded-tl-[32px] rounded-tr-[32px] rounded-bl-lg rounded-br-lg md:rounded-none md:h-full w-full flex flex-col items-center py-6 pb-12 md:pt-12 bottomSheet">
 
+            </div>
+        </div>
     </div>
     <footer>
 
@@ -162,36 +173,7 @@ include $fold . 'includesv2/head.php';
 
     </footer>
 
-    <style>
-        .bottomSheetMain {
-            display: none;
-        }
 
-        .bottomSheetMainVisible {
-            display: flex;
-        }
-
-
-        .bottomSheet {
-            transform: translateX(100%);
-            transition: 0.3s;
-        }
-
-        .popBottomSheet {
-            transform: translateX(0%);
-        }
-
-        @media (max-width:950px) {
-            .bottomSheet {
-                transform: translateY(100%);
-                transition: 0.3s;
-            }
-
-            .popBottomSheet {
-                transform: translateY(0%);
-            }
-        }
-    </style>
 
 
 
@@ -359,7 +341,7 @@ include $fold . 'includesv2/head.php';
                         break;
                     case 'exchangeRate':
                         const exchangeRateElement = document.querySelector('[data-bind="exchangeRate"]');
-                        if (exchangeRateElement) exchangeRateElement.textContent = value || '';
+                        if (exchangeRateElement) exchangeRateElement.textContent = UIManager.formatAmount(value) || '';
                         break;
                     case 'currencyQuantity':
                         calculations.getExchangeRateAddProduct(this.addProductState.selectedCurrency, this.addProductState.currencyQuantity, this.addProductState.productType);
@@ -376,7 +358,7 @@ include $fold . 'includesv2/head.php';
                         break;
                     case 'exchangeRateEdit':
                         const exchangeRateEditElement = document.querySelector('[data-bind="exchangeRateEdit"]');
-                        if (exchangeRateEditElement) exchangeRateEditElement.textContent = value || '';
+                        if (exchangeRateEditElement) exchangeRateEditElement.textContent = UIManager.formatAmount(value) || '';
                         break;
                     case 'currencyQuantityEdit':
                         calculations.getExchangeRateEditProduct(this.editProductState.currencyQuantityEdit, this.editProductState.currencyRateEdit);
@@ -772,7 +754,7 @@ include $fold . 'includesv2/head.php';
                         token: AppState.getState('token', 'mainState'),
                         userip: userIP
                     });
-                
+
 
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -822,15 +804,23 @@ include $fold . 'includesv2/head.php';
             },
             cacheStaticElements() {
                 this.elements = {
+                    templateMainContainer: document.querySelector('#containerWholeMain'),
                     templateContainer: document.querySelector('#templateContainer'),
-                };
+                    backBtn: document.querySelector('#backBtn'),
+                }
+                if (this.elements.backBtn) {
+                    this.elements.backBtn.addEventListener('click', () => this.handleBackBtn());
+                }
             },
             cacheForexElements() {
                 this.elements = {
+                    ...this.elements,
                     addCurrencyBtn: document.querySelector('#addCurrencyCardBtn'),
                     addForexBtn: document.querySelector('#addForexCardBtn'),
                     bottomSheetMain: document.querySelector('.bottomSheetMain'),
-                    nextBtn: document.querySelector('#proceedBtn')
+                    bottomSheet: document.querySelector('.bottomSheet'),
+                    nextBtn: document.querySelector('#proceedBtn'),
+                    cartTotal: document.querySelector('#cartTotal')
                 }
                 console.log("Next button cached:", this.elements.nextBtn); // Add this line
             },
@@ -943,6 +933,9 @@ include $fold . 'includesv2/head.php';
 
 
             async openBottomSheet(type, mode, rowId = null) {
+                this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
+
+
                 if (!type) {
                     this.closeBottomSheet();
                     return;
@@ -957,16 +950,63 @@ include $fold . 'includesv2/head.php';
                         document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
                     }, 100);
                     return;
+                } else {
+                    this.elements.bottomSheet.innerHTML = ''
                 }
                 this.currentBottomSheetMode = mode;
                 this.currentBottomSheetType = type;
-                this.currentBottomSheetRowId = rowId
+                this.currentBottomSheetRowId = rowId;
+
+                if (mode === 'editProduct') {
+                    this.elements.bottomSheet.style = 'min-height:22rem;'
+
+                    this.elements.bottomSheet.innerHTML = `
+       
+                <div class="w-full h-8 px-4 animate-pulse">
+                    <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                </div>
+                <div class="w-full px-4 mt-6 space-y-4 animate-pulse">
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                </div>
+            `;
+
+                } else if (mode === 'addProduct') {
+                    this.elements.bottomSheet.style = 'min-height:30rem;'
+
+                    this.elements.bottomSheet.innerHTML = `
+       
+                <div class="w-full h-8 px-4 animate-pulse">
+                    <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                </div>
+                <div class="w-full px-4 mt-6 space-y-4 animate-pulse">
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                    <div class="h-10 bg-gray-200 rounded"></div>
+                </div>
+            `;
+                }
+
+
+                this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
+                setTimeout(() => {
+                    document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
+                }, 100);
+
+
                 const templateName = mode === 'editProduct' ? 'bottomSheetEdit' : 'bottomSheet';
                 if (!this.cachedTemplate || this.currentTemplate !== templateName) {
                     this.cachedTemplate = await TemplateCache.get(templateName);
                     this.currentTemplate = templateName;
                 }
-                this.elements.bottomSheetMain.innerHTML = this.cachedTemplate;
+                console.log(this.cachedTemplate);
+                this.elements.bottomSheet.innerHTML = this.cachedTemplate;
+
                 if (mode === 'editProduct') {
                     const clickedCard = AppState.cardDataState.find((item) => item.rowID === rowId);
                     let quantity;
@@ -985,11 +1025,9 @@ include $fold . 'includesv2/head.php';
                     AppState.setState('selectedCurrency', defaultCurrency, 'addProductState');
                     AppState.setState('currencyQuantity', defaultQuantity, 'addProductState');
                 }
-                this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
-                setTimeout(() => {
-                    document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
-                }, 100);
+
             },
+
 
 
 
@@ -1006,6 +1044,7 @@ include $fold . 'includesv2/head.php';
                 const container = document.getElementById('cardContainer');
                 if (!container || !data?.length) return;
                 try {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                     const template = await TemplateCache.get('getRatesCard');
                     const fragment = document.createDocumentFragment();
                     data.forEach((item, index) => {
@@ -1019,7 +1058,7 @@ include $fold . 'includesv2/head.php';
                             cityName: AppState.getState('currentCity', 'mainState'),
                             currencyRate: item.rate.toFixed(2),
                             currencyQuantity: item.amount,
-                            exchangeRate: item.totalINR
+                            exchangeRate: this.formatAmount(item.totalINR)
                         };
 
                         let cardHTML = template.replace(/\{\{(\w+)\}\}/g, (match, key) => cardData[key] || '');
@@ -1046,6 +1085,8 @@ include $fold . 'includesv2/head.php';
                     container.appendChild(fragment);
                 } catch (error) {
                     console.error('Card render error:', error);
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                 }
             },
             async renderCardsMt(data) {
@@ -1129,6 +1170,15 @@ include $fold . 'includesv2/head.php';
                     console.error('Card render error:', error);
                 }
             },
+            async updateCart(val) {
+
+                if (this.elements.cartTotal) {
+                    this.elements.cartTotal.textContent = this.formatAmount(val)
+                } else {
+                    console.log('no cart elemnt')
+                }
+
+            },
             async handleEditProduct(product) {
                 this.openBottomSheet(product.productType, 'editProduct', product.rowID);
             },
@@ -1139,31 +1189,62 @@ include $fold . 'includesv2/head.php';
             updateProceedButtonState() {
 
                 const proceedBtn = this.elements.nextBtn;
-                console.log(proceedBtn)
+                const backBtn = this.elements.backBtn;
+
+                const updateButtonState = (button, isDisabled) => {
+
+                    if (!button) return;
+
+                    if (isDisabled) {
+                        button.classList.add('opacity-50', 'cursor-not-allowed');
+                        button.disabled = true;
+                    } else {
+                        button.classList.remove('opacity-50', 'cursor-not-allowed');
+                        button.disabled = false;
+                    }
+                };
+
+                // If processing, disable both buttons
                 if (AppState.isProcessing()) {
-                    proceedBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                    proceedBtn.disabled = true;
+                    updateButtonState(proceedBtn, true);
+                    updateButtonState(backBtn, true);
                     AppState.nextBtnState.active = false;
                     return;
                 }
 
-                if (AppState.cardDataState.length > 0) {
-                    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    proceedBtn.disabled = false;
+                // Only check card data length on GET_RATES page
+                if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
+                    if (AppState.cardDataState.length > 0) {
+                        updateButtonState(proceedBtn, false);
+                        AppState.nextBtnState.active = true;
+                    } else {
+                        updateButtonState(proceedBtn, true);
+                        AppState.nextBtnState.active = false;
+                    }
+                } else {
+                    // For all other pages, next button should be enabled
+                    updateButtonState(proceedBtn, false);
                     AppState.nextBtnState.active = true;
-                    return;
                 }
 
-                proceedBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                proceedBtn.disabled = true;
-                AppState.nextBtnState.active = false;
+                // Enable back button when not processing
+                updateButtonState(backBtn, false);
             },
 
             assignNextButton(element) {
+                // Clear state of previous next button if it exists
+                if (this.elements.nextBtn) {
+                    this.elements.nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    this.elements.nextBtn.disabled = false;
+                }
+
+                // Assign new next button
                 if (element) {
-                    UIManager.elements.nextBtn = element
+                    this.elements.nextBtn = element;
                     element.addEventListener('click', () => this.handleNextBtn());
 
+                    // Update the state of the new button based on current app state
+                    this.updateProceedButtonState();
                 } else {
                     console.warn("No element provided for next button");
                 }
@@ -1197,6 +1278,8 @@ include $fold . 'includesv2/head.php';
 
                 try {
                     if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
+
+                        AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                         // Hide current content
                         const getRatesContainer = document.querySelector('#getRatesContainer');
                         if (getRatesContainer) getRatesContainer.style.display = 'none';
@@ -1209,12 +1292,14 @@ include $fold . 'includesv2/head.php';
 
                         const sectionContainer = document.getElementById('sectionContainer');
                         sectionContainer.appendChild(deliverySection);
+                        ProgressManager.updateProgress('CHOOSE_PROVIDER');
 
                         // Update app state
                         AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
 
                         // Initialize any required components for delivery details
                         await this.initializeDeliveryDetailsComponents();
+                        AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                         return
                     }
                     if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
@@ -1230,7 +1315,7 @@ include $fold . 'includesv2/head.php';
                         AppState.setState('ddLandMark', ddLandMark, 'deliveryState');
 
 
-                        if (!branch) {
+                        if (!branch || branch === 'Select') {
                             insertAlertBelowElement(document.querySelector('#cityDropDown'), 'Select a branch')
                             return
                         } else {
@@ -1256,8 +1341,10 @@ include $fold . 'includesv2/head.php';
                         }
 
                         let status = await APIService.updateDeliveryDetails();
-                        if (status) {
 
+                        if (status) {
+                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
+                            ProgressManager.updateProgress('CONTACT_DETAILS');
                             // Hide current content
                             const deliveryDetailsContainer = document.querySelector('#deliveryDetailsSection');
                             if (deliveryDetailsContainer) deliveryDetailsContainer.style.display = 'none';
@@ -1276,6 +1363,7 @@ include $fold . 'includesv2/head.php';
 
                             AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
                             await this.initializeContactDetailsComponents()
+                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                         }
                         return
 
@@ -1301,7 +1389,10 @@ include $fold . 'includesv2/head.php';
 
                         let response = await APIService.updateContactDetails()
 
+
                         if (response.status) {
+                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
+                            ProgressManager.updateProgress('REVIEW_PAYMENT');
                             // Hide current content
                             const contactDetailsSection = document.querySelector('#contactDetailsSection');
                             if (contactDetailsSection) contactDetailsSection.style.display = 'none';
@@ -1316,19 +1407,20 @@ include $fold . 'includesv2/head.php';
 
                             AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.REVIEW_PAYMENT;
                             await this.initializeSummaryComponents()
+                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                         }
 
                         return
                     }
                     if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
-                        let data= await APIService.placeOrder();
+                        let data = await APIService.placeOrder();
                         console.log(data)
                         if (data.status) {
                             sessionStorage.setItem('orderId', data.orderID);
-                            sessionStorage.setItem('customerName',AppState.contactData.name);
+                            sessionStorage.setItem('customerName', AppState.contactData.name);
                             window.location.href = '/orderv2/Complete-KYC';
                         }
-                        
+
                         return
                     }
 
@@ -1341,9 +1433,11 @@ include $fold . 'includesv2/head.php';
             },
 
             async initializeDeliveryDetailsComponents() {
+
                 let data = await APIService.getDeliveryDetails()
 
                 if (data) {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
 
                     const districtName = document.getElementById('districtName');
                     if (districtName) {
@@ -1413,6 +1507,7 @@ include $fold . 'includesv2/head.php';
                         // document.querySelector('#cartContentStorePickup').style.display = 'block'
                     });
 
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                 }
 
 
@@ -1440,6 +1535,7 @@ include $fold . 'includesv2/head.php';
                 let data = await APIService.getContactDetails()
 
                 if (data) {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                     this.nameInput = document.querySelector('#customerName');
                     this.emailInput = document.querySelector('#customerEmail');
                     this.mobileField = document.querySelector('#customerMobile');
@@ -1512,6 +1608,7 @@ include $fold . 'includesv2/head.php';
 
                     this.updateKycList(Dropdown.getValue('purposeSelector').getAttribute('value'));
 
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
 
                 }
             },
@@ -1523,7 +1620,7 @@ include $fold . 'includesv2/head.php';
                 docs.forEach((item, index) => {
                     let kyc = document.createElement('p');
                     kyc.className = 'text-black text-sm font-normal'
-                    kyc.textContent = `${index+1}. ${item}`
+                    kyc.textContent = `${index + 1}. ${item}`
                     documentContainer.appendChild(kyc)
                 })
             },
@@ -1535,6 +1632,7 @@ include $fold . 'includesv2/head.php';
                 const summaryData = await APIService.getSummaryDetails();
                 if (!summaryData) return;
 
+                AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                 // Get required elements when they're needed
                 const doorDeliveryElement = document.querySelector('#doorDeliveryData');
                 const paymentInfoText = document.querySelector('#paymentInfoText');
@@ -1559,6 +1657,7 @@ include $fold . 'includesv2/head.php';
 
                 // Render product list
                 this.renderProductList(productList, summaryData.order_details);
+                AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
 
             },
 
@@ -1593,6 +1692,81 @@ include $fold . 'includesv2/head.php';
 
 
 
+            },
+            handleBackBtn() {
+                const currentStatus = AppState.nextBtnState.status;
+
+                switch (currentStatus) {
+                    case CONSTANTS.ORDER_STATES.DELIVERY_DETAILS:
+                        // Going back to GET_RATES
+                        const deliveryDetailsSection = document.querySelector('#deliveryDetailsSection');
+                        if (deliveryDetailsSection) {
+                            deliveryDetailsSection.remove();
+                        }
+                        // Show the rates container again
+                        const getRatesContainer = document.querySelector('#getRatesContainer');
+                        if (getRatesContainer) {
+                            getRatesContainer.style.display = 'block';
+                        }
+                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.GET_RATES;
+                        ProgressManager.updateProgress('GET_RATES');
+                        break;
+
+                    case CONSTANTS.ORDER_STATES.CONTACT_DETAILS:
+                        // Going back to DELIVERY_DETAILS
+                        const contactDetailsSection = document.querySelector('#contactDetailsSection');
+                        if (contactDetailsSection) {
+                            contactDetailsSection.remove();
+                        }
+                        // Show cart section again
+                        const cartSection = document.getElementById('cartSection');
+                        if (cartSection) {
+                            cartSection.style.display = 'block';
+                        }
+                        // Reset section container width
+                        const sectionContainer = document.getElementById('sectionContainer');
+                        if (sectionContainer) {
+                            sectionContainer.classList.add('md:w-2/3');
+                        }
+                        // Show delivery details section
+                        const deliverySection = document.querySelector('#deliveryDetailsSection');
+                        if (deliverySection) {
+                            deliverySection.style.display = 'block';
+                        }
+                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
+                        ProgressManager.updateProgress('CHOOSE_PROVIDER');
+                        break;
+
+                    case CONSTANTS.ORDER_STATES.REVIEW_PAYMENT:
+                        // Going back to CONTACT_DETAILS
+                        const summarySection = document.querySelector('#summarySection');
+                        if (summarySection) {
+                            summarySection.remove();
+                        }
+                        // Show contact details section
+                        const contactSection = document.querySelector('#contactDetailsSection');
+                        if (contactSection) {
+                            contactSection.style.display = 'block';
+                        }
+                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
+                        ProgressManager.updateProgress('CONTACT_DETAILS');
+                        break;
+
+                    default:
+                        console.log("No back action available for current state:", currentStatus);
+                }
+
+                // Re-assign the appropriate next button after state change
+                if (currentStatus === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
+                    this.assignNextButton(document.querySelector('#proceedBtn'));
+                } else if (currentStatus === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
+                    this.assignNextButton(document.querySelector('#contactUpdateBtn'));
+                } else if (currentStatus === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
+                    this.assignNextButton(document.querySelector('#summaryConfirm'));
+                }
+
+                // Explicitly set next button to active since we have valid data
+                AppState.nextBtnState.active = true;
             }
 
         };
@@ -1609,7 +1783,7 @@ include $fold . 'includesv2/head.php';
             getExchangeRateEditProduct(rate, quantity) {
                 AppState.setState('exchangeRateEdit', quantity * rate, 'editProductState');
             },
-            processCardData(data) {
+            async processCardData(data) {
 
                 try {
 
@@ -1637,12 +1811,32 @@ include $fold . 'includesv2/head.php';
                     });
                     AppState.cardDataState = data;
                     UIManager.renderCards(AppState.cardDataState);
+                    let cartTotal = this.calculateTotalAmount(AppState.cardDataState);
+                    await UIManager.updateCart(cartTotal)
                 } catch (error) {
                     console.log(error)
                 } finally {
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.RATE_CALCULATION, false);
                 }
 
+            },
+            calculateTotalAmount(data) {
+                try {
+                    if (!data || data === 0) {
+                        return 0;
+                    }
+
+                    const total = data.reduce((sum, item) => {
+                        // Ensure totalINR is treated as a number and is valid
+                        const amount = Number(item.totalINR) || 0;
+                        return sum + amount;
+                    }, 0);
+
+                    return total;
+                } catch (error) {
+                    console.error('Error calculating total amount:', error);
+                    return 0;
+                }
             }
 
 
@@ -1679,14 +1873,18 @@ include $fold . 'includesv2/head.php';
 
             },
             async openOtpWidget() {
+                
                 this.loginWidgetContainer.style.display = 'flex'
                 this.otpWidget.style.display = 'flex'
                 document.querySelector('body').classList.add('snipContainer');
                 this.mobNumberInput.focus()
+                
+                UIManager.elements.templateMainContainer.style.display='none'
             },
             async closeOtpWidget() {
 
                 if (this.loginWidgetContainer) {
+                    UIManager.elements.templateMainContainer.style.display='flex'
                     // Reset widget state properly
                     this.loginWidgetContainer.style.display = 'none';
                     this.otpWidget.style.display = 'none';
@@ -1730,7 +1928,7 @@ include $fold . 'includesv2/head.php';
                 currentInput.value = currentInput.value.replace(/\D/g, '').slice(0, 1);
 
                 if (currentInput.value) {
-                    currentInput.style.backgroundColor = 'rgba(14, 81, 160, 1)';
+                    currentInput.style.backgroundColor = '#0DA486';
 
                     if (index < this.otpInputs.length - 1) {
                         this.otpInputs[index + 1].focus();
@@ -1944,12 +2142,51 @@ include $fold . 'includesv2/head.php';
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
 
-                    loginManager.closeOtpWidget()
+                    loginManager.closeOtpWidget();
+                    this.resetLoginWidget()
+                    window.userCheckMain()
                     UIManager.handleNextBtn()
                 } else {
                     insertAlertBelowElement(this.otpContainer, 'Incorrect OTP');
                     return
                 }
+            },
+            resetLoginWidget() {
+                // Reset OTP inputs
+                this.otpInputs.forEach(input => {
+                    input.value = '';
+                    input.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
+                });
+
+                // Reset mobile number input
+                if (this.mobNumberInput) {
+                    this.mobNumberInput.value = '';
+                }
+
+                // Show send OTP container, hide verify container
+                if (this.sendOtpContainer) {
+                    this.sendOtpContainer.style.display = 'flex';
+                }
+                if (this.verifyOtpContainer) {
+                    this.verifyOtpContainer.style.display = 'none';
+                }
+
+
+
+                // Reset timer if it's running
+                if (this.countdown) {
+                    clearInterval(this.countdown);
+                }
+                if (this.otpTimer) {
+                    this.otpTimer.textContent = '';
+                }
+                if (this.resendBtn) {
+                    this.resendBtn.style.opacity = '0.5';
+                    this.resendBtn.style.pointerEvents = 'none';
+                }
+
+                // Set isResendEnabled to false
+                this.isResendEnabled = false;
             },
             isResendEnabled: false,
             countdown: null,
@@ -1978,7 +2215,84 @@ include $fold . 'includesv2/head.php';
                 }, 1000); // Run this function every 1 second (1000ms)
             }
 
+        }
+        const ProgressManager = {
+            stages: {
+                GET_RATES: {
+                    step: 1,
+                    name: "Get Rates"
+                },
+                CHOOSE_PROVIDER: {
+                    step: 2,
+                    name: "Choose Provider"
+                },
+                CONTACT_DETAILS: {
+                    step: 3,
+                    name: "Contact Details"
+                },
+                REVIEW_PAYMENT: {
+                    step: 4,
+                    name: "Review & Payment"
+                },
+                COMPLETE_KYC: {
+                    step: 5,
+                    name: "Complete KYC"
+                }
+            },
+
+            updateProgress(stage) {
+                const stageInfo = this.stages[stage];
+                if (!stageInfo) return;
+
+                // Update mobile progress
+                this.updateMobileProgress(stageInfo);
+            },
+
+            updateMobileProgress(stageInfo) {
+                const progressBar = document.querySelector('#progressBarMain');
+                if (!progressBar) return;
+
+                const numberElement = progressBar.querySelector('#numberElement');
+                const stageNameElement = progressBar.querySelector('#stageNameElement');
+                const progressTrack = progressBar.querySelector('[role="progressbar"]');
+
+                // Animate number
+                let currentNumber = parseInt(numberElement.textContent);
+                this.animateNumber(currentNumber, stageInfo.step, numberElement);
+
+                // Update stage name with fade effect
+                stageNameElement.style.opacity = '0';
+                setTimeout(() => {
+                    stageNameElement.textContent = stageInfo.name;
+                    stageNameElement.style.opacity = '1';
+                }, 200);
+
+                // Animate progress bar width
+                const percentage = ((stageInfo.step - 1) / 4) * 100;
+                progressTrack.style.transition = 'width 100ms ease-in-out';
+                progressTrack.style.width = `${percentage}%`;
+            },
+
+            animateNumber(start, end, element) {
+                if (start === end) return;
+
+                const step = start < end ? 1 : -1;
+                let current = start;
+
+                const animate = () => {
+                    current += step;
+                    element.textContent = current;
+
+                    if ((step > 0 && current < end) || (step < 0 && current > end)) {
+                        setTimeout(animate, 200);
+                    }
+                };
+
+                animate();
+            }
         };
+
+
 
 
 

@@ -197,7 +197,14 @@ const Dropdown = {
     open(instance) {
         instance.state.isOpen = true;
         instance.element.classList.add('open');
-        instance.elements.searchInput.focus();
+
+        // Check if the device is mobile (basic check using window width or user agent)
+        const isMobile = window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            instance.elements.searchInput.focus(); // Only focus if it's not a mobile device
+        }
+
         instance.config.onOpen();
     },
 
