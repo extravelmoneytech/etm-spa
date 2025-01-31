@@ -536,7 +536,10 @@ console.log(paramsData)
     if(tokenVal){
          
         let cityName=e.target.getAttribute('city');
-        if(cityName){
+        console.log(cityName,'nbvv')
+        if(cityName!=0){
+            console.log('cityName',cityName)
+            return
             document.querySelector('#citySelector').value=cityName;
            await handleBuyCityWidgetTransmission();
         }else{

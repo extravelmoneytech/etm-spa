@@ -17,7 +17,7 @@ $SCRIPTS = [
     'countryData' => "<script src=\"{$fold}scripts/countryData.js\"></script>",
     'forexSuggestion' => "<script src=\"{$fold}scripts/forexSuggestion.js?ver=1.3\" defer></script>",
     'countryDropDown' => "<script src=\"{$fold}scripts/countryDropDown.js\"></script>",
-    'homePage' => "<script src=\"{$fold}scripts/homePage.js?ver=10.9\"></script>",
+    'homePage' => "<script src=\"{$fold}scripts/homePage.js?ver=11.1\"></script>",
     'cityListLoader' => "<script src=\"{$fold}scripts/cityListLoader.js?ver=5.8\"></script>",
     'getRates' => "<script src=\"{$fold}scripts/pageScripts/getRates.js?ver=1.80\"></script>",
     'multipleCurrency' => "<script src=\"{$fold}scripts/multipleCurrency.js\"></script>",
@@ -31,7 +31,8 @@ $SCRIPTS = [
     'completeKyc' => "<script src=\"{$fold}scripts/pageScripts/completeKyc.js?ver=2.7\"></script>",
     'myAccount' => "<script src=\"{$fold}scripts/myAccount.js?ver=34\"></script>",
     'myAccountSingle' => "<script src=\"{$fold}scripts/myAccountSingle.js?ver=3.7\"></script>",
-    'myAccountProfile' => "<script src=\"{$fold}scripts/myAccountProfile.js?ver=5.7\"></script>"
+    'myAccountProfile' => "<script src=\"{$fold}scripts/myAccountProfile.js?ver=5.7\"></script>",
+    'datePickerNew' => "<script src=\"{$fold}scripts/datePickerNew.js\" defer></script>"
 ];
 
 // Function to load scripts
@@ -63,7 +64,8 @@ if (isset($orderV3Page) && $orderV3Page) {
     loadPageScripts([
         'alert',
         'dropDownNew',
-        'telInput'
+        'telInput',
+        'datePickerNew'
     ], $SCRIPTS);
 }
 

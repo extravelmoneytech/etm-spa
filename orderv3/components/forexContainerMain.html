@@ -1,7 +1,7 @@
-<div id="forexContainerMain" class="pb-32 md:pb-8 px-5 sm:px-12 md:px-16 py-5 md:flex gap-5 md:gap-10 forexContainer flex-col md:flex-row "
+<div id="forexContainerMain" class="pb-32 md:pb-8 px-5  py-5 md:flex gap-5 md:gap-10 forexContainer flex-col md:flex-row justify-between max-w-[1100px] w-full"
                     style="padding-bottom:25rem;">
 
-                    <div class="w-full md:w-2/3" id="sectionContainer">
+                    <div class="w-full md:max-w-[40rem]" id="sectionContainer">
                         <div class="" id="getRatesContainer">
 
 
@@ -14,26 +14,21 @@
 
                             <div class="mt-6" id="addBtnContainer">
                                 <div class="flex  md:gap-8 items-center flex-col md:flex-row">
-                                    <div id="addForexCardBtn"
-                                        class="w-full h-10 mt-3 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                            fill="none">
-                                            <path
-                                                d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
-                                                fill="#0E51A0" />
-                                        </svg>
-                                        <p class="text-primary-blue text-xs font-semibold ">Add Another Forex Card</p>
-                                    </div>
+                                    
 
                                     <div id="addCurrencyCardBtn"
-                                        class="w-full h-10 mt-2 px-3 py-2 rounded-2xl border bg-[#0e51a0]/10 justify-center items-center gap-1 inline-flex cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
-                                            fill="none">
-                                            <path
-                                                d="M14 8.15039C14 8.283 13.9473 8.41018 13.8536 8.50394C13.7598 8.59771 13.6326 8.65039 13.5 8.65039H8.5V13.6504C8.5 13.783 8.44732 13.9102 8.35355 14.0039C8.25979 14.0977 8.13261 14.1504 8 14.1504C7.86739 14.1504 7.74021 14.0977 7.64645 14.0039C7.55268 13.9102 7.5 13.783 7.5 13.6504V8.65039H2.5C2.36739 8.65039 2.24021 8.59771 2.14645 8.50394C2.05268 8.41018 2 8.283 2 8.15039C2 8.01778 2.05268 7.89061 2.14645 7.79684C2.24021 7.70307 2.36739 7.65039 2.5 7.65039H7.5V2.65039C7.5 2.51778 7.55268 2.39061 7.64645 2.29684C7.74021 2.20307 7.86739 2.15039 8 2.15039C8.13261 2.15039 8.25979 2.20307 8.35355 2.29684C8.44732 2.39061 8.5 2.51778 8.5 2.65039V7.65039H13.5C13.6326 7.65039 13.7598 7.70307 13.8536 7.79684C13.9473 7.89061 14 8.01778 14 8.15039Z"
-                                                fill="#0E51A0" />
-                                        </svg>
-                                        <p class="text-primary-blue text-xs font-semibold ">Add Another Currency</p>
+                                        class="w-full md:w-fit mt-2 px-3 md:px-10 py-3 rounded-2xl md:rounded-3xl border bg-primary-blue/10 justify-center items-center gap-1 inline-flex cursor-pointer" style="display: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                            <path d="M21.5 13C21.5 13.1989 21.421 13.3897 21.2803 13.5303C21.1397 13.671 20.9489 13.75 20.75 13.75H13.25V21.25C13.25 21.4489 13.171 21.6397 13.0303 21.7803C12.8897 21.921 12.6989 22 12.5 22C12.3011 22 12.1103 21.921 11.9697 21.7803C11.829 21.6397 11.75 21.4489 11.75 21.25V13.75H4.25C4.05109 13.75 3.86032 13.671 3.71967 13.5303C3.57902 13.3897 3.5 13.1989 3.5 13C3.5 12.8011 3.57902 12.6103 3.71967 12.4697C3.86032 12.329 4.05109 12.25 4.25 12.25H11.75V4.75C11.75 4.55109 11.829 4.36032 11.9697 4.21967C12.1103 4.07902 12.3011 4 12.5 4C12.6989 4 12.8897 4.07902 13.0303 4.21967C13.171 4.36032 13.25 4.55109 13.25 4.75V12.25H20.75C20.9489 12.25 21.1397 12.329 21.2803 12.4697C21.421 12.6103 21.5 12.8011 21.5 13Z" fill="black"/>
+                                          </svg>
+                                        <p class="text-black text-sm font-semibold ">Add New Currency</p>
+                                    </div>
+                                    <div id="addForexCardBtn"
+                                        class="w-full md:w-fit mt-2 px-3 md:px-10 py-3 rounded-2xl md:rounded-3xl border bg-primary-blue/10 justify-center items-center gap-1 inline-flex cursor-pointer" style="display: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                            <path d="M21.5 13C21.5 13.1989 21.421 13.3897 21.2803 13.5303C21.1397 13.671 20.9489 13.75 20.75 13.75H13.25V21.25C13.25 21.4489 13.171 21.6397 13.0303 21.7803C12.8897 21.921 12.6989 22 12.5 22C12.3011 22 12.1103 21.921 11.9697 21.7803C11.829 21.6397 11.75 21.4489 11.75 21.25V13.75H4.25C4.05109 13.75 3.86032 13.671 3.71967 13.5303C3.57902 13.3897 3.5 13.1989 3.5 13C3.5 12.8011 3.57902 12.6103 3.71967 12.4697C3.86032 12.329 4.05109 12.25 4.25 12.25H11.75V4.75C11.75 4.55109 11.829 4.36032 11.9697 4.21967C12.1103 4.07902 12.3011 4 12.5 4C12.6989 4 12.8897 4.07902 13.0303 4.21967C13.171 4.36032 13.25 4.55109 13.25 4.75V12.25H20.75C20.9489 12.25 21.1397 12.329 21.2803 12.4697C21.421 12.6103 21.5 12.8011 21.5 13Z" fill="black"/>
+                                          </svg>
+                                        <p class="text-black text-sm font-semibold ">Add New Forex Card</p>
                                     </div>
                                 </div>
 
@@ -61,14 +56,14 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="px-4 mt-6 flex justify-between flex-col h-full">
+                            <div class="px-4 mt-4 flex justify-between flex-col h-full">
 
-                                <div class="w-full py-[12px] rounded-md justify-between items-center inline-flex">
-                                    <div class="w-[102px] text-black text-base font-semibold ">Total Amount</div>
-                                    <div class="text-black text-xl font-bold leading-tight">₹ 1,84,472</div>
+                                <div class="w-full rounded-md justify-between items-center inline-flex">
+                                    <div class="w-[102px] text-black text-lg font-bold ">Total</div>
+                                    <div class="text-black text-xl font-bold leading-tight" id="cartTotal">₹ 0</div>
                                 </div>
 
-                                <div class="bg-white py-4 rounded-t-3xl   w-full flex items-center justify-center flex-col">
+                                <div class="bg-white pb-4 rounded-t-3xl   w-full flex items-center justify-center flex-col">
                                     <div class=" h-12 px-2 py-3 cursor-pointer bg-primary-blue rounded-lg justify-center items-center gap-1 inline-flex mt-4 mb-0 md:mb-4   z-10 w-full"
                                         id="proceedBtn">
                                         <div class="text-white text-sm font-bold">Proceed to Next</div>

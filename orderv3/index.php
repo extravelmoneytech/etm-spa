@@ -18,6 +18,7 @@ include $fold . 'includesv2/head.php';
 
     .bottomSheetMainVisible {
         display: flex;
+
     }
 
 
@@ -91,10 +92,28 @@ include $fold . 'includesv2/head.php';
     .animate-pulse {
         animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
+
+    .no-scroll {
+        overflow: hidden;
+    }
+
+    @media (max-width:950px) {
+        .hideCartSection {
+            display: none;
+        }
+    }
+
+    .contactMainContainer .hideCartSection {
+        display: none;
+    }
+
+    .contactMainContainer #sectionContainer {
+        max-width: none;
+    }
 </style>
 
-<body>
-    <div class="flex flex-col items-center justify-center" id="containerWholeMain">
+<body class="flex justify-center">
+    <div class="w-full flex flex-col items-center justify-center" id="containerWholeMain">
         <div class="w-full chooseCityOverlayMain  relative" style="max-width: 103rem;">
 
             <?php
@@ -102,29 +121,75 @@ include $fold . 'includesv2/head.php';
             include $fold . 'includesv2/header.php';
             ?>
 
-            <div id="backBtn" class="px-5 sm:px-12 md:px-16 mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <div class="px-5  mt-2">
+                <svg id="backBtn" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M27.9998 15.9999C27.9998 16.2652 27.8945 16.5195 27.7069 16.7071C27.5194 16.8946 27.265 16.9999 26.9998 16.9999H7.41356L14.7073 24.2924C14.8002 24.3854 14.8739 24.4957 14.9242 24.6171C14.9745 24.7384 15.0004 24.8686 15.0004 24.9999C15.0004 25.1313 14.9745 25.2614 14.9242 25.3828C14.8739 25.5042 14.8002 25.6145 14.7073 25.7074C14.6144 25.8004 14.5041 25.8741 14.3827 25.9243C14.2613 25.9746 14.1312 26.0005 13.9998 26.0005C13.8684 26.0005 13.7383 25.9746 13.6169 25.9243C13.4955 25.8741 13.3852 25.8004 13.2923 25.7074L4.29231 16.7074C4.19933 16.6146 4.12557 16.5043 4.07525 16.3829C4.02493 16.2615 3.99902 16.1314 3.99902 15.9999C3.99902 15.8685 4.02493 15.7384 4.07525 15.617C4.12557 15.4956 4.19933 15.3853 4.29231 15.2924L13.2923 6.29245C13.4799 6.1048 13.7344 5.99939 13.9998 5.99939C14.2652 5.99939 14.5197 6.1048 14.7073 6.29245C14.895 6.48009 15.0004 6.73458 15.0004 6.99995C15.0004 7.26531 14.895 7.5198 14.7073 7.70745L7.41356 14.9999H26.9998C27.265 14.9999 27.5194 15.1053 27.7069 15.2928C27.8945 15.4804 27.9998 15.7347 27.9998 15.9999Z" fill="black" />
                 </svg>
             </div>
-            <div class="progressContainer px-5 sm:px-12 md:px-16">
+            <div class="progressContainer px-5 md:hidden">
 
                 <div id="progressBarMain"
                     class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6">
                     <div
-                        class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div><span class="text-primary text-lg font-bold " id="numberElement">1</span><span
+                        class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
+                        <div><span class="text-primary-blue text-lg font-bold " id="numberElement">1</span><span
                                 class="text-black/40 text-base font-medium " id="">/5</span></div>
                     </div>
                     <div class="text-black text-base font-bold leading-none" id="stageNameElement">Get Rates</div>
-                    <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary basis-4 w-[198px]"
+                    <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary-blue basis-4 w-[198px]"
                         role="progressbar"></div>
                 </div>
             </div>
 
 
+            <div class="progressBar mb-0 md:mb-8 hidden md:block">
+                <div class="w-full justify-start items-center progressBar hidden md:inline-flex mt-8">
+                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73]"></div>
+                    <div class="flex flex-col relative">
+                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold">1</span>
+                        </div>
+                        <span class="step-label text-black text-lg font-bold absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Get Rates</span>
+                    </div>
 
-            <section class="md:mt-12" id="templateContainer">
+                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
+                    <div class="flex flex-col relative">
+                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold">2</span>
+                        </div>
+                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Delivery Details</span>
+                    </div>
+
+                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
+                    <div class="flex flex-col relative">
+                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold">3</span>
+                        </div>
+                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Contact Details</span>
+                    </div>
+
+                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
+                    <div class="flex flex-col relative">
+                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold">4</span>
+                        </div>
+                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Review & Payment</span>
+                    </div>
+
+                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
+                    <div class="flex flex-col relative">
+                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                            <span class="text-black text-xl font-bold">5</span>
+                        </div>
+                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Complete KYC</span>
+                    </div>
+                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
+                </div>
+            </div>
+
+
+
+            <section class="mt-4 flex items-center justify-center md:mt-20" id="templateContainer">
 
 
             </section>
@@ -135,7 +200,7 @@ include $fold . 'includesv2/head.php';
 
     <div class="fixed top-0 left-0 w-full h-[100vh] bg-black/20 z-20 bottomSheetMain">
         <div class="absolute bottom-0 left-0 w-full z-50 md:w-[30%] md:right-0 md:left-auto md:top-0">
-            <div class="bg-white rounded-tl-[32px] rounded-tr-[32px] rounded-bl-lg rounded-br-lg md:rounded-none md:h-full w-full flex flex-col items-center py-6 pb-12 md:pt-12 bottomSheet">
+            <div class="bg-white rounded-tl-[32px] rounded-tr-[32px] rounded-bl-lg rounded-br-lg md:rounded-none md:h-full w-full flex flex-col items-center py-6 pb-12 md:pt-12 bottomSheet h-full">
 
             </div>
         </div>
@@ -263,7 +328,7 @@ include $fold . 'includesv2/head.php';
                 exchangeRateCalculation: false
             },
             mainState: {
-                currentCity: 'Ernakulam',
+                currentCity: JSON.parse(sessionStorage.getItem('storedData'))[0].city,
                 token: sessionStorage.getItem('token'),
                 orderType: sessionStorage.getItem('productPage')
             },
@@ -841,6 +906,15 @@ include $fold . 'includesv2/head.php';
             setupMoneyTransferListeners() {
 
             },
+            handleProductAddBtnVisibility(val) {
+                if (!val) {
+                    this.elements.addCurrencyBtn.style.display = 'none'
+                    this.elements.addForexBtn.style.display = 'none'
+                } else {
+                    this.elements.addCurrencyBtn.style.display = 'inline-flex'
+                    this.elements.addForexBtn.style.display = 'inline-flex'
+                }
+            },
             setupAddBottomSheetListeners(type) {
                 const closeButton = document.querySelector('#closeBottomSheet');
                 const addProductBtn = document.querySelector('#addProductBtn');
@@ -855,6 +929,7 @@ include $fold . 'includesv2/head.php';
                 })
                 addProductBtn.addEventListener('click', async () => {
                     const data = await APIService.addProduct('add');
+                    console.log(data, 'data')
                     calculations.processCardData(data);
                     this.closeBottomSheet()
                 })
@@ -899,7 +974,7 @@ include $fold . 'includesv2/head.php';
             async loadForexData() {
 
                 const rates = await APIService.getRates(AppState.getState('currentCity', 'mainState'));
-
+                await TemplateCache.get('getRatesCard');
                 calculations.processCardData(rates);
                 AppState.nextBtnState.active = true;
             },
@@ -935,11 +1010,19 @@ include $fold . 'includesv2/head.php';
             async openBottomSheet(type, mode, rowId = null) {
                 this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
 
+                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+                this.elements.bottomSheetMain.style.height = `${viewportHeight}px`;
+
+                // document.body.classList.add('no-scroll'); // Disable background scrolling
+
+
 
                 if (!type) {
                     this.closeBottomSheet();
                     return;
                 }
+
+
                 this.currentBottomSheetMode = this.currentBottomSheetMode || null;
                 this.currentBottomSheetType = this.currentBottomSheetType || null;
                 this.currentBottomSheetRowId = this.currentBottomSheetRowId || null;
@@ -948,6 +1031,7 @@ include $fold . 'includesv2/head.php';
                     this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
                     setTimeout(() => {
                         document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
+
                     }, 100);
                     return;
                 } else {
@@ -958,7 +1042,14 @@ include $fold . 'includesv2/head.php';
                 this.currentBottomSheetRowId = rowId;
 
                 if (mode === 'editProduct') {
-                    this.elements.bottomSheet.style = 'min-height:22rem;'
+
+                    // Check if the device is mobile (viewport width less than 768px as a common breakpoint)
+                    if (window.innerWidth <= 768) { // You can adjust the width threshold based on your requirement
+                        this.elements.bottomSheet.style = 'height:22rem;';
+                    } else {
+                        // Keep the height as it is or remove specific height changes
+                        this.elements.bottomSheet.style = '';
+                    }
 
                     this.elements.bottomSheet.innerHTML = `
        
@@ -974,28 +1065,35 @@ include $fold . 'includesv2/head.php';
             `;
 
                 } else if (mode === 'addProduct') {
-                    this.elements.bottomSheet.style = 'min-height:30rem;'
+                    // Check if the device is mobile (viewport width less than 768px as a common breakpoint)
+                    if (window.innerWidth <= 768) { // You can adjust the width threshold based on your requirement
+                        this.elements.bottomSheet.style = 'height:30rem;';
+                    } else {
+                        // Keep the height as it is or remove specific height changes
+                        this.elements.bottomSheet.style = '';
+                    }
 
                     this.elements.bottomSheet.innerHTML = `
-       
-                <div class="w-full h-8 px-4 animate-pulse">
-                    <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                </div>
-                <div class="w-full px-4 mt-6 space-y-4 animate-pulse">
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                </div>
-            `;
+        <div class="w-full h-8 px-4 animate-pulse">
+            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+        </div>
+        <div class="w-full px-4 mt-6 space-y-4 animate-pulse">
+            <div class="h-10 bg-gray-200 rounded"></div>
+            <div class="h-10 bg-gray-200 rounded"></div>
+            <div class="h-10 bg-gray-200 rounded"></div>
+            <div class="h-10 bg-gray-200 rounded"></div>
+            <div class="h-10 bg-gray-200 rounded"></div>
+            <div class="h-10 bg-gray-200 rounded"></div>
+        </div>
+    `;
                 }
+
 
 
                 this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
                 setTimeout(() => {
                     document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
+
                 }, 100);
 
 
@@ -1004,7 +1102,7 @@ include $fold . 'includesv2/head.php';
                     this.cachedTemplate = await TemplateCache.get(templateName);
                     this.currentTemplate = templateName;
                 }
-                console.log(this.cachedTemplate);
+
                 this.elements.bottomSheet.innerHTML = this.cachedTemplate;
 
                 if (mode === 'editProduct') {
@@ -1033,6 +1131,7 @@ include $fold . 'includesv2/head.php';
 
             closeBottomSheet() {
                 const bottomSheet = document.querySelector('.bottomSheet');
+                document.body.classList.remove('no-scroll'); // Disable background scrolling
                 if (bottomSheet) {
                     bottomSheet.classList.remove('popBottomSheet');
                     setTimeout(() => {
@@ -1041,6 +1140,7 @@ include $fold . 'includesv2/head.php';
                 }
             },
             async renderCards(data) {
+
                 const container = document.getElementById('cardContainer');
                 if (!container || !data?.length) return;
                 try {
@@ -1187,12 +1287,12 @@ include $fold . 'includesv2/head.php';
                 calculations.processCardData(data)
             },
             updateProceedButtonState() {
-
                 const proceedBtn = this.elements.nextBtn;
                 const backBtn = this.elements.backBtn;
+                const addProductBtn = document.querySelector('#addProductBtn');
+                const editProductBtn = document.querySelector('#editProductBtn');
 
                 const updateButtonState = (button, isDisabled) => {
-
                     if (!button) return;
 
                     if (isDisabled) {
@@ -1204,10 +1304,12 @@ include $fold . 'includesv2/head.php';
                     }
                 };
 
-                // If processing, disable both buttons
+                // If processing, disable all buttons
                 if (AppState.isProcessing()) {
                     updateButtonState(proceedBtn, true);
                     updateButtonState(backBtn, true);
+                    updateButtonState(addProductBtn, true);
+                    updateButtonState(editProductBtn, true);
                     AppState.nextBtnState.active = false;
                     return;
                 }
@@ -1227,8 +1329,10 @@ include $fold . 'includesv2/head.php';
                     AppState.nextBtnState.active = true;
                 }
 
-                // Enable back button when not processing
+                // Enable all other buttons when not processing
                 updateButtonState(backBtn, false);
+                updateButtonState(addProductBtn, false);
+                updateButtonState(editProductBtn, false);
             },
 
             assignNextButton(element) {
@@ -1251,8 +1355,11 @@ include $fold . 'includesv2/head.php';
             },
             async handleNextBtn() {
 
+                console.log('called againnbb')
+
 
                 if (!userCheck()) {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                     if (loginManager.loginWidgetContainer) {
                         loginManager.openOtpWidget()
                     } else {
@@ -1262,7 +1369,9 @@ include $fold . 'includesv2/head.php';
                         tempDiv.innerHTML = template;
                         body.appendChild(tempDiv.firstElementChild);
                         await this.initializeLoginWidget();
+
                     }
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
 
                     return
                 }
@@ -1292,6 +1401,10 @@ include $fold . 'includesv2/head.php';
 
                         const sectionContainer = document.getElementById('sectionContainer');
                         sectionContainer.appendChild(deliverySection);
+
+                        const cartContainer = document.getElementById('cartSection')
+                        cartContainer.classList.add('hideCartSection')
+
                         ProgressManager.updateProgress('CHOOSE_PROVIDER');
 
                         // Update app state
@@ -1356,13 +1469,15 @@ include $fold . 'includesv2/head.php';
                             contactSection.innerHTML = template;
 
                             const sectionContainer = document.getElementById('sectionContainer');
-                            const cartContainer = document.getElementById('cartSection')
-                            cartContainer.style.display = 'none'
-                            sectionContainer.classList.remove('md:w-2/3');
+
+                            document.querySelector('#forexContainerMain').classList.add('contactMainContainer')
+
                             sectionContainer.appendChild(contactSection);
 
                             AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
+
                             await this.initializeContactDetailsComponents()
+
                             AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                         }
                         return
@@ -1434,6 +1549,9 @@ include $fold . 'includesv2/head.php';
 
             async initializeDeliveryDetailsComponents() {
 
+                let nextBtn = document.querySelector('#deliveryUpdateBtn');
+                this.assignNextButton(nextBtn);
+
                 let data = await APIService.getDeliveryDetails()
 
                 if (data) {
@@ -1441,12 +1559,20 @@ include $fold . 'includesv2/head.php';
 
                     const districtName = document.getElementById('districtName');
                     if (districtName) {
-                        districtName.textContent = data.district || '';
+
+                        districtName.textContent = data.selected_district || '';
                     }
+
 
                     const cities = data.areas;
                     const dropdownList = document.querySelector('#cityDropDown').querySelector('.dropdownList');
                     const templateItem = document.querySelector('#cityDropDown').querySelector('.dropdownItem');
+
+                    if (data.order_within_hours || data.order_within_mins) {
+                        document.querySelector('#cartContentText').textContent = `${data.delivery_on} if you Order within ${data.order_within_hours} hrs ${data.order_within_mins} mins.`
+                    } else {
+                        document.querySelector('#cartContentText').textContent = 'by ' + data.delivery_on
+                    }
 
 
                     // Ensure the template item is hidden
@@ -1488,6 +1614,7 @@ include $fold . 'includesv2/head.php';
                         },
                         onSelect: (value) => {
                             AppState.deliveryState.branch = value;
+                            document.querySelector('#selectedBranchStorePickup').textContent = value
                         }
                     });
 
@@ -1535,6 +1662,7 @@ include $fold . 'includesv2/head.php';
                 let data = await APIService.getContactDetails()
 
                 if (data) {
+                    console.log(data, 'datatvv')
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                     this.nameInput = document.querySelector('#customerName');
                     this.emailInput = document.querySelector('#customerEmail');
@@ -1561,23 +1689,12 @@ include $fold . 'includesv2/head.php';
                         AppState.contactData.email = e.target.value;
                     })
 
-                    const script = document.createElement('script');
-                    script.src = 'orderv3/components/modules/datepicker.js';
-                    script.async = true;
-
-                    await new Promise((resolve, reject) => {
-                        script.onload = resolve;
-                        script.onerror = reject;
-                        document.head.appendChild(script);
-                    });
-
-
-                    // Initialize with callback
                     window.initializeDatePicker({
                         onSelect: (date) => {
                             AppState.contactData.travelDate = window.getFormatedDate(date);
                         }
                     });
+
 
 
 
@@ -1599,6 +1716,7 @@ include $fold . 'includesv2/head.php';
                         console.log(' no previous date available')
                         AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
                     }
+
                     if (data.travel_purpose != "") {
                         AppState.contactData.travelPurpose = data.travel_purpose;
                         Dropdown.setValue('purposeSelector', data.travel_purpose)
@@ -1668,11 +1786,11 @@ include $fold . 'includesv2/head.php';
                     productDiv.classList.add('justify-between', 'items-start', 'inline-flex');
 
                     const rateParagraph = document.createElement('p');
-                    rateParagraph.classList.add('text-[#677489]', 'text-sm', 'font-medium', 'tracking-tight');
+                    rateParagraph.classList.add('text-[#555555]', 'text-[14px]', 'font-medium', 'tracking-tight');
                     rateParagraph.textContent = `${product.amount} ${product.currency} (${product.product === 'Forex Card' ? 'Card' : 'Note'}) @ ${product.rate}`;
 
                     const amountParagraph = document.createElement('p');
-                    amountParagraph.classList.add('text-[#111729]', 'text-sm', 'font-medium', 'tracking-tight');
+                    amountParagraph.classList.add('text-[#111729]', 'text-[14px]', 'font-medium', 'tracking-tight');
                     amountParagraph.textContent = this.formatAmount(product.amount * product.rate);
 
                     productDiv.appendChild(rateParagraph);
@@ -1703,6 +1821,13 @@ include $fold . 'includesv2/head.php';
                         if (deliveryDetailsSection) {
                             deliveryDetailsSection.remove();
                         }
+
+                        // Show cart section again
+                        const cartSection = document.getElementById('cartSection');
+                        if (cartSection) {
+                            cartSection.classList.remove('hideCartSection')
+                        }
+
                         // Show the rates container again
                         const getRatesContainer = document.querySelector('#getRatesContainer');
                         if (getRatesContainer) {
@@ -1718,16 +1843,9 @@ include $fold . 'includesv2/head.php';
                         if (contactDetailsSection) {
                             contactDetailsSection.remove();
                         }
-                        // Show cart section again
-                        const cartSection = document.getElementById('cartSection');
-                        if (cartSection) {
-                            cartSection.style.display = 'block';
-                        }
-                        // Reset section container width
-                        const sectionContainer = document.getElementById('sectionContainer');
-                        if (sectionContainer) {
-                            sectionContainer.classList.add('md:w-2/3');
-                        }
+                        document.querySelector('#forexContainerMain').classList.remove('contactMainContainer')
+
+
                         // Show delivery details section
                         const deliverySection = document.querySelector('#deliveryDetailsSection');
                         if (deliverySection) {
@@ -1753,7 +1871,7 @@ include $fold . 'includesv2/head.php';
                         break;
 
                     default:
-                        console.log("No back action available for current state:", currentStatus);
+                        window.location = '/'
                 }
 
                 // Re-assign the appropriate next button after state change
@@ -1803,14 +1921,21 @@ include $fold . 'includesv2/head.php';
                         productTypeCounters[productTypeKey]++;
                         const camelCasedProductType = item.productType.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => index === 0 ? word.toUpperCase() : word.toUpperCase()).replace(/\s+/g, '');
                         if (productCounts[productTypeKey] > 1) {
-                            item.productNumber = `${camelCasedProductType}${productTypeCounters[productTypeKey]}`;
+                            item.productNumber = `${camelCasedProductType} ${productTypeCounters[productTypeKey]}`;
                         } else {
                             item.productNumber = camelCasedProductType;
                         }
                         item.allowDelete = data.length > 1;
                     });
                     AppState.cardDataState = data;
+
                     UIManager.renderCards(AppState.cardDataState);
+
+                    if (data.length == 3) {
+                        UIManager.handleProductAddBtnVisibility(false)
+                    } else {
+                        UIManager.handleProductAddBtnVisibility(true)
+                    }
                     let cartTotal = this.calculateTotalAmount(AppState.cardDataState);
                     await UIManager.updateCart(cartTotal)
                 } catch (error) {
@@ -1866,6 +1991,7 @@ include $fold . 'includesv2/head.php';
                 this.changeNumberBtn = document.querySelector('#changeNumberBtn');
                 this.otpTimer = document.querySelector('.otpTimer');
                 this.resendBtn = document.querySelector('.otpResendBtn');
+                this.backBtnLogin = document.querySelector('#backBtnLogin')
 
                 this.setupOTPInputs();
                 this.setupCountryCodeDropdown();
@@ -1873,18 +1999,18 @@ include $fold . 'includesv2/head.php';
 
             },
             async openOtpWidget() {
-                
+
                 this.loginWidgetContainer.style.display = 'flex'
                 this.otpWidget.style.display = 'flex'
                 document.querySelector('body').classList.add('snipContainer');
                 this.mobNumberInput.focus()
-                
-                UIManager.elements.templateMainContainer.style.display='none'
+
+                UIManager.elements.templateMainContainer.style.display = 'none'
             },
             async closeOtpWidget() {
 
                 if (this.loginWidgetContainer) {
-                    UIManager.elements.templateMainContainer.style.display='flex'
+                    UIManager.elements.templateMainContainer.style.display = 'flex'
                     // Reset widget state properly
                     this.loginWidgetContainer.style.display = 'none';
                     this.otpWidget.style.display = 'none';
@@ -1895,6 +2021,10 @@ include $fold . 'includesv2/head.php';
 
 
                 }
+            },
+            handleBackBtnLogin() {
+                loginManager.closeOtpWidget();
+                this.resetLoginWidget()
             },
 
             // OTP Related Functions
@@ -1914,8 +2044,10 @@ include $fold . 'includesv2/head.php';
                 }
 
                 if (event.key === 'Backspace') {
+
                     const currentInput = event.target;
-                    currentInput.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
+
+                    currentInput.style.backgroundColor = 'rgba(14, 81, 160, 0.10)';
 
                     if (currentInput.value === '' && index > 0) {
                         this.otpInputs[index - 1].focus();
@@ -1928,7 +2060,7 @@ include $fold . 'includesv2/head.php';
                 currentInput.value = currentInput.value.replace(/\D/g, '').slice(0, 1);
 
                 if (currentInput.value) {
-                    currentInput.style.backgroundColor = '#0DA486';
+                    currentInput.style.backgroundColor = '#0E51A0';
 
                     if (index < this.otpInputs.length - 1) {
                         this.otpInputs[index + 1].focus();
@@ -2046,7 +2178,7 @@ include $fold . 'includesv2/head.php';
 
                     this.otpInputs.forEach((input) => {
                         input.value = '' // Clears each OTP input field
-                        input.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
+                        input.style.backgroundColor = 'rgba(14, 81, 160, 0.10)';
                     });
 
                     this.sendOtpContainer.style.display = 'flex';
@@ -2078,6 +2210,12 @@ include $fold . 'includesv2/head.php';
                         loginManager.closeOtpWidget(); // Only close if the click was outside the otpWidget
                     }
                 });
+                if (this.backBtnLogin) {
+                    this.backBtnLogin.addEventListener('click', () => {
+                        this.handleBackBtnLogin()
+                    })
+                }
+
 
             },
             async handleSendOtp(otpMode) {
@@ -2095,19 +2233,61 @@ include $fold . 'includesv2/head.php';
                 } else {
                     removeAlertBelowElement(this.otpInputContainer);
                 }
-                let response = await APIService.sendOtp(otpMode, countryCode, mobNumber)
 
-                if (response) {
-                    console.log(response);
-                    this.sendOtpContainer.style.display = 'none';
-                    this.verifyOtpContainer.style.display = 'flex';
-                    document.querySelector('#mobNum').textContent = countryCode + " " + mobNumber
-                    this.otpInputs[0].focus();
-                    this.activeResendOtp()
-                } else {
-                    console.log('some error occurred')
+                let btn;
+                if (otpMode === 'wa') {
+                    btn = loginManager.whatsappOtpSendDiv;
+                } else if (otpMode === 'sms') {
+                    btn = loginManager.optSendDiv;
                 }
 
+                try {
+                    this.toggleButtonLoader(btn, true)
+                    let response = await APIService.sendOtp(otpMode, countryCode, mobNumber)
+
+                    if (response) {
+                        console.log(response);
+                        this.sendOtpContainer.style.display = 'none';
+                        this.verifyOtpContainer.style.display = 'flex';
+                        document.querySelector('#mobNum').textContent = countryCode + " " + mobNumber
+                        this.otpInputs[0].focus();
+                        this.activeResendOtp()
+                    } else {
+                        console.log('some error occurred')
+                    }
+                } catch (error) {
+                    console.error('Error sending OTP:', error);
+                } finally {
+                    // Hide loader and restore button
+                    this.toggleButtonLoader(btn, false);
+                }
+
+
+
+            },
+            toggleButtonLoader(button, isLoading) {
+                if (!button) return;
+
+                const contentElement = button.querySelector('.button-content');
+                const loaderElement = button.querySelector('.button-loader');
+
+                if (!contentElement || !loaderElement) return;
+
+                if (isLoading) {
+                    // Show loader, hide content
+                    contentElement.classList.add('hidden');
+                    loaderElement.classList.remove('hidden');
+                    button.disabled = true;
+                    button.style.opacity = '0.7';
+                    button.style.cursor = 'not-allowed';
+                } else {
+                    // Hide loader, show content
+                    contentElement.classList.remove('hidden');
+                    loaderElement.classList.add('hidden');
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    button.style.cursor = 'pointer';
+                }
             },
             async handleVerifyOtp() {
                 let fetchOtp = this.getOtpValue()
@@ -2123,39 +2303,52 @@ include $fold . 'includesv2/head.php';
                     removeAlertBelowElement(this.otpContainer)
                 }
 
-                let response = await APIService.verifyOtp(fetchOtp, aff_token);
+                let btn = this.otpVerify
 
-                if (response.verified) {
-                    console.log(response)
+                try {
 
+                    this.toggleButtonLoader(btn, true)
+                    let response = await APIService.verifyOtp(fetchOtp, aff_token);
 
-                    sessionStorage.setItem('userId', response.uid)
-
-
-
-                    // Store the object as a JSON string
-                    const userInfo = {
-                        userId: response.uid,
-                        countryCode: response.customer_country_code,
-                        mobNum: response.customer_mobile
-                    };
-                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    if (response.verified) {
+                        console.log(response)
 
 
-                    loginManager.closeOtpWidget();
-                    this.resetLoginWidget()
-                    window.userCheckMain()
-                    UIManager.handleNextBtn()
-                } else {
-                    insertAlertBelowElement(this.otpContainer, 'Incorrect OTP');
-                    return
+                        sessionStorage.setItem('userId', response.uid)
+
+
+
+                        // Store the object as a JSON string
+                        const userInfo = {
+                            userId: response.uid,
+                            countryCode: response.customer_country_code,
+                            mobNum: response.customer_mobile
+                        };
+                        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+
+
+                        window.userCheckMain()
+                        UIManager.handleNextBtn()
+                        loginManager.closeOtpWidget();
+                        this.resetLoginWidget()
+                    } else {
+                        insertAlertBelowElement(this.otpContainer, 'Incorrect OTP');
+                        return
+                    }
+                } catch (error) {
+                    console.error(error)
+                } finally {
+                    this.toggleButtonLoader(btn, false)
                 }
+
+
             },
             resetLoginWidget() {
                 // Reset OTP inputs
                 this.otpInputs.forEach(input => {
                     input.value = '';
-                    input.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
+                    input.style.backgroundColor = 'rgba(14, 81, 160, 0.10)';
                 });
 
                 // Reset mobile number input
@@ -2246,6 +2439,7 @@ include $fold . 'includesv2/head.php';
 
                 // Update mobile progress
                 this.updateMobileProgress(stageInfo);
+                this.updateDesktopProgress(stageInfo);
             },
 
             updateMobileProgress(stageInfo) {
@@ -2271,6 +2465,41 @@ include $fold . 'includesv2/head.php';
                 const percentage = ((stageInfo.step - 1) / 4) * 100;
                 progressTrack.style.transition = 'width 100ms ease-in-out';
                 progressTrack.style.width = `${percentage}%`;
+            },
+            updateDesktopProgress(stageInfo) {
+                const currentStep = stageInfo.step;
+
+                // Update progress segments (lines)
+                const progressSegments = document.querySelectorAll('.progress-line');
+                progressSegments.forEach((segment, index) => {
+                    segment.className = 'grow shrink basis-0 h-0.5 progress-line';
+
+                    if (index <= currentStep - 1) {
+                        segment.classList.add('bg-[#20bc73]');
+                    } else {
+                        segment.classList.add('bg-[#eaeef4]', 'border', 'border-[#eaeef4]');
+                    }
+                });
+
+                // Update step circles and labels
+                const stepCircles = document.querySelectorAll('.step-circle');
+                const stepLabels = document.querySelectorAll('.step-label');
+
+                stepCircles.forEach((circle, index) => {
+                    circle.classList.remove('border-[#20bc73]', 'border-[#eaeef4]');
+                    stepLabels[index].classList.remove('text-black', 'text-opacity-60', 'font-bold', 'font-normal');
+
+                    if (index < currentStep - 1) {
+                        circle.classList.add('border-[#20bc73]');
+                        stepLabels[index].classList.add('text-black', 'font-bold');
+                    } else if (index === currentStep - 1) {
+                        circle.classList.add('border-[#20bc73]');
+                        stepLabels[index].classList.add('text-black', 'font-bold');
+                    } else {
+                        circle.classList.add('border-[#eaeef4]');
+                        stepLabels[index].classList.add('text-black', 'text-opacity-60', 'font-normal');
+                    }
+                });
             },
 
             animateNumber(start, end, element) {
@@ -2314,6 +2543,7 @@ include $fold . 'includesv2/head.php';
             initializeApp();
         }
     </script>
+
 
 </body>
 

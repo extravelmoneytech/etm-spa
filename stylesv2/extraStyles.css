@@ -50,13 +50,14 @@ body {
 }
 
 .snipContainer {
+  overflow: hidden;
+}
+
+.snipContainerLoading {
   height: 100vh;
   overflow: hidden;
 }
-.snipContainerLoading{
-  height: 100vh;
-  overflow: hidden;
-}
+
 .chooseCityWidget {
   display: none;
 }
@@ -87,14 +88,42 @@ body {
 
 
 
+
+
 .radio {
   background-color: white;
   color: black;
 
 }
-
+.selectedTick{
+  opacity: 0;
+  transition: 0.1s;
+}
 .selectedRadio {
-  background-color: #0E51A0;
+  border: 1px solid #0E51A0;
+  background: linear-gradient(329deg, rgba(14, 81, 160, 0.05) -43.1%, rgba(227, 29, 28, 0.05) 144.49%);
+}
+.svgContainer{
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  transition: 0.1;
+}
+.svgContainer svg{
+  fill: black;
+  transition: 0.1;
+}
+.selectedRadio .selectedTick{
+  opacity: 1;
+}
+.selectedRadio .svgContainer{
+  background-color: rgba(44, 90, 162, 0.10);
+}
+.selectedRadio .svgContainer svg{
+  fill: #2C5AA2;
+}
+
+.selectedRadioSummary{
+  background-color: rgba(44, 90, 162, 1);
   color: white;
 }
 
@@ -102,11 +131,11 @@ body {
   display: none;
 }
 
-.selectedRadio .checkedIcon {
+.selectedRadioSummary .checkedIcon {
   display: block;
 }
 
-.selectedRadio .uncheckedIcon {
+.selectedRadioSummary .uncheckedIcon {
   display: none;
 }
 
@@ -233,11 +262,13 @@ body {
 .toggleItem {
   border-color: transparent;
 }
-.toggleItem span{
+
+.toggleItem span {
   color: black;
   --tw-text-opacity: 0.6;
 }
-.toggleItem svg{
+
+.toggleItem svg {
   fill: black;
   fill-opacity: 0.6;
 }
@@ -245,12 +276,14 @@ body {
 .activeToggle {
   border-color: #0E51A0;
 }
-.activeToggle span{
+
+.activeToggle span {
   color: #0E51A0;
   font-weight: 700;
   --tw-text-opacity: 1;
 }
-.activeToggle svg{
+
+.activeToggle svg {
   fill: #0E51A0;
   fill-opacity: 1;
 }
@@ -268,7 +301,7 @@ body {
   transition: background 0.3s ease, transform 0.3s ease;
   cursor: pointer;
   flex-wrap: wrap;
-  height:100%;
+  height: 100%;
 }
 
 .icon-container {
@@ -400,8 +433,8 @@ body {
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.10);
   background: #FFF;
-  
-  
+
+
   z-index: 1000;
   max-height: 260px;
   overflow-y: auto;
@@ -420,7 +453,7 @@ body {
 .dropdown-item input[type="checkbox"] {
   margin-right: 10px;
   margin-left: auto;
-  
+
 }
 
 .dropdown-item:hover {
@@ -439,7 +472,7 @@ body {
   outline: none;
 }
 
-.icon-dropdown-flag{
+.icon-dropdown-flag {
   width: 28px !important;
   border-radius: 100%;
   aspect-ratio: 1;
@@ -453,80 +486,102 @@ body {
 
 
 .dropdown-menu::-webkit-scrollbar-thumb {
-  background-color: #bcbcbc; 
+  background-color: #bcbcbc;
   border-radius: 10px;
 }
 
 
 .dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background-color: #9b9b9b; 
+  background-color: #9b9b9b;
 }
 
 
 /* Hide the native checkbox */
 .dropdown-item input[type="checkbox"] {
-  appearance: none; /* Removes default styling in modern browsers */
-  -webkit-appearance: none; /* Safari */
-  -moz-appearance: none; /* Firefox */
-  width: 20px;  /* Custom size for checkbox */
-  height: 20px; /* Custom size for checkbox */
-border: 1px solid rgba(0, 0, 0, 0.10);
-  background-color: #ffff; /* Custom background color for the checkbox */
-  border-radius: 3px; /* Rounded corners for the checkbox */
-   /* Border for the checkbox */
+  appearance: none;
+  /* Removes default styling in modern browsers */
+  -webkit-appearance: none;
+  /* Safari */
+  -moz-appearance: none;
+  /* Firefox */
+  width: 20px;
+  /* Custom size for checkbox */
+  height: 20px;
+  /* Custom size for checkbox */
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background-color: #ffff;
+  /* Custom background color for the checkbox */
+  border-radius: 3px;
+  /* Rounded corners for the checkbox */
+  /* Border for the checkbox */
   position: relative;
-  cursor: pointer; /* Cursor changes to pointer on hover */
+  cursor: pointer;
+  /* Cursor changes to pointer on hover */
   margin-left: auto;
   margin-right: 10px;
 }
 
 /* Custom checkmark using ::after */
 .dropdown-item input[type="checkbox"]::after {
-  content: ''; /* Empty content to create the checkmark */
+  content: '';
+  /* Empty content to create the checkmark */
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 8px; /* Width of the checkmark */
-  height: 14px; /* Height of the checkmark */
-  border: solid white; /* White color for the checkmark */
-  border-width: 0 2px 2px 0; /* Only display right and bottom borders to form the checkmark */
-  transform: translate(-50%, -50%) rotate(45deg); /* Position and rotate the checkmark */
-  display: none; /* Hidden by default */
+  width: 8px;
+  /* Width of the checkmark */
+  height: 14px;
+  /* Height of the checkmark */
+  border: solid white;
+  /* White color for the checkmark */
+  border-width: 0 2px 2px 0;
+  /* Only display right and bottom borders to form the checkmark */
+  transform: translate(-50%, -50%) rotate(45deg);
+  /* Position and rotate the checkmark */
+  display: none;
+  /* Hidden by default */
 }
 
 /* Show the checkmark when the checkbox is checked */
 .dropdown-item input[type="checkbox"]:checked::after {
-  display: block; /* Display checkmark */
+  display: block;
+  /* Display checkmark */
 }
 
 /* Custom styling when checkbox is checked */
 .dropdown-item input[type="checkbox"]:checked {
-  background-color: #0ab163; /* Maintain the background color when checked */ /* Keep the border color consistent */
+  background-color: #0ab163;
+  /* Maintain the background color when checked */
+  /* Keep the border color consistent */
 }
-.selectedChoice{
+
+.selectedChoice {
   background-color: rgb(14 81 160/0.1);
   font-weight: 600;
   padding: 0.25rem;
   border-radius: 0.375rem;
   font-size: 0.8rem;
   line-height: 1rem;
-  color: rgba(0, 0, 0,0.8);
+  color: rgba(0, 0, 0, 0.8);
   display: flex;
 }
-.dropdown-toggle{
+
+.dropdown-toggle {
   display: flex;
   gap: 0.4rem;
 }
 
 .dropdown-item.selected {
-  background-color: rgb(14 81 160/0.1); /* Example highlight color */
-  font-weight: bold; /* Example style for selected item */
+  background-color: rgb(14 81 160/0.1);
+  /* Example highlight color */
+  font-weight: bold;
+  /* Example style for selected item */
 }
 
 
 
 
-#recomendationContainer{
+#recomendationContainer {
   display: none;
 }
 
@@ -564,19 +619,23 @@ border: 1px solid rgba(0, 0, 0, 0.10);
   color: red;
   border-radius: 10px;
 }
-.testimonialCard{
+
+.testimonialCard {
   transition: 0.1s;
   cursor: pointer;
 }
-.testimonialCard:hover{
+
+.testimonialCard:hover {
   background: linear-gradient(329deg, #0E51A0 -43.1%, #E3373A 144.49%), #0E51A0 !important;
 }
+
 .testimonialCard:hover h3,
 .testimonialCard:hover p,
 .testimonialCard:hover span {
   color: white !important;
 }
-.testimonialCard:hover span{
+
+.testimonialCard:hover span {
   background: rgba(255, 255, 255, 0.10);
 }
 
@@ -586,9 +645,12 @@ border: 1px solid rgba(0, 0, 0, 0.10);
 /* Ensure the parent element is positioned relative */
 .custom-underline {
   position: relative;
-  text-decoration: none; /* Remove default underline */
-  color: #000; /* Default text color */
-  overflow: hidden; /* Hide overflow for animation */
+  text-decoration: none;
+  /* Remove default underline */
+  color: #000;
+  /* Default text color */
+  overflow: hidden;
+  /* Hide overflow for animation */
   padding-bottom: 0.7rem;
 }
 
@@ -599,50 +661,63 @@ border: 1px solid rgba(0, 0, 0, 0.10);
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 4px; /* Underline thickness */
-  background: #0E51A0; /* Custom underline color */
-  transform: translateY(10px); /* Start with the underline hidden */
-  transition: transform 0.3s ease; /* Animate the underline */
-  transform-origin: bottom; /* Animate from the bottom */
+  height: 4px;
+  /* Underline thickness */
+  background: #0E51A0;
+  /* Custom underline color */
+  transform: translateY(10px);
+  /* Start with the underline hidden */
+  transition: transform 0.3s ease;
+  /* Animate the underline */
+  transform-origin: bottom;
+  /* Animate from the bottom */
 }
 
 /* On hover of either .custom-underline or .navElementContainer, animate the underline */
 .custom-underline:hover::after,
 .navElementContainer:hover .custom-underline::after {
-  transform: translateY(0); /* Reveal the underline */
+  transform: translateY(0);
+  /* Reveal the underline */
 }
 
 .subNavElement:hover .subNavElementSvg {
-  fill: #0E51A0; 
+  fill: #0E51A0;
 }
-#mobileContactSection{
+
+#mobileContactSection {
   transition: 0.2s;
 }
-#mobileContactBtn{
+
+#mobileContactBtn {
   transition: 0.1s;
   width: 6rem;
 }
-.hideContactMob{
+
+.hideContactMob {
   transform: translate(-50%, -5rem);
   opacity: 0;
   z-index: -1;
 }
-.activeContactBtn{
+
+.activeContactBtn {
   background-color: #0E51A0;
   color: white;
 }
-#mobileContactBtn svg{
+
+#mobileContactBtn svg {
   display: none;
 }
-.activeContactBtn svg{
+
+.activeContactBtn svg {
   display: block !important;
 }
 
-.serviceBtn{
+.serviceBtn {
   border-color: transparent;
   transition: 0.1s;
 }
-.serviceBtn svg{
+
+.serviceBtn svg {
   fill: black;
   fill-opacity: 0.6;
   stroke: black;
@@ -650,14 +725,17 @@ border: 1px solid rgba(0, 0, 0, 0.10);
   stroke-width: 0.5;
 
 }
-.servicesActiveBtn{
+
+.servicesActiveBtn {
   border-color: #0E51A0;
 
 }
-.servicesActiveBtn p{
+
+.servicesActiveBtn p {
   font-weight: 600;
 }
-.servicesActiveBtn svg{
+
+.servicesActiveBtn svg {
   fill: #0E51A0;
   fill-opacity: 1;
   stroke: #0E51A0;
@@ -675,15 +753,21 @@ border: 1px solid rgba(0, 0, 0, 0.10);
 .faqContent {
   transition: max-height 0.3s ease-out;
 }
+
 .faqContent.open {
-  max-height: fit-content; /* Adjust this value based on your content size */
+  max-height: fit-content;
+  /* Adjust this value based on your content size */
 }
+
 .faqHeader .iconArrow {
   transform: rotateZ(180deg);
-  transition: transform 0.3s ease; /* Smooth rotation transition */
+  transition: transform 0.3s ease;
+  /* Smooth rotation transition */
 }
+
 .faqHeader.open .iconArrow {
-  transform: rotateZ(0deg); /* Rotate icon when open */
+  transform: rotateZ(0deg);
+  /* Rotate icon when open */
 }
 
 
@@ -697,7 +781,8 @@ border: 1px solid rgba(0, 0, 0, 0.10);
   height: 25px;
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease; /* Adjusted for smooth transformation */
+  transition: transform 0.3s ease;
+  /* Adjusted for smooth transformation */
 }
 
 .menu-icon div {
@@ -714,80 +799,97 @@ border: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 .menu-icon .bar2 {
-  top: 10px; /* Adjust based on height of the bars */
+  top: 10px;
+  /* Adjust based on height of the bars */
 }
 
 .menu-icon .bar3 {
-  top: 20px; /* Adjust based on height of the bars */
+  top: 20px;
+  /* Adjust based on height of the bars */
 }
 
 /* Transform to a cross */
 .menu-icon.open .bar1 {
   transform: rotate(45deg);
-  top: 12px; /* Center the bar */
+  top: 12px;
+  /* Center the bar */
 }
 
 .menu-icon.open .bar2 {
-  transform: translate(-10rem,0);
-  opacity: 0; /* Hide the middle bar */
+  transform: translate(-10rem, 0);
+  opacity: 0;
+  /* Hide the middle bar */
   transition: opacity 0.3s ease;
 }
 
 .menu-icon.open .bar3 {
   transform: rotate(-45deg);
-  top: 12px; /* Center the bar */
+  top: 12px;
+  /* Center the bar */
 }
 
-.mobMenuActive{
+.mobMenuActive {
   transform: translate(0, 0) !important;
 }
-.showDropDownMob{
+
+.showDropDownMob {
   display: flex;
 }
-.rotateDropDownArrow{
+
+.rotateDropDownArrow {
   transform: rotate(0deg);
 }
 
 
-.otpWidget{
+.otpWidget {
   display: none;
 }
-#verifyOtpMain{
+
+#verifyOtpMain {
   display: none;
 }
 
 .kycExtender {
   display: none;
 }
-.kycExtender .deleteIcon{
+
+.kycExtender .deleteIcon {
   display: none;
 }
-.uploadedContent{
+
+.uploadedContent {
   display: none;
 }
-.kycUploaderActive .kycUploaderContainer{
+
+.kycUploaderActive .kycUploaderContainer {
   background: rgba(32, 188, 115, 0.10);
 }
 
-.kycUploaderActive .uploadBtn{
+.kycUploaderActive .uploadBtn {
   display: none;
 }
-.kycUploaderActive .uploadedContent{
+
+.kycUploaderActive .uploadedContent {
   display: flex;
 }
-.uploadingText{
+
+.uploadingText {
   display: none;
 }
-.uploadingText{
+
+.uploadingText {
   display: none;
 }
-.kycUploaderDelay .uploadingText{
+
+.kycUploaderDelay .uploadingText {
   display: block;
 }
-.kycUploaderDelay .uploadBtn{
+
+.kycUploaderDelay .uploadBtn {
   display: none;
 }
-.uploadProgress{
+
+.uploadProgress {
   display: none;
 }
 
@@ -805,9 +907,7 @@ select:-webkit-autofill {
 
 
 
-.loadingAnimationContainer{
-  
-}
+.loadingAnimationContainer {}
 
 .svgbox {
   --blue: rgb(148, 66, 63);
@@ -818,19 +918,22 @@ select:-webkit-autofill {
   stroke-dashoffset: 192;
   animation: dash_682 2s linear infinite;
 }
+
 @keyframes dash_682 {
   72.5% {
     opacity: 1;
   }
+
   to {
     stroke-dashoffset: 1;
   }
 }
 
-.selectedDropDownItem{
+.selectedDropDownItem {
   background-color: #ececec;
 }
-.otpResendBtn{
+
+.otpResendBtn {
   opacity: 0.5;
 }
 
@@ -843,31 +946,33 @@ input[type="number"] {
 /* Hides the spinner in Chrome, Safari, and Edge */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.chooseCityWidget img{
-    display:none;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.currencyListTemp{
-    list-style: none;
-}
-#sellCurrencyContainer{
-    z-index:1;
+.chooseCityWidget img {
+  display: none;
 }
 
+.currencyListTemp {
+  list-style: none;
+}
+
+#sellCurrencyContainer {
+  z-index: 1;
+}
 
 
 
-.whatsappChatBotContainer{
+
+.whatsappChatBotContainer {
   position: fixed;
   right: 1.3rem;
   bottom: 2rem;
   z-index: 1000;
 }
 
-.whatsappChatBot{
+.whatsappChatBot {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -875,8 +980,9 @@ input[type="number"]::-webkit-outer-spin-button {
   background: #25D366;
   border-radius: 32px;
 }
+
 @media (max-width:800px) {
-  .whatsappChatBot{
+  .whatsappChatBot {
     display: flex;
     width: 48px;
     height: 48px;
@@ -884,19 +990,22 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
 
     padding: 12px;
-    
-    
+
+
   }
-  .whatsappChatBot span{
+
+  .whatsappChatBot span {
     display: none;
   }
-  .whatsappChatBot img{
+
+  .whatsappChatBot img {
     width: 24px;
     height: 24px;
-    
+
   }
 }
-.whatsappChatBot span{
+
+.whatsappChatBot span {
   color: var(--Neutral-100, var(--Backgrounds-Primary, #FFF));
   text-align: center;
   font-size: 16px;
@@ -904,7 +1013,8 @@ input[type="number"]::-webkit-outer-spin-button {
   line-height: 20px;
   font-style: normal;
 }
-.whatsappChatBot img{
+
+.whatsappChatBot img {
   width: 32px;
   height: 32px;
 }

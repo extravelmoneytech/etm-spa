@@ -1,2336 +1,421 @@
-<!-- orderV3/index.php  -->
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
+$title="ExTravelMoney- Send Money Abroad | Buy Forex Online in India"; 
+$description="Get the best exchange rates on currency, forex cards, and money transfers from India. Fast, easy, and trusted RBI-authorized partners!"; 
+$sub=0; $page=1; $city=0; $curpage=0; $fold=""; 
+$ogurl="https://www.extravelmoney.com";
+$ogtype="website";
 
 
-$fold = "../";
-$title = "Get Rates";
-$orderV3Page = true;
-include $fold . 'includesv2/head.php';
+$indexPage = true;
+$widgetType='fx';
+$defaultCountry="us";
+$defaultProduct="currency";
 
+
+    include $fold . 'includesv2/head.php';
 ?>
-<style>
-    .bottomSheetMain {
-        display: none;
-    }
-
-    .bottomSheetMainVisible {
-        display: flex;
-        
-    }
 
 
-    .bottomSheet {
-        transform: translateX(100%);
-        transition: 0.3s;
-    }
 
-    .popBottomSheet {
-        transform: translateX(0%);
-    }
-
-    @media (max-width:950px) {
-        .bottomSheet {
-            transform: translateY(100%);
-            transition: 0.3s;
-        }
-
-        .popBottomSheet {
-            transform: translateY(0%);
-        }
-    }
-
-    /* Progress bar animations */
-    [role="progressbar"] {
-        transition: width 300ms ease-in-out;
-    }
-
-    .text-black.text-base.font-bold {
-        transition: opacity 200ms ease-in-out;
-    }
-
-    .fade-out {
-        opacity: 0;
-    }
-
-    /* Optional: Add animation for the number transition */
-    .text-lg.font-bold {
-        transition: transform 200ms ease-in-out;
-    }
-
-    .text-lg.font-bold.animate {
-        transform: scale(1.1);
-    }
-
-    /* Add to your CSS */
-    .grow.shrink.basis-0.h-0\\.5 {
-        transition: all 400ms ease-in-out;
-    }
-
-    .rounded-\[30px\] {
-        transition: all 400ms ease-in-out;
-    }
-
-    span.text-lg {
-        transition: all 400ms ease-in-out;
-    }
-
-    @keyframes pulse {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.5;
-        }
-    }
-
-    .animate-pulse {
-        animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    .no-scroll {
-        overflow: hidden;
-        height: 100vh;
-    }
-
-</style>
 
 <body>
-    <div class="flex flex-col items-center justify-center" id="containerWholeMain">
+    <div class="flex flex-col items-center justify-center relative bg-white">
+        <div class="chooseCityOverlay absolute top-0 left-0 w-full h-[100vh] bg-white customMd:bg-black/30  customMd:bg-opacity-60  z-20"
+            style="backdrop-filter: blur(7px)">
+
+            <div
+                    class="chooseCityWidget  flex w-full absolute  z-20 top-0 left-0 bg-white px-5  py-5 customMd:rounded-xl flex-col customMd:mt-12 customMd:bg-white h-fit min-h-[100vh] customMd:min-h-fit customMd:max-w-2xl customMd:left-2/4 customMd:top-1/2  customMd:transform customMd:-translate-x-1/2 customMd:-translate-y-1/2">
+                    <img class="w-44" src="<?php echo $fold . 'public/images/logo/ETM logo without tagline.png'; ?>" alt="ETM logo without tagline">
+                    <h2 class="font-bold text-2xl mt-6">
+                        <span class="custom-gradient-text">We
+                            Promise
+                        </span>
+                        the Best Rates,<br> From the Market for
+                        <span class="custom-gradient-text">you.</span>
+                    </h2>
+                    <p class="text-[#777777] text-xs  leading-3 mt-4">Our Services are provided all across the country
+                    </p>
+
+                    <!-- <p class="text-[#777777] text-xs font-bold  leading-3 mt-4">Please Select your City</p> -->
+
+                    <div id="citySelectorContainer"
+                        class="custom-gradient-border  relative rounded-lg h-12 flex items-center justify-between border-2 mt-4 px-3">
+                        <input type="text" value="" placeholder="Search your city" autocomplete="off"
+                            id="citySelector" class="text-black font-semibold text-base w-full h-full outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                            <path
+                                d="M21.3963 20.6203L16.5794 15.8035C17.953 14.2238 18.6596 12.1725 18.5503 10.082C18.441 7.99156 17.5243 6.02518 15.9934 4.59741C14.4626 3.16964 12.4371 2.39202 10.3441 2.42847C8.2511 2.46493 6.25399 3.3126 4.77378 4.79282C3.29356 6.27303 2.44588 8.27014 2.40943 10.3632C2.37298 12.4562 3.15059 14.4816 4.57837 16.0125C6.00614 17.5433 7.97252 18.46 10.063 18.5694C12.1535 18.6787 14.2048 17.9721 15.7844 16.5985L20.6013 21.4153C20.7079 21.5147 20.8489 21.5688 20.9947 21.5662C21.1404 21.5636 21.2794 21.5046 21.3825 21.4015C21.4856 21.2985 21.5446 21.1594 21.5472 21.0137C21.5497 20.868 21.4956 20.727 21.3963 20.6203ZM3.56128 10.5178C3.56128 9.14572 3.96816 7.80442 4.73046 6.66356C5.49277 5.52269 6.57625 4.6335 7.84392 4.10841C9.11158 3.58333 10.5065 3.44594 11.8522 3.71363C13.198 3.98131 14.4341 4.64205 15.4043 5.61227C16.3746 6.5825 17.0353 7.81864 17.303 9.16439C17.5707 10.5101 17.4333 11.905 16.9082 13.1727C16.3831 14.4404 15.4939 15.5238 14.3531 16.2861C13.2122 17.0484 11.8709 17.4553 10.4988 17.4553C8.65953 17.4531 6.89625 16.7215 5.5957 15.4209C4.29515 14.1204 3.56352 12.3571 3.56128 10.5178Z"
+                                fill="black" />
+                        </svg>
+
+
+                    </div>
+                    <p class="text-[#777777] text-sm font-bold  leading-3 mt-4">Popular Cities</p>
+                    <div id="searchspin" style="display: none;">Loading...</div>
+                    <div id="results" class="popularCityContainer flex flex-wrap gap-3 mt-3 text-[#777777]"></div>
+                    <button id="citySelect" disabled
+                        class="h-12 px-2 py-3 bg-primary-blue rounded-lg justify-center items-center gap-1 inline-flex mt-6 select-none cursor-pointer opacity-60">
+                        <span class="text-white text-sm font-bold">View Best Rates in your City</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M15.781 12.7823L8.28104 20.2823C8.21136 20.3519 8.12863 20.4072 8.03759 20.4449C7.94654 20.4826 7.84896 20.5021 7.75042 20.5021C7.65187 20.5021 7.55429 20.4826 7.46324 20.4449C7.3722 20.4072 7.28947 20.3519 7.21979 20.2823C7.15011 20.2126 7.09483 20.1299 7.05712 20.0388C7.01941 19.9478 7 19.8502 7 19.7516C7 19.6531 7.01941 19.5555 7.05712 19.4645C7.09483 19.3734 7.15011 19.2907 7.21979 19.221L14.1901 12.2516L7.21979 5.28226C7.07906 5.14153 7 4.95066 7 4.75164C7 4.55261 7.07906 4.36174 7.21979 4.22101C7.36052 4.08028 7.55139 4.00122 7.75042 4.00122C7.94944 4.00122 8.14031 4.08028 8.28104 4.22101L15.781 11.721C15.8508 11.7907 15.9061 11.8734 15.9438 11.9644C15.9816 12.0555 16.001 12.1531 16.001 12.2516C16.001 12.3502 15.9816 12.4478 15.9438 12.5388C15.9061 12.6299 15.8508 12.7126 15.781 12.7823Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+
+                    <div class="flex items-center mt-10 justify-center customMd:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="253" height="161" viewBox="0 0 253 161"
+                            fill="none">
+                            <path
+                                d="M25.28 76.4052L27.8094 78.3053L33.8057 74.5175H34.1265L35.7058 75.1467C35.7058 75.1467 36.0266 75.4675 35.7058 75.4675L31.2888 80.5264L31.6096 80.8472C32.2389 81.168 32.2388 82.1057 31.9304 82.4265C31.6096 83.0558 30.9803 83.3765 30.351 83.0558H30.0303L28.451 89.6939C28.451 89.6939 28.1302 90.0147 28.1302 89.6939L26.5508 89.0647V88.7439V81.7974L23.3922 80.5389C22.4422 80.2181 21.8129 79.9096 21.1836 79.5888L16.4457 77.0595L13.2871 91.2733C13.2871 91.5941 12.9663 91.5941 12.6578 91.5941L9.81996 90.0148L9.49918 89.694V84.6351L7.59907 83.6851C7.27828 83.6851 7.27828 83.3643 7.59907 83.0558L8.22833 81.7973C8.22833 81.4765 8.54911 81.4765 8.85758 81.7973L9.80764 82.1181V80.5388L8.22833 79.5887C7.90754 79.5887 7.90754 79.2679 8.22833 78.9595L8.85758 77.7009C8.85758 77.3801 9.17837 77.3801 9.48684 77.7009L10.1161 78.0217V73.6047L5.69908 71.3961C3.79897 70.4461 2.21953 68.8667 0.640213 67.2874L0.319439 66.9666C-0.00135422 66.6458 -0.00135422 66.0165 0.319439 65.3873C0.640228 64.758 1.26948 64.758 1.57795 64.758H2.20721C4.41579 65.0788 6.31596 65.7081 8.20355 66.6581L12.016 68.8297L15.4956 66.3003L14.8663 65.9795C14.5455 65.9795 14.5455 65.6587 14.8663 65.3502L15.4956 64.0917C15.4956 63.7709 15.8164 63.7709 16.1248 64.0917L17.7041 65.0418L18.9627 64.0917L18.0126 63.7709C17.6918 63.7709 17.6918 63.4501 18.0126 63.1417L18.6419 61.8831C18.6419 61.5624 18.9627 61.5624 19.2711 61.8831L21.1713 62.8332L25.28 59.9954H25.6008L28.4386 61.5747C28.7594 61.5747 28.7594 61.8955 28.4386 62.2039L18.3335 72.9382L23.0715 75.4676C24.0215 75.4553 24.6507 75.7759 25.28 76.4052Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M205.014 31.5601C205.335 31.2393 205.964 31.5601 205.964 31.8809C206.285 33.1394 206.914 34.0895 207.223 35.3605C207.544 36.3105 207.544 37.2606 207.852 38.1983C207.852 38.5191 207.531 39.1484 207.223 39.1484C206.902 39.1484 206.594 38.8276 206.273 38.5191C206.273 37.569 205.952 36.619 205.643 35.6813C205.323 34.4227 205.014 33.4727 204.693 32.5226C204.373 32.1895 204.693 31.8809 205.014 31.5601Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M204.065 151.909C204.065 152.23 203.745 152.539 203.436 152.539H203.115C201.215 151.588 199.007 150.959 197.119 150.009C196.798 149.688 196.49 149.38 196.798 149.059C197.119 148.738 197.427 148.43 197.748 148.738C199.648 149.688 201.536 150.638 203.745 151.268C204.065 150.959 204.374 151.268 204.065 151.909Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M207.223 44.1943C207.544 44.1943 207.852 44.5151 207.852 45.1444C207.531 47.353 206.902 49.5614 206.273 51.4617C206.273 51.7824 205.952 52.0909 205.643 52.0909H205.323C205.002 51.7701 204.693 51.4616 205.002 51.1409C205.631 49.2407 206.26 47.0321 206.581 45.1445C206.273 44.5153 206.902 44.1943 207.223 44.1943Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M215.75 155.067C216.071 155.067 216.379 155.696 216.379 156.017C216.379 156.338 216.058 156.646 215.75 156.646H215.429C213.22 156.017 211.32 155.388 209.112 154.746C208.791 154.746 208.482 154.117 208.482 153.796C208.482 153.475 209.112 153.167 209.433 153.167C211.641 153.796 213.85 154.426 215.75 155.067Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M185.418 16.7167C185.418 16.3959 186.047 16.0874 186.368 16.0874C188.576 16.4082 190.785 17.0375 192.685 17.9875C193.006 18.3083 193.314 18.6168 193.006 18.9376C193.006 19.2584 192.685 19.2584 192.377 19.2584H192.056C190.156 18.3083 188.268 17.679 186.059 17.3582C185.418 17.3459 185.109 17.0251 185.418 16.7167Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M229.011 158.855C229.011 159.176 228.69 159.484 228.061 159.484C225.852 159.164 223.644 158.855 221.744 158.226C221.423 158.226 221.114 157.597 221.114 157.276C221.114 156.955 221.744 156.646 222.064 156.646C224.273 156.967 226.173 157.597 228.382 157.905C228.703 157.905 229.011 158.226 229.011 158.855Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M175.005 134.215C175.326 133.894 175.955 133.894 176.264 134.215C177.843 135.473 179.743 136.744 181.323 138.323C181.643 138.644 181.643 138.953 181.643 139.582C181.323 139.903 181.323 139.903 181.014 139.903H180.385C178.485 138.644 176.905 137.373 175.326 135.794C175.005 135.165 174.684 134.536 175.005 134.215Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M186.998 68.5102C186.369 68.5102 186.048 68.5102 186.048 68.1894C185.727 67.8687 186.048 67.2394 186.369 67.2394L190.157 65.6601C190.786 65.3393 191.736 65.0308 192.365 64.71C192.686 64.3892 193.315 64.71 193.315 65.0308C193.636 65.3516 193.315 65.9809 192.994 65.9809C192.365 66.3017 191.415 66.6101 190.786 66.9309L186.998 68.5102Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M191.733 146.525H191.412C189.512 145.575 187.624 144.317 185.724 143.046C185.403 142.725 185.094 142.417 185.403 141.787C185.724 141.467 186.032 141.158 186.661 141.467C188.562 142.725 190.449 143.675 192.029 144.625C192.349 144.946 192.658 145.254 192.349 145.575C192.374 146.525 192.053 146.525 191.733 146.525Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M130.464 6.29044C130.143 6.29044 129.835 6.29044 129.835 5.96965C129.514 5.64886 129.835 5.0196 130.156 4.71113C132.056 3.4526 133.943 2.50255 135.844 1.87329H136.164C136.485 1.87329 137.115 1.87329 137.115 2.50255C137.115 2.82334 137.115 3.45261 136.485 3.45261H136.164C134.264 4.08187 132.377 5.03192 130.797 6.29044C130.785 5.96965 130.785 6.29044 130.464 6.29044Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M121.937 15.7648H121.617C121.296 15.444 120.987 15.1356 121.296 14.8148C122.246 12.9147 123.504 11.0269 125.084 9.44762C125.404 9.12683 126.034 9.12683 126.342 9.44762C126.663 9.76841 126.663 10.3977 126.342 10.7062C125.084 12.2855 123.813 13.8648 122.863 15.765L121.937 15.7648Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M174.055 72.9419C173.734 72.6211 174.055 71.9918 174.376 71.9918L180.372 69.4625C180.693 69.1417 181.322 69.4625 181.322 69.7833C181.643 70.1041 181.322 70.7333 181.001 70.7333L175.005 73.2627H174.684C174.363 73.5711 174.055 73.2503 174.055 72.9419Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M130.46 57.7782L132.99 63.7745C133.311 64.0953 132.99 64.7246 132.669 64.7246H132.348C132.027 64.7246 131.719 64.4038 131.719 64.0953L129.19 58.099C128.869 57.7782 129.19 57.1489 129.51 57.1489C129.831 57.1489 130.46 57.1489 130.46 57.7782Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M119.086 28.4005C118.765 28.4005 118.136 28.0798 118.136 27.7713V26.8212C118.136 24.9211 118.457 23.0334 118.765 21.1332C118.765 20.8124 119.394 20.5039 119.715 20.5039C120.036 20.5039 120.344 21.1332 120.344 21.454C120.024 23.3541 119.715 24.9335 119.715 26.8211V27.4504C120.036 27.7712 119.727 28.4005 119.086 28.4005Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M241.014 159.16C241.334 159.16 241.643 159.481 241.643 160.11C241.643 160.431 241.322 160.739 240.693 160.739C238.484 160.739 236.276 160.418 234.055 160.11C233.734 160.11 233.425 159.789 233.425 159.16C233.425 158.839 233.746 158.531 234.376 158.531C236.905 158.851 239.113 159.16 241.014 159.16Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M202.163 27.4462C201.842 27.4462 201.533 27.4462 201.533 27.1254C200.275 25.5461 198.695 23.9667 197.116 22.7083C196.796 22.3876 196.796 21.7583 197.116 21.4498C197.437 21.129 198.066 21.129 198.375 21.4498C200.275 22.7083 201.533 24.6084 203.113 26.1878C203.434 26.5086 203.434 27.1378 202.792 27.4463L202.163 27.4462Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M160.15 7.24078C158.57 5.98225 156.67 4.71141 154.783 4.08215C154.462 3.76136 154.153 3.45288 154.462 3.13209C154.783 2.8113 155.091 2.50283 155.412 2.8113C157.312 3.76136 159.2 5.01988 161.1 6.29085C161.421 6.61164 161.421 6.92011 161.1 7.54938C160.779 7.87017 160.779 7.87016 160.471 7.87016C160.471 7.54937 160.471 7.24078 160.15 7.24078Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M203.11 57.4549C201.852 59.355 200.272 60.9345 198.693 62.5138C198.693 62.5138 198.372 62.8346 198.064 62.8346C197.743 62.8346 197.743 62.8346 197.435 62.5138C197.114 62.193 197.114 61.5637 197.435 61.2553C199.014 59.9968 200.593 58.4174 201.543 56.5173C201.864 56.1965 202.173 56.1965 202.802 56.1965C203.11 56.505 203.431 57.1465 203.11 57.4549Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M168.694 17.3455C168.373 17.3455 168.064 17.0247 168.064 17.0247C167.114 15.1246 166.164 13.2369 164.906 11.6576C164.585 11.3368 164.585 10.7075 164.906 10.399C165.226 10.0782 165.856 10.0782 166.164 10.399C167.423 12.2991 168.694 14.1869 169.644 16.0871C169.965 16.4079 169.644 17.0372 169.323 17.0372C169.002 17.3456 168.694 17.3455 168.694 17.3455Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M68.2412 95.3579C66.0327 95.0371 63.8242 94.7286 61.924 94.0993C61.6032 94.0993 61.2947 93.4701 61.2947 93.1493C61.2947 92.8285 61.924 92.52 62.2447 92.52C64.4533 92.8408 66.3535 93.4701 68.562 93.7785C68.8828 93.7785 69.1913 94.4078 69.1913 94.7286C69.1913 95.0494 68.8705 95.3579 68.2412 95.3579C68.5497 95.3579 68.5497 95.3579 68.2412 95.3579Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M107.095 94.4072C107.724 94.4072 108.045 94.728 108.045 95.0365C108.045 95.3573 107.724 95.9865 107.416 95.9865C105.207 96.3073 102.999 96.6158 100.778 96.6158C100.457 96.6158 100.148 96.295 99.8276 95.9865C99.8276 95.6658 100.148 95.0365 100.457 95.0365C102.986 94.728 105.195 94.728 107.095 94.4072Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M122.891 40.7116C122.57 40.7116 122.57 40.7116 122.891 40.7116C122.262 40.7116 121.941 40.7116 121.941 40.3908L120.362 36.9113C120.041 35.9612 119.732 35.332 119.411 34.3819C119.411 34.0611 119.411 33.4319 120.041 33.4319C120.362 33.4319 120.991 33.4319 120.991 34.0611C121.312 35.0112 121.62 35.6405 121.941 36.5905L123.52 40.0701C123.52 40.0824 123.199 40.4032 122.891 40.7116Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M120.36 93.7788C118.152 94.0996 116.252 94.7288 114.043 95.0373C113.722 95.0373 113.414 94.7165 113.093 94.408C113.093 94.0872 113.414 93.458 113.722 93.458C115.931 93.1372 117.831 92.5079 120.04 92.1995C120.36 92.1995 120.99 92.5202 120.99 92.8287C120.99 93.1495 120.669 93.7788 120.36 93.7788Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M124.773 45.1434C125.094 44.8226 125.723 45.1434 125.723 45.4642L128.253 51.4605C128.574 51.7813 128.253 52.4106 127.932 52.4106H127.611C127.29 52.4106 126.982 52.0898 126.982 51.7813L124.453 45.785C124.144 45.7726 124.144 45.4518 124.773 45.1434Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M55.6049 92.5231C53.3963 91.8939 51.4961 91.2646 49.2876 90.623C48.9668 90.623 48.6584 89.9937 48.6584 89.673C48.6584 89.3522 49.2876 89.0437 49.6084 89.0437C51.5085 89.673 53.7171 90.3022 55.9256 90.9438C56.2464 90.9438 56.5549 91.5731 56.5549 91.8939C56.5549 92.2023 56.2341 92.5231 55.6049 92.5231Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M43.2809 88.7368C41.3808 88.1075 39.1722 87.1574 37.2846 86.2074C36.9638 85.8866 36.6553 85.5781 36.9638 85.2573C37.2846 84.9365 37.593 84.6281 37.9138 84.9365C39.8139 85.8866 42.0226 86.5159 43.9102 87.1451C44.231 87.1451 44.5394 87.7744 44.5394 88.0952C44.231 88.416 43.9225 88.7368 43.2809 88.7368Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M90.0328 96.936H87.8242C87.5034 96.936 86.8741 96.6152 86.8741 95.9859C86.8741 95.6652 87.1949 95.0359 87.8242 95.0359H90.0328H94.1415C94.4623 95.0359 95.0916 95.3567 95.0916 95.6652C95.0916 95.9859 94.7708 96.6152 94.4623 96.6152C92.883 96.936 91.6119 96.936 90.0328 96.936Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M132.675 90.3149C130.467 90.9442 128.567 91.5734 126.358 92.215H126.037C125.716 92.215 125.408 91.8942 125.408 91.5858C125.408 91.265 125.408 90.6357 126.037 90.6357C127.937 90.0064 130.146 89.3772 132.355 88.7356C132.675 88.7356 133.305 88.7356 133.305 89.3649C133.305 89.6733 133.305 89.9941 132.675 90.3149Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M81.1791 96.6314C78.9705 96.6314 76.7621 96.3106 74.5409 96.0022C74.2201 96.0022 73.9117 95.6814 73.9117 95.0521C73.9117 94.7313 74.2324 94.4229 74.8617 94.4229C77.0703 94.7436 79.2787 94.7437 81.1789 95.0521C81.4997 95.0521 81.8082 95.3729 81.8082 96.0022C82.129 96.3106 81.8207 96.6314 81.1791 96.6314C81.4999 96.6314 81.4999 96.6314 81.1791 96.6314Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M150.363 81.7741L156.359 79.2447C156.68 78.9239 157.309 79.2447 157.309 79.5655C157.63 79.8863 157.309 80.5155 156.988 80.5155L150.992 83.0449H150.671C150.35 83.0449 150.042 82.7241 150.042 82.4156C149.733 82.4156 150.042 81.7741 150.363 81.7741Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M162.675 78.3104C162.355 78.3104 162.046 77.9896 162.046 77.6811C161.725 77.3603 162.046 76.7311 162.367 76.7311L168.363 74.2017C168.684 73.8809 169.313 74.2017 169.313 74.5225C169.634 74.8433 169.313 75.4726 168.992 75.4726L162.675 78.3104Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M162.048 121.903C161.727 121.903 161.727 121.903 161.419 121.582C160.79 120.632 160.16 120.003 159.21 119.053C158.581 118.103 157.952 117.473 157.31 116.523C156.99 116.202 156.99 115.573 157.631 115.265C157.952 114.944 158.581 114.944 158.89 115.585C159.519 116.536 160.148 117.165 160.79 118.115C161.419 119.065 162.048 119.694 162.998 120.644C163.319 120.965 163.319 121.594 162.998 121.903H162.048Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M151.621 104.835C152.879 106.735 153.829 108.623 155.1 110.202C155.421 110.523 155.1 111.152 154.779 111.461H154.459C154.138 111.461 153.829 111.461 153.829 111.14C152.571 109.24 151.3 107.352 150.35 105.773C150.029 105.452 150.35 104.823 150.671 104.514C150.671 104.206 151.312 104.527 151.621 104.835Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M166.791 125.366C168.37 126.945 169.629 128.524 171.208 129.783C171.529 130.103 171.529 130.733 171.208 131.041C170.887 131.362 170.887 131.362 170.579 131.362C170.258 131.362 170.258 131.362 169.95 131.041L165.212 126.303C164.891 125.982 164.891 125.353 165.212 125.045C166.162 125.057 166.47 125.057 166.791 125.366Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M142.472 1.87332C142.151 1.87332 141.522 1.55254 141.522 1.24406C141.522 0.923274 141.842 0.294008 142.151 0.294008C144.359 -0.0267823 146.568 0.29401 148.789 0.614801C149.11 0.614801 149.418 1.24406 149.418 1.56485C149.418 1.88564 149.097 2.19412 148.468 2.19412C146.889 1.87332 144.68 1.55253 142.472 1.87332Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M147.513 100.42C147.192 100.42 146.884 100.42 146.884 100.099C145.933 98.1993 144.983 96.3115 144.046 94.4113C143.725 94.0905 144.046 93.4612 144.366 93.4612C144.687 93.1405 145.317 93.4613 145.317 93.782C146.267 95.6821 147.217 97.5699 148.154 99.4701C148.475 99.7909 148.154 100.42 147.834 100.42H147.513Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M142.468 88.7353C142.147 88.7353 142.147 88.7353 142.468 88.7353C141.839 88.7353 141.518 88.7353 141.518 88.4145C141.518 88.0937 141.197 87.7852 141.197 87.4644C140.568 87.7852 139.938 88.0937 139.297 88.0937C138.976 88.0937 138.347 88.0937 138.347 87.7729C138.026 87.4521 138.347 86.8228 138.668 86.8228C139.297 86.5021 139.926 86.1936 140.568 86.1936L138.988 82.714C138.668 82.3932 138.988 81.764 139.309 81.764C139.63 81.4432 140.259 81.764 140.259 82.0848L141.839 85.5643L144.368 84.6143C144.689 84.2935 145.318 84.6143 145.318 84.9351C145.639 85.2558 145.318 85.8851 144.997 85.8851L142.468 86.8352C142.468 87.1559 142.789 87.4644 142.789 87.7852C143.097 88.0937 142.776 88.4145 142.468 88.7353Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M137.1 76.73C136.78 76.73 136.471 76.4092 136.471 76.1008L133.942 70.1044C133.621 69.7836 133.942 69.1544 134.262 69.1544C134.583 68.8336 135.213 69.1544 135.213 69.4752L137.742 75.4715C138.038 76.1008 137.73 76.4092 137.1 76.73Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M173.425 18.6015C173.105 18.6015 172.796 18.2807 172.796 17.9723C172.796 17.6515 172.796 17.0222 173.425 17.0222C175.634 16.3929 177.842 15.7637 180.064 15.7637C180.693 15.7637 181.014 16.0845 181.014 16.3929C181.014 16.7137 180.693 17.343 180.384 17.343C177.522 17.343 175.634 17.6638 173.425 18.6015Z"
+                                fill="black" fill-opacity="0.1" />
+                            <path
+                                d="M243.545 150.329C241.337 154.117 235.649 154.117 233.44 150.329C229.652 143.691 224.914 134.857 224.914 130.427C224.914 122.852 230.911 116.843 238.499 116.843C246.075 116.843 252.084 122.839 252.084 130.427C252.071 134.844 247.333 143.691 243.545 150.329ZM238.486 123.16C234.378 123.16 231.219 126.318 231.219 130.427C231.219 134.536 234.378 137.695 238.486 137.695C242.595 137.695 245.754 134.536 245.754 130.427C245.754 126.318 242.595 123.16 238.486 123.16Z"
+                                fill="black" fill-opacity="0.1" />
+                        </svg>
+                    </div>
+
+                </div>
+        </div>
+
+
         <div class="w-full chooseCityOverlayMain  relative" style="max-width: 103rem;">
 
-            <?php
+            <?php 
 
-            include $fold . 'includesv2/header.php';
+                include $fold . 'includesv2/header.php';
+
             ?>
 
-            <div id="backBtn" class="px-5 sm:px-12 md:px-16 mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path d="M27.9998 15.9999C27.9998 16.2652 27.8945 16.5195 27.7069 16.7071C27.5194 16.8946 27.265 16.9999 26.9998 16.9999H7.41356L14.7073 24.2924C14.8002 24.3854 14.8739 24.4957 14.9242 24.6171C14.9745 24.7384 15.0004 24.8686 15.0004 24.9999C15.0004 25.1313 14.9745 25.2614 14.9242 25.3828C14.8739 25.5042 14.8002 25.6145 14.7073 25.7074C14.6144 25.8004 14.5041 25.8741 14.3827 25.9243C14.2613 25.9746 14.1312 26.0005 13.9998 26.0005C13.8684 26.0005 13.7383 25.9746 13.6169 25.9243C13.4955 25.8741 13.3852 25.8004 13.2923 25.7074L4.29231 16.7074C4.19933 16.6146 4.12557 16.5043 4.07525 16.3829C4.02493 16.2615 3.99902 16.1314 3.99902 15.9999C3.99902 15.8685 4.02493 15.7384 4.07525 15.617C4.12557 15.4956 4.19933 15.3853 4.29231 15.2924L13.2923 6.29245C13.4799 6.1048 13.7344 5.99939 13.9998 5.99939C14.2652 5.99939 14.5197 6.1048 14.7073 6.29245C14.895 6.48009 15.0004 6.73458 15.0004 6.99995C15.0004 7.26531 14.895 7.5198 14.7073 7.70745L7.41356 14.9999H26.9998C27.265 14.9999 27.5194 15.1053 27.7069 15.2928C27.8945 15.4804 27.9998 15.7347 27.9998 15.9999Z" fill="black" />
-                </svg>
-            </div>
-            <div class="progressContainer px-5 sm:px-12 md:px-16">
 
-                <div id="progressBarMain"
-                    class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6">
-                    <div
-                        class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div><span class="text-primary text-lg font-bold " id="numberElement">1</span><span
-                                class="text-black/40 text-base font-medium " id="">/5</span></div>
-                    </div>
-                    <div class="text-black text-base font-bold leading-none" id="stageNameElement">Get Rates</div>
-                    <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary basis-4 w-[198px]"
-                        role="progressbar"></div>
-                </div>
-            </div>
-
-
-
-            <section class="md:mt-12" id="templateContainer">
-
-
-            </section>
-
-        </div>
-
-    </div>
-
-    <div class="fixed top-0 left-0 w-full h-[100vh] bg-black/20 z-20 bottomSheetMain">
-        <div class="absolute bottom-0 left-0 w-full z-50 md:w-[30%] md:right-0 md:left-auto md:top-0">
-            <div class="bg-white rounded-tl-[32px] rounded-tr-[32px] rounded-bl-lg rounded-br-lg md:rounded-none md:h-full w-full flex flex-col items-center py-6 pb-12 md:pt-12 bottomSheet">
-
-            </div>
-        </div>
-    </div>
-    <footer>
-
-
-
-
-        <div
-            class="loadingAnimationContainer hidden items-center justify-center h-screen fixed top-0 left-0 w-full bg-white z-50">
-            <div class="loading">
-                <svg viewBox="0 0 187.3 93.7" height="200px" width="300px" class="svgbox">
-                    <defs>
-                        <linearGradient y2="0%" x2="100%" y1="0%" x1="0%" id="gradient">
-                            <stop stop-color="#2C5AA2" offset="0%"></stop>
-                            <stop stop-color="#E3373A" offset="100%"></stop>
-                        </linearGradient>
-                    </defs>
-                    <path stroke="url(#gradient)"
-                        d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z">
-                    </path>
-                </svg>
-            </div>
-        </div>
-
-
-
-
-        <?php
-        include $fold . 'includesv2/footerScripts.php';
-        ?>
-
-
-
-    </footer>
-
-
-
-
-
-
-    <script>
-        const CONSTANTS = {
-            ORDER_TYPES: {
-                moneyTransfer: 'mt',
-                forexTransfer: 'fx'
-            },
-            PRODUCT_TYPES: {
-                currency: 'currency',
-                forexCard: 'forexCard'
-            },
-            PROCESSING_STATES: {
-                INITIAL_LOAD: 'initialDataLoading',
-                ADDING_PRODUCT: 'addingProduct',
-                EDITING_PRODUCT: 'editingProduct',
-                DELETING_PRODUCT: 'deletingProduct',
-                RATE_CALCULATION: 'exchangeRateCalculation',
-
-            },
-            ORDER_STATES: {
-                GET_RATES: 'getRates',
-                DELIVERY_DETAILS: 'deliveryDetails',
-                CONTACT_DETAILS: 'contact_details',
-                REVIEW_PAYMENT: 'reviewAndPayment'
-            },
-            TEMPLATE_NAMES: {
-                FOREX_CONTAINER: 'forexContainerMain',
-                MONEYTRANSFER_CONTAINER: 'mtContainerMain'
-            }
-        };
-        const currencyNames = {
-            USD: "US Dollar",
-            GBP: "British Pound",
-            AUD: "Australian Dollar",
-            CAD: "Canadian Dollar",
-            EUR: "Euro",
-            JPY: "Japanese Yen",
-            MYR: "Malaysian Ringgit",
-            NZD: "New Zealand Dollar",
-            SGD: "Singapore Dollar",
-            THB: "Thai Baht",
-            AED: "UAE Dirham"
-        };
-        const TemplateCache = {
-            cache: {},
-            async get(templateName) {
-                if (this.cache[templateName]) return this.cache[templateName];
-                try {
-                    const response = await fetch(`/orderv3/components/${templateName}.html`);
-                    if (!response.ok) throw new Error(`Template load failed: ${templateName}`);
-                    const html = await response.text();
-                    this.cache[templateName] = html;
-                    return html;
-                } catch (error) {
-                    console.error('Template fetch error:', error);
-                    throw error;
-                }
-            }
-        };
-        const DropdownCache = {
-            currencyItems: null,
-            forexCardItems: null,
-            initializeCache() {
-                if (this.currencyItems && this.forexCardItems) return;
-                const allItems = document.querySelectorAll('#currencyDropDownList li');
-                this.currencyItems = [...allItems];
-                this.forexCardItems = [...allItems].filter(item => item.dataset.forex === 'true');
-            },
-            getCache(type) {
-                this.initializeCache();
-                return type === CONSTANTS.PRODUCT_TYPES.forexCard ? this.forexCardItems : this.currencyItems;
-            }
-        };
-        const AppState = {
-            nextBtnState: {
-                active: false,
-                status: CONSTANTS.ORDER_STATES.GET_RATES
-            },
-            processingStates: {
-                initialDataLoading: false,
-                addingProduct: false,
-                editingProduct: false,
-                deletingProduct: false,
-                exchangeRateCalculation: false
-            },
-            mainState: {
-                currentCity: 'Ernakulam',
-                token: sessionStorage.getItem('token'),
-                orderType: sessionStorage.getItem('productPage')
-            },
-            addProductState: {
-                selectedCurrency: null,
-                exchangeRate: null,
-                currencyQuantity: null,
-                productType: null,
-            },
-            editProductState: {
-                selectedCurrencyEdit: null,
-                currencyQuantityEdit: null,
-                exchangeRateEdit: null,
-                currencyRateEdit: null
-            },
-            deliveryState: {
-                doorDelivery: 1,
-                branch: null,
-                ddAddress: null,
-                ddLandMark: null
-            },
-            cardDataState: [],
-            contactData: {
-                countryCode: null,
-                email: null,
-                name: null,
-                mobile: null,
-                uid: null,
-                travelDate: null,
-                travelPurpose: null
-            },
-            kycData: {
-                education: [
-                    "Passport",
-                    "Pan Card",
-                    "Confirmed Air Ticket",
-                    "Valid Visa",
-                    "University Admission Letter"
-                ],
-                immigration: [
-                    "Passport",
-                    "Pan Card",
-                    "Confirmed Air Ticket",
-                    "Valid Visa",
-                    "Immigration Letter"
-                ],
-                employment: [
-                    "Passport",
-                    "Pan Card",
-                    "Confirmed Air Ticket",
-                    "Valid Visa",
-                    "Work Contract Letter"
-                ],
-                holidayLeisure: [
-                    "Passport",
-                    "Pan Card",
-                    "Onward Air Ticket",
-                    "Valid Visa",
-                    "Return Air Ticket"
-                ]
-            },
-            setState(key, value, state) {
-                this[state][key] = value;
-                this.updateDOM(key, value);
-            },
-            getState(key, state) {
-                return this[state][key];
-            },
-            updateDOM(key, value) {
-                switch (key) {
-                    case 'selectedCurrency':
-                        const selectedCurrencyElement = document.querySelector('[data-bind="selectedCurrency"]');
-                        if (selectedCurrencyElement) selectedCurrencyElement.textContent = value || '';
-                        calculations.getExchangeRateAddProduct(this.addProductState.selectedCurrency, this.addProductState.currencyQuantity, this.addProductState.productType);
-                        break;
-                    case 'exchangeRate':
-                        const exchangeRateElement = document.querySelector('[data-bind="exchangeRate"]');
-                        if (exchangeRateElement) exchangeRateElement.textContent = UIManager.formatAmount(value) || '';
-                        break;
-                    case 'currencyQuantity':
-                        calculations.getExchangeRateAddProduct(this.addProductState.selectedCurrency, this.addProductState.currencyQuantity, this.addProductState.productType);
-                        break;
-                    case 'productType':
-                        const productTypeElement = document.querySelector('[data-bind="bottomSheetProduct"]');
-                        if (productTypeElement) {
-                            productTypeElement.textContent = value === CONSTANTS.PRODUCT_TYPES.currency ? 'Currency' : 'Forex Card';
-                        }
-                        break;
-                    case 'selectedCurrencyEdit':
-                        const selectedCurrencyEditElement = document.querySelector('[data-bind="selectedCurrencyEdit"]')
-                        if (selectedCurrencyEditElement) selectedCurrencyEditElement.textContent = value || '';
-                        break;
-                    case 'exchangeRateEdit':
-                        const exchangeRateEditElement = document.querySelector('[data-bind="exchangeRateEdit"]');
-                        if (exchangeRateEditElement) exchangeRateEditElement.textContent = UIManager.formatAmount(value) || '';
-                        break;
-                    case 'currencyQuantityEdit':
-                        calculations.getExchangeRateEditProduct(this.editProductState.currencyQuantityEdit, this.editProductState.currencyRateEdit);
-                        const currencyQuantityEditElement = document.querySelector('#editCurrencyQuantity');
-                        if (currencyQuantityEditElement) currencyQuantityEditElement.value = value || '';
-                        break;
-                    default:
-                        console.warn(`No DOM updates defined for state key: ${key}`);
-                }
-            },
-            isProcessing() {
-                return Object.values(this.processingStates).some(state => state === true);
-            },
-
-            setProcessingState(state, value) {
-                this.processingStates[state] = value;
-                UIManager.updateProceedButtonState();
-            }
-        };
-        const APIService = {
-            async getRates(city) {
-
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
-
-                    const params = new URLSearchParams({
-                        action: 'get_city_rate',
-                        token: AppState.getState('token', 'mainState'),
-                        city: city
-                    });
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: params.toString()
-                    });
-                    if (!response.ok) throw new Error('Rate fetch failed');
-                    const data = await response.json();
-
-                    return data.products;
-                } catch (error) {
-                    console.error('API Error:', error);
-                    return [];
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            },
-
-            async addProduct(type, rowId) {
-
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.ADDING_PRODUCT, true);
-
-                    let params;
-                    if (type === 'add') {
-                        params = new URLSearchParams({
-                            action: 'add_remove_product',
-                            token: AppState.getState('token', 'mainState'),
-                            transaction: 'buy',
-                            currency: AppState.getState('selectedCurrency', 'addProductState'),
-                            product: AppState.getState('productType', 'addProductState'),
-                            amount: AppState.getState('currencyQuantity', 'addProductState'),
-                            function: 'add'
-                        });
-                    }
-                    if (type === 'remove') {
-                        params = new URLSearchParams({
-                            action: 'add_remove_product',
-                            token: AppState.getState('token', 'mainState'),
-                            transaction: 'buy',
-                            function: 'remove',
-                            rowID: rowId
-                        });
-                    }
-                    if (type === 'edit') {
-                        params = new URLSearchParams({
-                            action: 'save_amount',
-                            token: AppState.getState('token', 'mainState'),
-                            rowID: rowId,
-                            amount: currentAmount
-                        });
-                    }
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
-                    }
-                    const data = await response.json();
-                    return data.products;
-                } catch (error) {
-                    console.error('API Error:', error);
-                    return [];
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.ADDING_PRODUCT, false);
-                }
-            },
-            async editProduct(rowId, quantity) {
-
-
-                try {
-
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.EDITING_PRODUCT, true);
-
-                    const params = new URLSearchParams({
-                        action: 'save_amount',
-                        token: AppState.getState('token', 'mainState'),
-                        rowID: rowId,
-                        amount: quantity
-                    });
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
-                    }
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error('API Error:', error);
-                    return [];
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.EDITING_PRODUCT, false);
-                }
-            },
-            async getRatesMt(city) {
-
-                try {
-                    // AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
-
-                    const params = new URLSearchParams({
-                        action: 'get_city_rate_mt',
-                        token: AppState.getState('token', 'mainState'),
-                        city: city
-                    });
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: params.toString()
-                    });
-                    if (!response.ok) throw new Error('Rate fetch failed');
-                    const data = await response.json();
-
-                    return data;
-                } catch (error) {
-                    console.error('API Error:', error);
-                    return [];
-                } finally {
-                    // AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            },
-            async getDeliveryDetails() {
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
-                    const params = new URLSearchParams({
-                        action: 'get_delivery_details',
-                        token: AppState.getState('token', 'mainState'),
-                    });
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: params.toString()
-                    });
-                    if (!response.ok) throw new Error('Rate fetch failed');
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error('API Error:', error);
-                    return [];
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            },
-
-            async updateDeliveryDetails() {
-
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
-                    const params = new URLSearchParams({
-                        action: 'update_delivery_details',
-                        token: AppState.mainState.token, // Ensure `token` is defined
-                        dd_status: AppState.deliveryState.doorDelivery, // Ensure `doorDelivery` is defined
-                        landmark: AppState.deliveryState.ddLandMark,
-                        address: AppState.deliveryState.ddAddress,
-                        selected_area: AppState.deliveryState.branch
-                    });
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-                    const resp = await response.json();
-
-
-                    return resp;
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false)
-                }
-            },
-            async getContactDetails() {
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
-                    const params = new URLSearchParams({
-                        action: 'get_contact_details',
-                        token: AppState.mainState.token
-                    });
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-
-                    }
-
-                    const resp = await response.json();
-
-                    return resp
-
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            },
-            async updateContactDetails() {
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-
-                    const params = new URLSearchParams({
-                        action: 'save_contact_details',
-                        token: AppState.mainState.token,
-                        full_name: AppState.contactData.name,
-                        email: AppState.contactData.email,
-                        travel_date: AppState.contactData.travelDate,
-                        purpose: AppState.contactData.travelPurpose,
-                    });
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-
-                    }
-
-                    const resp = await response.json();
-
-                    return resp
-
-                } catch (error) {
-                    console.log(error)
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false)
-                }
-            },
-            async sendOtp(otpMode, countryCode, mobNumber) {
-
-                try {
-
-                    const params = new URLSearchParams({
-                        action: 'send_otp',
-                        token: AppState.mainState.token,
-                        country_code: countryCode,
-                        mobile: mobNumber,
-                        mode: otpMode
-                    });
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-                    const resp = await response.json(); // Use await to handle the promise returned by response.json()
-                    return resp.status;
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                    // location.href='error.html'
-                }
-
-            },
-            async verifyOtp(fetchOtp, aff_token) {
-                try {
-                    const params = new URLSearchParams({
-                        action: 'check_otp',
-                        token: AppState.mainState.token,
-                        otp: fetchOtp,
-                        aff_token: aff_token
-                    });
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params.toString(),
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-                    const resp = await response.json(); // Use await to handle the promise returned by response.json()
-
-                    return resp;
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                    // location.href='error.html'
-                }
-            },
-            async getSummaryDetails() {
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                    const params = new URLSearchParams({
-                        action: 'summary',
-                        token: AppState.getState('token', 'mainState')
-                    });
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: params.toString()
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                    const data = await response.json();
-                    return data;
-
-                } catch (error) {
-                    console.error('Error fetching summary:', error);
-                    window.location.href = '/error.html';
-                    return null;
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            },
-            async getUserIP() {
-                try {
-                    const response = await fetch('https://api.ipify.org?format=json');
-                    const data = await response.json();
-                    return data.ip;
-                } catch (error) {
-                    console.error('Error fetching user IP:', error);
-                    return null;
-                }
-            },
-            async placeOrder() {
-                console.log('placing order');
-
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                    const userIP = await this.getUserIP();
-                    if (!userIP) throw new Error("Could not retrieve user IP address.");
-
-                    const params = new URLSearchParams({
-                        action: 'create_order',
-                        token: AppState.getState('token', 'mainState'),
-                        userip: userIP
-                    });
-
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: params.toString()
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                    const data = await response.json();
-
-                    return data;
-
-                } catch (error) {
-                    console.error('Error placing order:', error);
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            }
-
-
-        };
-        const UIManager = {
-            elements: {},
-            dropdownInstances: {},
-            async init(orderType) {
-                this.cacheStaticElements();
-                if (orderType === CONSTANTS.ORDER_TYPES.moneyTransfer) {
-
-                    let moneyTransferTemplate = await TemplateCache.get(CONSTANTS.TEMPLATE_NAMES.MONEYTRANSFER_CONTAINER);
-                    console.log(this.elements.templateContainer)
-                    this.elements.templateContainer.innerHTML = moneyTransferTemplate;
-                    this.cacheMoneyTransferElements();
-                    await this.loadMoneyTransferData();
-                    this.setupMoneyTransferListeners();
-
-                } else if (orderType === CONSTANTS.ORDER_TYPES.forexTransfer) {
-
-
-                    let forexContainer = await TemplateCache.get(CONSTANTS.TEMPLATE_NAMES.FOREX_CONTAINER);
-                    this.elements.templateContainer.innerHTML = forexContainer;
-                    this.cacheForexElements();
-                    await this.loadForexData();
-                    this.setupForexListeners();
-                }
-            },
-            cacheStaticElements() {
-                this.elements = {
-                    templateMainContainer: document.querySelector('#containerWholeMain'),
-                    templateContainer: document.querySelector('#templateContainer'),
-                    backBtn: document.querySelector('#backBtn'),
-                }
-                if (this.elements.backBtn) {
-                    this.elements.backBtn.addEventListener('click', () => this.handleBackBtn());
-                }
-            },
-            cacheForexElements() {
-                this.elements = {
-                    ...this.elements,
-                    addCurrencyBtn: document.querySelector('#addCurrencyCardBtn'),
-                    addForexBtn: document.querySelector('#addForexCardBtn'),
-                    bottomSheetMain: document.querySelector('.bottomSheetMain'),
-                    bottomSheet: document.querySelector('.bottomSheet'),
-                    nextBtn: document.querySelector('#proceedBtn'),
-                    cartTotal: document.querySelector('#cartTotal')
-                }
-                console.log("Next button cached:", this.elements.nextBtn); // Add this line
-            },
-            cacheMoneyTransferElements() {
-                this.elements = {
-
-                }
-            },
-            setupForexListeners() {
-                this.elements.addCurrencyBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.currency, 'addProduct'));
-                this.elements.addForexBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.forexCard, 'addProduct'));
-
-                // Log before attaching event
-                console.log("Setting up next button listener, button:", this.elements.nextBtn);
-
-                this.assignNextButton(this.elements.nextBtn);
-            },
-            setupMoneyTransferListeners() {
-
-            },
-            setupAddBottomSheetListeners(type) {
-                const closeButton = document.querySelector('#closeBottomSheet');
-                const addProductBtn = document.querySelector('#addProductBtn');
-                if (closeButton) {
-                    closeButton.addEventListener('click', () => this.closeBottomSheet());
-                } else {
-                    console.warn('Close button not found in the bottom sheet');
-                }
-                const currencyQuantityInput = document.querySelector('#currencyQuantity');
-                currencyQuantityInput.addEventListener('input', (e) => {
-                    AppState.setState('currencyQuantity', e.target.value, 'addProductState')
-                })
-                addProductBtn.addEventListener('click', async () => {
-                    const data = await APIService.addProduct('add');
-                    calculations.processCardData(data);
-                    this.closeBottomSheet()
-                })
-                this.initializeAddCurrencyDropdown(type)
-
-
-            },
-            setupEditBottomSheetListeners(rowID) {
-                const closeButton = document.querySelector('#closeBottomSheet');
-                const editProductBtn = document.querySelector('#editProductBtn');
-                const editCurrencyQuantityInput = document.querySelector('#editCurrencyQuantity');
-                if (closeButton) {
-                    closeButton.addEventListener('click', () => this.closeBottomSheet());
-                }
-                if (editCurrencyQuantityInput) {
-                    editCurrencyQuantityInput.addEventListener('input', (e) => {
-                        AppState.setState('currencyQuantityEdit', e.target.value, 'editProductState');
-                    });
-                }
-                if (editProductBtn) {
-                    editProductBtn.addEventListener('click', async () => {
-                        const response = await APIService.editProduct(rowID, AppState.getState('currencyQuantityEdit', 'editProductState'));
-
-                        if (response.status) {
-                            const clickedCard = AppState.cardDataState.find((item) => item.rowID === rowID);
-                            if (clickedCard) {
-                                clickedCard.amount = AppState.getState('currencyQuantityEdit', 'editProductState');
-                                clickedCard.totalINR = AppState.getState('exchangeRateEdit', 'editProductState');
-                            }
-
-                            calculations.processCardData(AppState.cardDataState);
-                            this.closeBottomSheet();
-
-                        } else {
-                            console.error('Failed to update the product.');
-                        }
-                    });
-                }
-            },
-
-
-            async loadForexData() {
-
-                const rates = await APIService.getRates(AppState.getState('currentCity', 'mainState'));
-
-                calculations.processCardData(rates);
-                AppState.nextBtnState.active = true;
-            },
-            async loadMoneyTransferData() {
-                const data = await APIService.getRatesMt(AppState.getState('currentCity', 'mainState'));
-
-                UIManager.renderCardsMt(data.store_list)
-
-            },
-            initializeAddCurrencyDropdown(type) {
-                const cachedItems = DropdownCache.getCache(type);
-                const dropdownList = document.querySelector('#currencyDropDownList');
-                if (!dropdownList) return;
-                const previousInstance = this.dropdownInstances[type];
-                const previousSelectedValue = previousInstance?.state.selectedValue || null;
-                dropdownList.innerHTML = '';
-                cachedItems.forEach(item => {
-                    dropdownList.appendChild(item.cloneNode(true));
-                });
-                this.dropdownInstances[type] = Dropdown.init('cardCurrency', {
-                    searchable: true,
-                    customSelected: (item) => {
-                        const value = item.getAttribute('value');
-                        return ` <div class="custom-selected-item"> <span class="custom-value">${value}</span> </div> `;
-                    },
-                    onSelect: (value) => {
-                        AppState.setState('selectedCurrency', value, 'addProductState');
-                    }
-                });
-            },
-
-
-            async openBottomSheet(type, mode, rowId = null) {
-                this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
-                
-                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-                this.elements.bottomSheetMain.style.height = `${viewportHeight}px`;
-                
-                document.body.classList.add('no-scroll'); // Disable background scrolling
-
-
-
-                if (!type) {
-                    this.closeBottomSheet();
-                    return;
-                }
-                
-                
-                this.currentBottomSheetMode = this.currentBottomSheetMode || null;
-                this.currentBottomSheetType = this.currentBottomSheetType || null;
-                this.currentBottomSheetRowId = this.currentBottomSheetRowId || null;
-
-                if (mode === this.currentBottomSheetMode && type === this.currentBottomSheetType && rowId === this.currentBottomSheetRowId) {
-                    this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
-                    setTimeout(() => {
-                        document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
+            <!-- hero section contents start -->
+
+            
+            <section class="mainSection  w-full flex justify-center items-center  relative">
+                <div
+                    class=" flex w-full flex-col customMd:flex-row heroMain px-5 sm:px-12 md:px-24 py-5 relative justify-center  sm:justify-between customMd:pt-16 md:pt-16">
+                    <div class="w-full md:w-6/12 md:pr-4 widgetContainer">
+                        <!--<h1 class="text-[1.9rem] md:text-headingCustom text-black font-bold tracking-tight">For<span class="text-primary-blue">e</span><span class="text-primary-red">x</span> & Money Transfers..-->
+                        <!--    <br>Extra simple, <span class="text-primary-blue">e</span><span class="text-primary-red">x</span>tra-->
+                        <!--    savings-->
+                        <!--</h1>-->
+                        <h1 class="text-[1.6rem] xs:text-[1.9rem] md:text-[2.4rem] md:leading-[3rem] text-black font-bold tracking-tight">For<span class="text-primary-blue">e</span><span class="text-primary-red">x</span> & Money Transfers..
+                            <br>Extra simple, <span class="text-primary-blue">e</span><span class="text-primary-red">x</span>tra
+                            savings
+                        </h1>
+                        <p class="text-opacity-60 sm:text-opacity-100 text-black mt-3 sm:text-sm sm:w-11/12">Get the best exchange rates on currency, forex cards, and money transfers from India. Fast, easy, and trusted RBI-authorized partners!</p>
+                            <div class="mt-10  flex-col gap-2 hidden sm:flex">
+                                <div class="flex gap-8">
+                                    <div class="flex flex-col gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                            <path d="M17.0464 9.37088C16.8739 8.77765 16.7866 8.1629 16.7871 7.54509C16.7871 3.94763 19.7035 1.03125 23.301 1.03125C26.8984 1.03125 29.8148 3.94763 29.8148 7.54509C29.8148 8.17978 29.7241 8.79328 29.5547 9.37322" stroke="#0E51A0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M10.3197 14.3221H36.2821M10.3197 9.89172H36.2821M35.3291 14.9178V9.89172H11.2728V14.9178C11.2728 15.8929 10.6948 16.7675 9.80814 17.1736C7.77433 18.1049 6.36133 20.1572 6.36133 22.5405V42.391C6.36133 44.9192 8.4108 46.9687 10.939 46.9687H35.6629C38.191 46.9687 40.2406 44.9193 40.2406 42.391V22.5405C40.2406 20.1572 38.8276 18.1049 36.7938 17.1736C35.9071 16.7675 35.3291 15.8929 35.3291 14.9178Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M35.1794 46.9687H24.3195C23.8017 46.9687 23.382 46.549 23.382 46.0312V43.2631C23.382 42.7453 23.8017 42.3256 24.3195 42.3256H35.1794C35.6972 42.3256 36.1169 42.7453 36.1169 43.2631V46.0312C36.1169 46.549 35.6971 46.9687 35.1794 46.9687ZM33.3482 42.3256H22.4883C21.9705 42.3256 21.5508 41.9058 21.5508 41.3881V38.6199C21.5508 38.1021 21.9705 37.6824 22.4883 37.6824H33.3482C33.866 37.6824 34.2857 38.1021 34.2857 38.6199V41.3881C34.2857 41.9058 33.866 42.3256 33.3482 42.3256ZM35.1794 37.6823H24.3195C23.8017 37.6823 23.382 37.2626 23.382 36.7448V33.9767C23.382 33.4589 23.8017 33.0392 24.3195 33.0392H35.1794C35.6972 33.0392 36.1169 33.4589 36.1169 33.9767V36.7448C36.1169 37.2626 35.6971 37.6823 35.1794 37.6823ZM33.3482 33.0392H22.4883C21.9705 33.0392 21.5508 32.6194 21.5508 32.1017V29.3335C21.5508 28.8157 21.9705 28.396 22.4883 28.396H33.3482C33.866 28.396 34.2857 28.8157 34.2857 29.3335V32.1017C34.2857 32.6194 33.866 33.0392 33.3482 33.0392Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M19.8282 21.204H22.6242M21.2262 22.602V19.806M38.8417 5.31279H41.6376M40.2396 6.7107V3.91479M21.4259 38.5583L14.1802 46.6476C13.8348 47.0333 13.2421 47.0659 12.8564 46.7205L10.7945 44.8735C10.4088 44.528 10.3761 43.9354 10.7216 43.5497L17.9673 35.4604C18.3127 35.0747 18.9054 35.042 19.2911 35.3875L21.353 37.2345C21.7387 37.5799 21.7714 38.1727 21.4259 38.5583Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                          </svg>
+    
+                                          <p class="text-xl w-full font-bold" style="word-wrap: break-word;background: linear-gradient(329deg, #0E51A0 -43.1%, #E31D1C 144.49%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">Save More</p>
+                                          <span class="text-black/60 text-sm font-normal  leading-normal">5%+ better than <br/>market rates.</span>
+    
+    
+    
+                                    </div>
+    
+                                    <div class="flex flex-col gap-2">
+                                        
+    
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                            <path d="M46.9689 24H37.1239C34.6658 24 32.673 22.0072 32.673 19.5491V12.5632M42.6802 29.7184H46.9689M3.89062 29.7184H8.17941" stroke="#0E51A0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M41.2504 35.4367H46.9688V24L41.2504 12.5632H26.8592M26.8592 12.5632V35.1066M26.8592 12.5632V6.84485H1.03125C1.03125 10.0031 3.59147 12.5632 6.74963 12.5632H15.3272" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M18.1866 18.2816H9.609C6.45084 18.2816 3.89062 15.7214 3.89062 12.5632V11.7982V35.4366H9.405M18.3082 35.4367H32.3013" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M6.75 17.5166V18.2816C6.75 21.4398 9.31022 24 12.4684 24H21.0459" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M36.9607 41.1551C39.3293 41.1551 41.2494 39.2349 41.2494 36.8663C41.2494 34.4977 39.3293 32.5775 36.9607 32.5775C34.592 32.5775 32.6719 34.4977 32.6719 36.8663C32.6719 39.2349 34.592 41.1551 36.9607 41.1551Z" stroke="#0E51A0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M13.8982 41.1551C16.2668 41.1551 18.1869 39.2349 18.1869 36.8663C18.1869 34.4977 16.2668 32.5775 13.8982 32.5775C11.5295 32.5775 9.60938 34.4977 9.60938 36.8663C9.60938 39.2349 11.5295 41.1551 13.8982 41.1551Z" stroke="#0E51A0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                          </svg>
+    
+                                          <p class="text-xl w-full font-bold" style="word-wrap: break-word;background: linear-gradient(329deg, #0E51A0 -43.1%, #E31D1C 144.49%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">Fast Credit</p>
+                                          <span class="text-black/60 text-sm font-normal  leading-normal">Credit/Delivery in <br/>48 working hours.</span>
+    
+    
+    
+                                    </div>
+    
+                                    <div class="flex flex-col gap-2">
+                                        
+    
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                            <g clip-path="url(#clip0_1947_23067)">
+                                              <path d="M19.7252 37.8613L32.3329 37.8868L32.6159 37.8874C33.955 37.8901 35.0384 36.8069 35.0357 35.4682C35.0329 34.1293 33.9452 33.0418 32.606 33.0391L33.4344 33.0408C34.7735 33.0435 35.8569 31.9603 35.8542 30.6216C35.8515 29.2827 34.7637 28.1952 33.4246 28.1925L34.4601 28.1946C35.7992 28.1973 36.8826 27.1141 36.8799 25.7753C36.8772 24.4364 35.7894 23.3489 34.4503 23.3462C35.7894 23.3489 36.8728 22.2657 36.8701 20.927C36.8673 19.5881 35.7796 18.5006 34.4404 18.4979L32.2389 18.4934L25.4688 18.4797M17.4811 20.0695L10.0938 27.6109M29.6581 33.033L33.43 33.0407M29.6482 28.1847L33.4202 28.1923M29.6385 23.3364L34.5384 23.3463" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                              <path d="M26.4779 10.2719L20.3095 13.9428C18.5446 15.0079 17.5247 16.9703 17.6652 19.0309L18.1199 25.6999C18.2317 27.3404 19.7591 28.5154 21.3718 28.2015C22.7459 27.9342 23.6895 26.6685 23.5546 25.2739L23.1107 20.6852L26.4489 17.1999" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                              <path d="M9.29561 10.0569L10.7626 11.5236M5.42383 19.4398L7.49439 19.444M18.6806 6.18604L18.6849 8.25613" stroke="#0E51A0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                              <path d="M1.03125 34.39L8.48051 26.9428L21.0528 39.5186L13.6035 46.9658L1.03125 34.39Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                              <path d="M26.2148 9.21375L34.3949 1.036L46.9671 13.6118L38.7871 21.7895L26.2148 9.21375Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                              <clipPath id="clip0_1947_23067">
+                                                <rect width="48" height="48" fill="white"/>
+                                              </clipPath>
+                                            </defs>
+                                          </svg>
+    
+    
+                                          <p class="text-xl w-full font-bold" style="word-wrap: break-word;background: linear-gradient(329deg, #0E51A0 -43.1%, #E31D1C 144.49%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">Expert Help</p>
+                                          <span class="text-black/60 text-sm font-normal  leading-normal">Professional support,<br/>every step</span>
+    
+    
+    
+                                    </div>
+    
+                                    
+                                </div>
+                            </div>
+
+
+                         <?php include $fold .'includesv2/reviewScore.php'; ?>
                         
-                    }, 100);
-                    return;
-                } else {
-                    this.elements.bottomSheet.innerHTML = ''
-                }
-                this.currentBottomSheetMode = mode;
-                this.currentBottomSheetType = type;
-                this.currentBottomSheetRowId = rowId;
+                    </div>
+                    <div
+                        class="w-full  max-w-xl 2xl:items-center md:w-6/12 flex items-end sm:justify-end mt-8 customMd:mt-0 flex-col">
+                        
+                        
+                        <?php include $fold .'includesv2/widget.php'; ?>
+                        
+                        
+                        <?php include $fold .'includesv2/sellCurrency.php'; ?>
+                        
+                        
+                    </div>
+                    <div class="hidden md:flex absolute right-0 top-6" style="width: 54%;max-height: 46rem;;">
+                        <svg class="ml-8" width="100%" style="aspect-ratio: 1/1.25;opacity: 0.4;" viewBox="0 0 741 883" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M785.5 441.5C785.5 631.486 631.486 785.5 441.5 785.5C251.514 785.5 97.5 631.486 97.5 441.5C97.5 251.514 251.514 97.5 441.5 97.5C631.486 97.5 785.5 251.514 785.5 441.5Z"
+                                stroke="black" stroke-opacity="0.2" />
+                            <path
+                                d="M684.5 441C684.5 574.929 575.929 683.5 442 683.5C308.071 683.5 199.5 574.929 199.5 441C199.5 307.071 308.071 198.5 442 198.5C575.929 198.5 684.5 307.071 684.5 441Z"
+                                stroke="black" stroke-opacity="0.2" />
+                            <path
+                                d="M882.5 441.5C882.5 685.058 685.058 882.5 441.5 882.5C197.942 882.5 0.5 685.058 0.5 441.5C0.5 197.942 197.942 0.5 441.5 0.5C685.058 0.5 882.5 197.942 882.5 441.5Z"
+                                stroke="black" stroke-opacity="0.2" />
+                            <rect x="0.5" y="247.5" width="64" height="64" rx="32" fill="white" />
+                            <rect x="1.18085" y="248.181" width="62.6383" height="62.6383" rx="31.3191" stroke="black"
+                                stroke-opacity="0.1" stroke-width="1.3617" />
+                            <path
+                                d="M41.4368 284.606C41.4348 286.163 40.8154 287.656 39.7146 288.757C38.6137 289.857 37.1213 290.477 35.5645 290.479H33.2666V292.777C33.2666 292.98 33.1859 293.175 33.0422 293.318C32.8986 293.462 32.7038 293.543 32.5006 293.543C32.2975 293.543 32.1027 293.462 31.959 293.318C31.8154 293.175 31.7347 292.98 31.7347 292.777V290.479H29.4368C27.88 290.477 26.3875 289.857 25.2867 288.757C24.1858 287.656 23.5665 286.163 23.5645 284.606C23.5645 284.403 23.6452 284.208 23.7888 284.065C23.9324 283.921 24.1273 283.84 24.3304 283.84C24.5336 283.84 24.7284 283.921 24.872 284.065C25.0157 284.208 25.0964 284.403 25.0964 284.606C25.0964 285.758 25.5537 286.862 26.3676 287.676C27.1816 288.49 28.2856 288.947 29.4368 288.947H35.5645C36.7156 288.947 37.8196 288.49 38.6336 287.676C39.4476 286.862 39.9049 285.758 39.9049 284.606C39.9049 283.455 39.4476 282.351 38.6336 281.537C37.8196 280.723 36.7156 280.266 35.5645 280.266H30.4581C28.9006 280.266 27.407 279.647 26.3057 278.546C25.2044 277.445 24.5857 275.951 24.5857 274.394C24.5857 272.836 25.2044 271.343 26.3057 270.241C27.407 269.14 28.9006 268.521 30.4581 268.521H31.7347V266.223C31.7347 266.02 31.8154 265.826 31.959 265.682C32.1027 265.538 32.2975 265.458 32.5006 265.458C32.7038 265.458 32.8986 265.538 33.0422 265.682C33.1859 265.826 33.2666 266.02 33.2666 266.223V268.521H34.5432C36.1 268.523 37.5925 269.143 38.6933 270.244C39.7941 271.344 40.4135 272.837 40.4155 274.394C40.4155 274.597 40.3348 274.792 40.1912 274.935C40.0475 275.079 39.8527 275.16 39.6496 275.16C39.4464 275.16 39.2516 275.079 39.1079 274.935C38.9643 274.792 38.8836 274.597 38.8836 274.394C38.8836 273.243 38.4263 272.139 37.6123 271.325C36.7983 270.511 35.6943 270.053 34.5432 270.053H30.4581C29.3069 270.053 28.2029 270.511 27.3889 271.325C26.5749 272.139 26.1176 273.243 26.1176 274.394C26.1176 275.545 26.5749 276.649 27.3889 277.463C28.2029 278.277 29.3069 278.734 30.4581 278.734H35.5645C37.1213 278.736 38.6137 279.355 39.7146 280.456C40.8154 281.557 41.4348 283.05 41.4368 284.606Z"
+                                fill="#0E51A0" fill-opacity="0.6" />
+                            <rect x="143.5" y="754.5" width="64" height="64" rx="32" fill="white" />
+                            <rect x="144.181" y="755.181" width="62.6383" height="62.6383" rx="31.3191" stroke="black"
+                                stroke-opacity="0.1" stroke-width="1.3617" />
+                            <path
+                                d="M184.776 779.691C184.776 779.895 184.696 780.089 184.552 780.233C184.408 780.377 184.214 780.457 184.011 780.457H179.631C179.657 780.712 179.67 780.967 179.67 781.223C179.668 783.186 178.887 785.068 177.499 786.456C176.111 787.844 174.229 788.625 172.266 788.628H169.651L179.415 797.508C179.565 797.644 179.655 797.835 179.664 798.038C179.674 798.241 179.603 798.44 179.466 798.59C179.329 798.74 179.138 798.83 178.935 798.84C178.732 798.849 178.534 798.778 178.383 798.641L167.149 788.428C167.034 788.324 166.954 788.187 166.919 788.036C166.883 787.885 166.895 787.727 166.951 787.583C167.007 787.438 167.106 787.314 167.235 787.227C167.363 787.14 167.515 787.094 167.67 787.096H172.266C173.823 787.094 175.315 786.474 176.416 785.373C177.517 784.273 178.136 782.78 178.138 781.223C178.137 780.967 178.12 780.711 178.087 780.457H167.67C167.467 780.457 167.272 780.377 167.128 780.233C166.985 780.089 166.904 779.895 166.904 779.691C166.904 779.488 166.985 779.293 167.128 779.15C167.272 779.006 167.467 778.925 167.67 778.925H177.67C177.218 777.866 176.465 776.963 175.504 776.327C174.544 775.692 173.418 775.352 172.266 775.351H167.67C167.467 775.351 167.272 775.27 167.128 775.127C166.985 774.983 166.904 774.788 166.904 774.585C166.904 774.382 166.985 774.187 167.128 774.043C167.272 773.9 167.467 773.819 167.67 773.819H184.011C184.214 773.819 184.408 773.9 184.552 774.043C184.696 774.187 184.776 774.382 184.776 774.585C184.776 774.788 184.696 774.983 184.552 775.127C184.408 775.27 184.214 775.351 184.011 775.351H176.768C177.953 776.261 178.837 777.506 179.304 778.925H184.011C184.214 778.925 184.408 779.006 184.552 779.15C184.696 779.293 184.776 779.488 184.776 779.691Z"
+                                fill="#0E51A0" fill-opacity="0.6" />
+                            <rect x="625.5" y="789.5" width="64" height="64" rx="32" fill="white" />
+                            <rect x="626.181" y="790.181" width="62.6383" height="62.6383" rx="31.3191" stroke="black"
+                                stroke-opacity="0.1" stroke-width="1.3617" />
+                            <path
+                                d="M664.538 829.201C664.605 829.276 664.657 829.364 664.691 829.459C664.724 829.554 664.738 829.655 664.733 829.755C664.727 829.856 664.702 829.954 664.658 830.045C664.614 830.136 664.553 830.217 664.478 830.284C663.094 831.521 661.391 832.347 659.563 832.668C657.734 832.989 655.852 832.792 654.129 832.099C652.407 831.407 650.912 830.247 649.814 828.75C648.715 827.253 648.057 825.479 647.914 823.628H645.585C645.381 823.628 645.187 823.547 645.043 823.403C644.899 823.26 644.819 823.065 644.819 822.862C644.819 822.659 644.899 822.464 645.043 822.32C645.187 822.177 645.381 822.096 645.585 822.096H647.882V819.543H645.585C645.381 819.543 645.187 819.462 645.043 819.318C644.899 819.175 644.819 818.98 644.819 818.777C644.819 818.574 644.899 818.379 645.043 818.235C645.187 818.091 645.381 818.011 645.585 818.011H647.914C648.057 816.16 648.715 814.385 649.814 812.888C650.912 811.391 652.407 810.231 654.129 809.539C655.852 808.847 657.734 808.65 659.563 808.971C661.391 809.292 663.094 810.117 664.478 811.355C664.631 811.49 664.723 811.68 664.735 811.884C664.747 812.087 664.677 812.287 664.542 812.44C664.407 812.592 664.216 812.684 664.013 812.696C663.809 812.708 663.609 812.639 663.457 812.503C662.294 811.463 660.864 810.767 659.328 810.492C657.792 810.216 656.21 810.373 654.758 810.944C653.306 811.515 652.041 812.478 651.104 813.726C650.167 814.973 649.595 816.457 649.451 818.011H657.84C658.043 818.011 658.238 818.091 658.381 818.235C658.525 818.379 658.606 818.574 658.606 818.777C658.606 818.98 658.525 819.175 658.381 819.318C658.238 819.462 658.043 819.543 657.84 819.543H649.414V822.096H655.797C656 822.096 656.195 822.177 656.339 822.32C656.483 822.464 656.563 822.659 656.563 822.862C656.563 823.065 656.483 823.26 656.339 823.403C656.195 823.547 656 823.628 655.797 823.628H649.451C649.593 825.182 650.165 826.667 651.101 827.916C652.038 829.164 653.303 830.129 654.755 830.7C656.207 831.272 657.79 831.43 659.327 831.154C660.863 830.879 662.293 830.183 663.457 829.143C663.608 829.007 663.807 828.937 664.01 828.948C664.212 828.959 664.403 829.05 664.538 829.201Z"
+                                fill="#0E51A0" fill-opacity="0.6" />
+                        </svg>
 
-                if (mode === 'editProduct') {
-                    this.elements.bottomSheet.style = 'height:22rem;'
-
-                    this.elements.bottomSheet.innerHTML = `
-       
-                <div class="w-full h-8 px-4 animate-pulse">
-                    <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                    </div>
                 </div>
-                <div class="w-full px-4 mt-6 space-y-4 animate-pulse">
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                </div>
-            `;
 
-                } else if (mode === 'addProduct') {
-                    this.elements.bottomSheet.style = 'height:30rem;'
-
-                    this.elements.bottomSheet.innerHTML = `
-       
-                <div class="w-full h-8 px-4 animate-pulse">
-                    <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                </div>
-                <div class="w-full px-4 mt-6 space-y-4 animate-pulse">
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                    <div class="h-10 bg-gray-200 rounded"></div>
-                </div>
-            `;
-                }
-
-
-                this.elements.bottomSheetMain.classList.add('bottomSheetMainVisible');
-                setTimeout(() => {
-                    document.querySelector('.bottomSheet')?.classList.add('popBottomSheet');
-                    
-                }, 100);
-
-
-                const templateName = mode === 'editProduct' ? 'bottomSheetEdit' : 'bottomSheet';
-                if (!this.cachedTemplate || this.currentTemplate !== templateName) {
-                    this.cachedTemplate = await TemplateCache.get(templateName);
-                    this.currentTemplate = templateName;
-                }
-                console.log(this.cachedTemplate);
-                this.elements.bottomSheet.innerHTML = this.cachedTemplate;
-
-                if (mode === 'editProduct') {
-                    const clickedCard = AppState.cardDataState.find((item) => item.rowID === rowId);
-                    let quantity;
-                    if (clickedCard) {
-                        AppState.setState('selectedCurrencyEdit', clickedCard.currency, 'editProductState');
-                        AppState.setState('currencyQuantityEdit', clickedCard.amount, 'editProductState');
-                        AppState.setState('exchangeRateEdit', clickedCard.totalINR, 'editProductState');
-                        AppState.setState('currencyRateEdit', clickedCard.rate, 'editProductState');
-                    }
-                    this.setupEditBottomSheetListeners(rowId);
-                } else {
-                    this.setupAddBottomSheetListeners(type);
-                    const defaultCurrency = document.querySelector('#currencyDropDownList li[selected]')?.getAttribute('value') || 'USD';
-                    const defaultQuantity = 1000;
-                    AppState.setState('productType', type, 'addProductState');
-                    AppState.setState('selectedCurrency', defaultCurrency, 'addProductState');
-                    AppState.setState('currencyQuantity', defaultQuantity, 'addProductState');
-                }
-
-            },
-
-
-
-
-            closeBottomSheet() {
-                const bottomSheet = document.querySelector('.bottomSheet');
-                document.body.classList.remove('no-scroll'); // Disable background scrolling
-                if (bottomSheet) {
-                    bottomSheet.classList.remove('popBottomSheet');
-                    setTimeout(() => {
-                        this.elements.bottomSheetMain.classList.remove('bottomSheetMainVisible');
-                    }, 300);
-                }
-            },
-            async renderCards(data) {
-                const container = document.getElementById('cardContainer');
-                if (!container || !data?.length) return;
-                try {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                    const template = await TemplateCache.get('getRatesCard');
-                    const fragment = document.createDocumentFragment();
-                    data.forEach((item, index) => {
-                        const div = document.createElement('div');
-                        div.className = 'mb-4';
-
-                        const cardData = {
-                            productCount: item.productNumber,
-                            currencyNameExpanded: currencyNames[item.currency],
-                            currencyNameShort: item.currency,
-                            cityName: AppState.getState('currentCity', 'mainState'),
-                            currencyRate: item.rate.toFixed(2),
-                            currencyQuantity: item.amount,
-                            exchangeRate: this.formatAmount(item.totalINR)
-                        };
-
-                        let cardHTML = template.replace(/\{\{(\w+)\}\}/g, (match, key) => cardData[key] || '');
-                        div.innerHTML = cardHTML;
-
-                        if (!item.allowDelete) {
-                            const deleteButton = div.querySelector('.deleteProduct');
-
-                            if (deleteButton) {
-                                deleteButton.parentElement.removeChild(deleteButton); // Remove delete button
-                            }
-                        }
-                        const editButton = div.querySelector('.editProduct');
-                        if (editButton) {
-                            editButton.addEventListener('click', async () => await UIManager.handleEditProduct(item));
-                        }
-                        const deleteButton = div.querySelector('.deleteProduct');
-                        if (deleteButton) {
-                            deleteButton.addEventListener('click', async () => await UIManager.handleDeleteProduct(item));
-                        }
-                        fragment.appendChild(div.firstChild);
-                    });
-                    container.innerHTML = '';
-                    container.appendChild(fragment);
-                } catch (error) {
-                    console.error('Card render error:', error);
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-            },
-            async renderCardsMt(data) {
-                const container = document.getElementById('mtcardContainer');
-                if (!container || !data?.length) return;
-
-                try {
-                    // Get the template
-                    const template = await TemplateCache.get('getRatesCardMt');
-                    const fragment = document.createDocumentFragment();
-
-                    data.forEach((item) => {
-                        const div = document.createElement('div');
-                        div.className = 'mb-4';
-
-                        // Create a temporary container with the template HTML
-                        let cardHTML = template;
-
-                        // Create the card element
-                        div.innerHTML = cardHTML;
-                        const card = div.firstElementChild;
-
-                        // Update card elements directly
-                        const bankLogo = card.querySelector('.bank-logo');
-                        if (bankLogo) {
-                            bankLogo.src = `/assets/images/banklogos/${item.logo}.png`;
-                            bankLogo.alt = `${item.vendor_name} Logo`;
-                        }
-
-                        const bankName = card.querySelector('.bank-name');
-                        if (bankName) {
-                            bankName.textContent = item.vendor_name;
-                        }
-
-                        const supportedServices = card.querySelector('.supported-services');
-                        if (supportedServices) {
-                            let services = [];
-                            if (item.online_kyc === "1") services.push("Online KYC");
-                            if (item.pg === "1") services.push("Online Payment");
-                            if (item.zero_benf_bank_charge) services.push("Zero Beneficiary Bank Charges");
-                            supportedServices.textContent = services.join(" • ");
-                        }
-
-                        const bankCharges = card.querySelector('.bank-charges');
-                        if (bankCharges) {
-                            bankCharges.textContent = item.bank_charges === "0" ?
-                                "Free" :
-                                `₹ ${parseInt(item.bank_charges).toLocaleString('en-IN')}`;
-                        }
-
-                        const totalAmount = card.querySelector('.total-amount');
-                        if (totalAmount) {
-                            totalAmount.textContent = `₹ ${parseInt(item.inr_total).toLocaleString('en-IN')}`;
-                        }
-
-                        // Add click handler for select button
-                        const selectButton = card.querySelector('.select-button');
-                        if (selectButton) {
-                            selectButton.addEventListener('click', () => {
-                                // Handle selection - you can add your selection logic here
-                                console.log(`Selected bank: ${item.vendor_name}`);
-                            });
-                        }
-
-                        // Add branches information if available
-                        if (item.branch_locations && item.branch_locations.length > 0) {
-                            const supportedServices = card.querySelector('.supported-services');
-                            if (supportedServices) {
-                                supportedServices.textContent += ` • ${item.branch_locations.length} Branches Available`;
-                            }
-                        }
-
-                        fragment.appendChild(card);
-                    });
-
-                    // Clear container and append new cards
-                    container.innerHTML = '';
-                    container.appendChild(fragment);
-
-                } catch (error) {
-                    console.error('Card render error:', error);
-                }
-            },
-            async updateCart(val) {
-
-                if (this.elements.cartTotal) {
-                    this.elements.cartTotal.textContent = this.formatAmount(val)
-                } else {
-                    console.log('no cart elemnt')
-                }
-
-            },
-            async handleEditProduct(product) {
-                this.openBottomSheet(product.productType, 'editProduct', product.rowID);
-            },
-            async handleDeleteProduct(product) {
-                const data = await APIService.addProduct('remove', product.rowID);
-                calculations.processCardData(data)
-            },
-            updateProceedButtonState() {
-
-                const proceedBtn = this.elements.nextBtn;
-                const backBtn = this.elements.backBtn;
-
-                const updateButtonState = (button, isDisabled) => {
-
-                    if (!button) return;
-
-                    if (isDisabled) {
-                        button.classList.add('opacity-50', 'cursor-not-allowed');
-                        button.disabled = true;
-                    } else {
-                        button.classList.remove('opacity-50', 'cursor-not-allowed');
-                        button.disabled = false;
-                    }
-                };
-
-                // If processing, disable both buttons
-                if (AppState.isProcessing()) {
-                    updateButtonState(proceedBtn, true);
-                    updateButtonState(backBtn, true);
-                    AppState.nextBtnState.active = false;
-                    return;
-                }
-
-                // Only check card data length on GET_RATES page
-                if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
-                    if (AppState.cardDataState.length > 0) {
-                        updateButtonState(proceedBtn, false);
-                        AppState.nextBtnState.active = true;
-                    } else {
-                        updateButtonState(proceedBtn, true);
-                        AppState.nextBtnState.active = false;
-                    }
-                } else {
-                    // For all other pages, next button should be enabled
-                    updateButtonState(proceedBtn, false);
-                    AppState.nextBtnState.active = true;
-                }
-
-                // Enable back button when not processing
-                updateButtonState(backBtn, false);
-            },
-
-            assignNextButton(element) {
-                // Clear state of previous next button if it exists
-                if (this.elements.nextBtn) {
-                    this.elements.nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    this.elements.nextBtn.disabled = false;
-                }
-
-                // Assign new next button
-                if (element) {
-                    this.elements.nextBtn = element;
-                    element.addEventListener('click', () => this.handleNextBtn());
-
-                    // Update the state of the new button based on current app state
-                    this.updateProceedButtonState();
-                } else {
-                    console.warn("No element provided for next button");
-                }
-            },
-            async handleNextBtn() {
-
-
-                if (!userCheck()) {
-                    if (loginManager.loginWidgetContainer) {
-                        loginManager.openOtpWidget()
-                    } else {
-                        let body = document.body;
-                        const template = await TemplateCache.get('loginWidget');
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = template;
-                        body.appendChild(tempDiv.firstElementChild);
-                        await this.initializeLoginWidget();
-                    }
-
-                    return
-                }
-                if (AppState.isProcessing()) {
-                    console.log('Processing in progress, please wait...');
-                    return;
-                }
-
-                if (!AppState.nextBtnState.active) {
-                    console.log('Please add at least one currency to proceed');
-                    return;
-                }
-
-                try {
-                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
-
-                        AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                        // Hide current content
-                        const getRatesContainer = document.querySelector('#getRatesContainer');
-                        if (getRatesContainer) getRatesContainer.style.display = 'none';
-
-                        // Load and append delivery details template
-                        const template = await TemplateCache.get('deliveryDetails');
-                        const deliverySection = document.createElement('div');
-                        deliverySection.id = 'deliveryDetailsSection';
-                        deliverySection.innerHTML = template;
-
-                        const sectionContainer = document.getElementById('sectionContainer');
-                        sectionContainer.appendChild(deliverySection);
-                        ProgressManager.updateProgress('CHOOSE_PROVIDER');
-
-                        // Update app state
-                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
-
-                        // Initialize any required components for delivery details
-                        await this.initializeDeliveryDetailsComponents();
-                        AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                        return
-                    }
-                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
-
-
-
-                        let ddLandMark = document.querySelector('#ddLandMark').value;
-                        let ddAddress = document.querySelector('#ddAddress').value;
-
-                        let branch = AppState.deliveryState.branch;
-
-                        AppState.setState('ddAddress', ddAddress, 'deliveryState');
-                        AppState.setState('ddLandMark', ddLandMark, 'deliveryState');
-
-
-                        if (!branch || branch === 'Select') {
-                            insertAlertBelowElement(document.querySelector('#cityDropDown'), 'Select a branch')
-                            return
-                        } else {
-                            removeAlertBelowElement(document.querySelector('#cityDropDown'))
-                        }
-                        // Simple validation
-
-
-                        if (AppState.deliveryState.doorDelivery) {
-                            if (!ddAddress || ddAddress.trim() === "") {
-                                insertAlertBelowElement(document.querySelector('#ddAddress'), 'Enter a valid address')
-                                return
-                            } else {
-                                removeAlertBelowElement(document.querySelector('#ddAddress'))
-                            }
-
-                            if (!ddLandMark || ddLandMark.trim() === "") {
-                                insertAlertBelowElement(document.querySelector('#ddLandMark'), 'Enter a valid landmark')
-                                return
-                            } else {
-                                removeAlertBelowElement(document.querySelector('#ddLandMark'))
-                            }
-                        }
-
-                        let status = await APIService.updateDeliveryDetails();
-
-                        if (status) {
-                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                            ProgressManager.updateProgress('CONTACT_DETAILS');
-                            // Hide current content
-                            const deliveryDetailsContainer = document.querySelector('#deliveryDetailsSection');
-                            if (deliveryDetailsContainer) deliveryDetailsContainer.style.display = 'none';
-
-                            // Load and append delivery details template
-                            const template = await TemplateCache.get('contactDetails');
-                            const contactSection = document.createElement('div');
-                            contactSection.id = 'contactDetailsSection';
-                            contactSection.innerHTML = template;
-
-                            const sectionContainer = document.getElementById('sectionContainer');
-                            const cartContainer = document.getElementById('cartSection')
-                            cartContainer.style.display = 'none'
-                            sectionContainer.classList.remove('md:w-2/3');
-                            sectionContainer.appendChild(contactSection);
-
-                            AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
-                            await this.initializeContactDetailsComponents()
-                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                        }
-                        return
-
-                    }
-                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
-
-
-                        if (!AppState.contactData.name || AppState.contactData.name.trim() === "") {
-                            insertAlertBelowElement(document.querySelector('#customerName'), 'Enter a valid name')
-                            return
-                        } else {
-                            removeAlertBelowElement(document.querySelector('#customerName'))
-                        }
-
-                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!AppState.contactData.email || AppState.contactData.email.trim() === "" || !emailRegex.test(AppState.contactData.email)) {
-                            insertAlertBelowElement(document.querySelector('#customerEmail'), 'Enter a valid email')
-                            return
-                        } else {
-                            removeAlertBelowElement(document.querySelector('#customerEmail'))
-                        }
-
-
-                        let response = await APIService.updateContactDetails()
-
-
-                        if (response.status) {
-                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                            ProgressManager.updateProgress('REVIEW_PAYMENT');
-                            // Hide current content
-                            const contactDetailsSection = document.querySelector('#contactDetailsSection');
-                            if (contactDetailsSection) contactDetailsSection.style.display = 'none';
-
-                            // Load and append delivery details template
-                            const template = await TemplateCache.get('summary');
-                            const summarySection = document.createElement('div');
-                            summarySection.id = 'summarySection';
-                            summarySection.innerHTML = template;
-
-                            sectionContainer.appendChild(summarySection);
-
-                            AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.REVIEW_PAYMENT;
-                            await this.initializeSummaryComponents()
-                            AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                        }
-
-                        return
-                    }
-                    if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
-                        let data = await APIService.placeOrder();
-                        console.log(data)
-                        if (data.status) {
-                            sessionStorage.setItem('orderId', data.orderID);
-                            sessionStorage.setItem('customerName', AppState.contactData.name);
-                            window.location.href = '/orderv2/Complete-KYC';
-                        }
-
-                        return
-                    }
-
-
-
-                } catch (error) {
-                    console.error('Error switching templates:', error);
-                    // Handle error appropriately
-                }
-            },
-
-            async initializeDeliveryDetailsComponents() {
-
-                let data = await APIService.getDeliveryDetails()
-
-                if (data) {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-
-                    const districtName = document.getElementById('districtName');
-                    if (districtName) {
-                        districtName.textContent = data.district || '';
-                    }
-
-                    const cities = data.areas;
-                    const dropdownList = document.querySelector('#cityDropDown').querySelector('.dropdownList');
-                    const templateItem = document.querySelector('#cityDropDown').querySelector('.dropdownItem');
-
-
-                    // Ensure the template item is hidden
-                    templateItem.style.display = 'none';
-
-                    templateItem.classList.remove('template')
-
-                    // Remove all existing items except the template
-                    dropdownList.querySelectorAll('.dropdownItem:not([value="template"])').forEach(item => item.remove());
-
-                    // Add an initial "Select" option with a null value
-                    const selectItem = templateItem.cloneNode(true);
-                    selectItem.style.display = 'flex'; // Make the cloned item visible
-                    selectItem.setAttribute('value', 'Select'); // Set value to an empty string (null equivalent)
-                    selectItem.querySelector('span').textContent = 'Select'; // Set the text to 'Select'
-                    selectItem.querySelector('svg').style.display = 'none'
-                    selectItem.setAttribute('selected', '')
-                    dropdownList.appendChild(selectItem); // Append the "Select" item to the dropdown
-
-                    // Populate the dropdown list with cities
-                    cities.forEach(city => {
-                        // Clone the template item
-                        const newItem = templateItem.cloneNode(true);
-                        newItem.style.display = 'flex'; // Make the cloned item visible
-                        newItem.setAttribute('value', city); // Set the value attribute
-                        newItem.querySelector('span').textContent = `${city}`; // Update city name
-
-                        // Append the new item to the dropdown list
-                        dropdownList.appendChild(newItem);
-                    });
-
-                    Dropdown.init('cityDropDown', {
-                        searchable: true,
-
-
-                        customSelected: (item) => {
-                            const value = item.getAttribute('value');
-                            return ` <div class="custom-selected-item"> <span class="custom-value">${value}</span> </div> `;
-                        },
-                        onSelect: (value) => {
-                            AppState.deliveryState.branch = value;
-                        }
-                    });
-
-
-                    document.getElementById('radio1').addEventListener('click', function() {
-                        AppState.deliveryState.doorDelivery = 1;
-                        UIManager.toggleRadio(this, 'radio2');
-
-                        // document.querySelector('#cartContent').style.display = 'block'
-                        // document.querySelector('#cartContentStorePickup').style.display = 'none'
-                    });
-
-                    document.getElementById('radio2').addEventListener('click', function() {
-                        AppState.deliveryState.doorDelivery = 0;
-                        UIManager.toggleRadio(this, 'radio1');
-                        // document.querySelector('#cartContent').style.display = 'none'
-                        // document.querySelector('#cartContentStorePickup').style.display = 'block'
-                    });
-
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-
-
-
-            },
-            toggleRadio(selected, other) {
-                selected.classList.add('selectedRadio');
-                selected.classList.remove('radio');
-                document.getElementById(other).classList.add('radio');
-                document.getElementById(other).classList.remove('selectedRadio');
-
-                // Show or hide the doorDeliveryDetails div with a smooth height transition
-                const doorDeliveryDetails = document.getElementById('doorDeliveryDetails');
-                if (selected.id === 'radio1') {
-                    doorDeliveryDetails.classList.add('show');
-                } else {
-                    doorDeliveryDetails.classList.remove('show');
-                }
-            },
-            async initializeContactDetailsComponents() {
-
-                let nextBtn = document.querySelector('#contactUpdateBtn');
-                this.assignNextButton(nextBtn);
-
-                let data = await APIService.getContactDetails()
-
-                if (data) {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                    this.nameInput = document.querySelector('#customerName');
-                    this.emailInput = document.querySelector('#customerEmail');
-                    this.mobileField = document.querySelector('#customerMobile');
-
-                    AppState.contactData.countryCode = data.country_code;
-                    AppState.contactData.email = data.customer_email;
-                    AppState.contactData.name = data.customer_name;
-                    AppState.contactData.mobile = data.mobile;
-
-
-
-                    AppState.contactData.uid = data.uid;
-
-                    this.nameInput.value = AppState.contactData.name;
-                    this.emailInput.value = AppState.contactData.email;
-                    this.mobileField.textContent = AppState.contactData.mobile;
-
-                    this.nameInput.addEventListener('input', (e) => {
-                        AppState.contactData.name = e.target.value;
-                    })
-
-                    this.emailInput.addEventListener('input', (e) => {
-                        AppState.contactData.email = e.target.value;
-                    })
-
-                    const script = document.createElement('script');
-                    script.src = 'orderv3/components/modules/datepicker.js';
-                    script.async = true;
-
-                    await new Promise((resolve, reject) => {
-                        script.onload = resolve;
-                        script.onerror = reject;
-                        document.head.appendChild(script);
-                    });
-
-
-                    // Initialize with callback
-                    window.initializeDatePicker({
-                        onSelect: (date) => {
-                            AppState.contactData.travelDate = window.getFormatedDate(date);
-                        }
-                    });
-
-
-
-                    Dropdown.init('purposeSelector', {
-                        searchable: false,
-                        onSelect: (value) => {
-                            this.updateKycList(value)
-                            AppState.contactData.travelPurpose = value;
-                        }
-                    });
-
-                    if (data.travel_date != "") {
-                        console.log('previous date available')
-                        console.log(data.travel_date)
-                        // AppState.contactData.travelDate = data.travel_date;
-                        // window.setPickerDate(new Date(data.travel_date));
-                        AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
-                    } else {
-                        console.log(' no previous date available')
-                        AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
-                    }
-                    if (data.travel_purpose != "") {
-                        AppState.contactData.travelPurpose = data.travel_purpose;
-                        Dropdown.setValue('purposeSelector', data.travel_purpose)
-                    } else {
-                        AppState.contactData.travelPurpose = Dropdown.getValue('purposeSelector').getAttribute('value')
-                    }
-
-                    this.updateKycList(Dropdown.getValue('purposeSelector').getAttribute('value'));
-
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-
-                }
-            },
-            updateKycList(value) {
-                const documentContainer = document.querySelector('#document-list');
-                documentContainer.innerHTML = ''
-                let docs = AppState.kycData[value]
-                console.log(docs)
-                docs.forEach((item, index) => {
-                    let kyc = document.createElement('p');
-                    kyc.className = 'text-black text-sm font-normal'
-                    kyc.textContent = `${index + 1}. ${item}`
-                    documentContainer.appendChild(kyc)
-                })
-            },
-            async initializeSummaryComponents() {
-
-                const placeOrderBtn = document.querySelector('#summaryConfirm');
-                this.assignNextButton(placeOrderBtn);
-
-                const summaryData = await APIService.getSummaryDetails();
-                if (!summaryData) return;
-
-                AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                // Get required elements when they're needed
-                const doorDeliveryElement = document.querySelector('#doorDeliveryData');
-                const paymentInfoText = document.querySelector('#paymentInfoText');
-                const deliveryFee = document.querySelector('#deliveryFee');
-                const totalAmount = document.querySelector('#totalAmnt');
-                const gst = document.querySelector('#gst');
-                const productList = document.getElementById('productList');
-
-
-                // Update UI based on delivery option
-                if (summaryData.delivery_opted === '0') {
-                    doorDeliveryElement.style.display = "none";
-                    paymentInfoText.innerHTML = `Visit store before <b>${summaryData.delivery_on}</b>. Full/partial payment required before store visit. Payment instructions will be shared on your registered email after KYC verification.`;
-                } else {
-                    deliveryFee.innerHTML = '₹' + summaryData.door_fee;
-                    paymentInfoText.textContent = 'Full payment required before delivery. Payment instructions will be shared on your registered email after KYC verification.';
-                }
-
-                // Update totals
-                totalAmount.innerHTML = this.formatAmount(summaryData.total);
-                gst.innerHTML = '₹' + summaryData.gst;
-
-                // Render product list
-                this.renderProductList(productList, summaryData.order_details);
-                AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-
-            },
-
-            renderProductList(container, products) {
-                container.innerHTML = '';
-                products.forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('justify-between', 'items-start', 'inline-flex');
-
-                    const rateParagraph = document.createElement('p');
-                    rateParagraph.classList.add('text-[#677489]', 'text-sm', 'font-medium', 'tracking-tight');
-                    rateParagraph.textContent = `${product.amount} ${product.currency} (${product.product === 'Forex Card' ? 'Card' : 'Note'}) @ ${product.rate}`;
-
-                    const amountParagraph = document.createElement('p');
-                    amountParagraph.classList.add('text-[#111729]', 'text-sm', 'font-medium', 'tracking-tight');
-                    amountParagraph.textContent = this.formatAmount(product.amount * product.rate);
-
-                    productDiv.appendChild(rateParagraph);
-                    productDiv.appendChild(amountParagraph);
-                    container.appendChild(productDiv);
-                });
-            },
-            formatAmount(amount) {
-                return `₹ ${parseFloat(amount).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
-            },
-            async initializeLoginWidget() {
-                loginManager.init();
-
-                loginManager.openOtpWidget()
-
-
-
-
-
-            },
-            handleBackBtn() {
-                const currentStatus = AppState.nextBtnState.status;
-
-                switch (currentStatus) {
-                    case CONSTANTS.ORDER_STATES.DELIVERY_DETAILS:
-                        // Going back to GET_RATES
-                        const deliveryDetailsSection = document.querySelector('#deliveryDetailsSection');
-                        if (deliveryDetailsSection) {
-                            deliveryDetailsSection.remove();
-                        }
-                        // Show the rates container again
-                        const getRatesContainer = document.querySelector('#getRatesContainer');
-                        if (getRatesContainer) {
-                            getRatesContainer.style.display = 'block';
-                        }
-                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.GET_RATES;
-                        ProgressManager.updateProgress('GET_RATES');
-                        break;
-
-                    case CONSTANTS.ORDER_STATES.CONTACT_DETAILS:
-                        // Going back to DELIVERY_DETAILS
-                        const contactDetailsSection = document.querySelector('#contactDetailsSection');
-                        if (contactDetailsSection) {
-                            contactDetailsSection.remove();
-                        }
-                        // Show cart section again
-                        const cartSection = document.getElementById('cartSection');
-                        if (cartSection) {
-                            cartSection.style.display = 'block';
-                        }
-                        // Reset section container width
-                        const sectionContainer = document.getElementById('sectionContainer');
-                        if (sectionContainer) {
-                            sectionContainer.classList.add('md:w-2/3');
-                        }
-                        // Show delivery details section
-                        const deliverySection = document.querySelector('#deliveryDetailsSection');
-                        if (deliverySection) {
-                            deliverySection.style.display = 'block';
-                        }
-                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
-                        ProgressManager.updateProgress('CHOOSE_PROVIDER');
-                        break;
-
-                    case CONSTANTS.ORDER_STATES.REVIEW_PAYMENT:
-                        // Going back to CONTACT_DETAILS
-                        const summarySection = document.querySelector('#summarySection');
-                        if (summarySection) {
-                            summarySection.remove();
-                        }
-                        // Show contact details section
-                        const contactSection = document.querySelector('#contactDetailsSection');
-                        if (contactSection) {
-                            contactSection.style.display = 'block';
-                        }
-                        AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
-                        ProgressManager.updateProgress('CONTACT_DETAILS');
-                        break;
-
-                    default:
-                        console.log("No back action available for current state:", currentStatus);
-                }
-
-                // Re-assign the appropriate next button after state change
-                if (currentStatus === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
-                    this.assignNextButton(document.querySelector('#proceedBtn'));
-                } else if (currentStatus === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
-                    this.assignNextButton(document.querySelector('#contactUpdateBtn'));
-                } else if (currentStatus === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
-                    this.assignNextButton(document.querySelector('#summaryConfirm'));
-                }
-
-                // Explicitly set next button to active since we have valid data
-                AppState.nextBtnState.active = true;
-            }
-
-        };
-        const calculations = {
-            ibrData: (() => {
-                const storedIbrData = sessionStorage.getItem('ibrData');
-
-                return storedIbrData ? JSON.parse(storedIbrData) : null;
-            })(),
-            getExchangeRateAddProduct(currency, quantity, productType) {
-
-                AppState.setState('exchangeRate', calculations.ibrData[currency][productType] * quantity, 'addProductState')
-            },
-            getExchangeRateEditProduct(rate, quantity) {
-                AppState.setState('exchangeRateEdit', quantity * rate, 'editProductState');
-            },
-            async processCardData(data) {
-
-                try {
-
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.RATE_CALCULATION, true);
-
-                    const productCounts = {};
-                    data.forEach((item) => {
-                        const productTypeKey = item.productType.toLowerCase();
-                        productCounts[productTypeKey] = (productCounts[productTypeKey] || 0) + 1;
-                    });
-                    const productTypeCounters = {};
-                    data.forEach((item) => {
-                        const productTypeKey = item.productType.toLowerCase();
-                        if (!productTypeCounters[productTypeKey]) {
-                            productTypeCounters[productTypeKey] = 0;
-                        }
-                        productTypeCounters[productTypeKey]++;
-                        const camelCasedProductType = item.productType.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => index === 0 ? word.toUpperCase() : word.toUpperCase()).replace(/\s+/g, '');
-                        if (productCounts[productTypeKey] > 1) {
-                            item.productNumber = `${camelCasedProductType}${productTypeCounters[productTypeKey]}`;
-                        } else {
-                            item.productNumber = camelCasedProductType;
-                        }
-                        item.allowDelete = data.length > 1;
-                    });
-                    AppState.cardDataState = data;
-                    UIManager.renderCards(AppState.cardDataState);
-                    let cartTotal = this.calculateTotalAmount(AppState.cardDataState);
-                    await UIManager.updateCart(cartTotal)
-                } catch (error) {
-                    console.log(error)
-                } finally {
-                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.RATE_CALCULATION, false);
-                }
-
-            },
-            calculateTotalAmount(data) {
-                try {
-                    if (!data || data === 0) {
-                        return 0;
-                    }
-
-                    const total = data.reduce((sum, item) => {
-                        // Ensure totalINR is treated as a number and is valid
-                        const amount = Number(item.totalINR) || 0;
-                        return sum + amount;
-                    }, 0);
-
-                    return total;
-                } catch (error) {
-                    console.error('Error calculating total amount:', error);
-                    return 0;
-                }
-            }
-
-
-
-
-        };
-        const loginManager = {
-            otpInputs: null,
-            countryCodeDropDown: null,
-            countryCodeMain: null,
-            optSendDiv: null,
-
-            init() {
-                this.loginWidgetContainer = document.querySelector('#loginWidgetContainer')
-                this.otpWidget = document.querySelector('.otpWidget')
-                this.otpInputs = document.querySelectorAll('.otpInputBlock input');
-                this.otpContainer = document.querySelector('.otpInputBlock')
-                this.countryCodeDropDown = document.getElementById('countryCodeDropDown');
-                this.countryCodeMain = document.querySelector('#contryCodeMain');
-                this.optSendDiv = document.querySelector('#optSend');
-                this.whatsappOtpSendDiv = document.querySelector('#whatsappOtpSend');
-                this.mobNumberInput = document.querySelector('#mobNumber')
-                this.otpInputContainer = document.querySelector('#otpMobileContainer');
-                this.sendOtpContainer = document.querySelector('#sendOtpMain');
-                this.verifyOtpContainer = document.querySelector('#verifyOtpMain');
-                this.otpVerify = document.querySelector('#otpVerify');
-                this.changeNumberBtn = document.querySelector('#changeNumberBtn');
-                this.otpTimer = document.querySelector('.otpTimer');
-                this.resendBtn = document.querySelector('.otpResendBtn');
-
-                this.setupOTPInputs();
-                this.setupCountryCodeDropdown();
-                this.setupLoginListeners();
-
-            },
-            async openOtpWidget() {
                 
-                this.loginWidgetContainer.style.display = 'flex'
-                this.otpWidget.style.display = 'flex'
-                document.querySelector('body').classList.add('snipContainer');
-                this.mobNumberInput.focus()
-                
-                UIManager.elements.templateMainContainer.style.display='none'
-            },
-            async closeOtpWidget() {
-
-                if (this.loginWidgetContainer) {
-                    UIManager.elements.templateMainContainer.style.display='flex'
-                    // Reset widget state properly
-                    this.loginWidgetContainer.style.display = 'none';
-                    this.otpWidget.style.display = 'none';
-
-                    // Remove the body class properly
-                    document.querySelector('body').classList.remove('snipContainer');
-
-
-
-                }
-            },
-
-            // OTP Related Functions
-            setupOTPInputs() {
-                this.otpInputs.forEach((input, index) => {
-                    input.addEventListener('keydown', (e) => this.handleOTPKeyDown(e, index));
-                    input.addEventListener('input', (e) => this.handleOTPInput(e, index));
-                    input.addEventListener('focus', (e) => e.target.select());
-                });
-            },
-
-            handleOTPKeyDown(event, index) {
-                if (!/[0-9]/.test(event.key) &&
-                    !['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(event.key)) {
-                    event.preventDefault();
-                    return;
-                }
-
-                if (event.key === 'Backspace') {
-                    const currentInput = event.target;
-                    currentInput.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
-
-                    if (currentInput.value === '' && index > 0) {
-                        this.otpInputs[index - 1].focus();
-                    }
-                }
-            },
-
-            handleOTPInput(event, index) {
-                const currentInput = event.target;
-                currentInput.value = currentInput.value.replace(/\D/g, '').slice(0, 1);
-
-                if (currentInput.value) {
-                    currentInput.style.backgroundColor = '#0DA486';
-
-                    if (index < this.otpInputs.length - 1) {
-                        this.otpInputs[index + 1].focus();
-                    } else if (this.areAllInputsFilled()) {
-                        console.log('Final OTP:', this.getOtpValue());
-                    }
-                }
-            },
-
-            getOtpValue() {
-                return Array.from(this.otpInputs)
-                    .map(input => input.value)
-                    .join('');
-            },
-
-            areAllInputsFilled() {
-                return Array.from(this.otpInputs)
-                    .every(input => input.value !== '');
-            },
-
-            // Country Code Related Functions
-            setupCountryCodeDropdown() {
-                const countryData = this.getCountryData();
-                this.populateCountryDropdown(countryData);
-                this.initializeDropdown();
-            },
-
-            getCountryData() {
-                const countryData = intlTelInputGlobals.getCountryData();
-                return countryData.sort((a, b) => {
-                    if (a.name === 'India') return -1;
-                    if (b.name === 'India') return 1;
-                    return 0;
-                });
-            },
-            getMobileData() {
-                let countryCode = Dropdown.getValue('contryCodeMain').getAttribute('mob-code')
-                let mobNumber = this.mobNumberInput.value
-                let mobileData = {
-                    countryCode: countryCode,
-                    mobNumber: mobNumber
-                }
-                return mobileData
-            },
-
-            populateCountryDropdown(countryData) {
-                countryData.forEach(country => {
-
-                    const li = document.createElement('li');
-                    const dialCode = `+${country.dialCode}`;
-                    const isIndia = country.iso2 === 'in';
-
-                    li.className = 'text-sm';
-                    li.setAttribute('value', country.iso2.toUpperCase());
-                    li.setAttribute('alternativeName', country.name);
-                    li.setAttribute('mob-code', dialCode);
-
-                    // Add selected attribute for India
-                    if (isIndia) {
-                        li.setAttribute('selected', 'true');
-                    }
-
-                    li.innerHTML = `<span>${dialCode}</span> <span>${country.name}</span>`;
-
-                    this.countryCodeDropDown.appendChild(li);
-                });
-            },
-
-            toggleOptSendVisibility(show) {
-                this.optSendDiv.style.display = show ? 'inline-flex' : 'none';
-                this.optSendDiv.style.pointerEvents = show ? 'auto' : 'none';
-            },
-
-            initializeDropdown() {
-                Dropdown.init('contryCodeMain', {
-                    searchable: true,
-                    customSelected: (item) => {
-                        const value = item.getAttribute('value');
-                        const mobCode = item.getAttribute('mob-code')
-                        return ` <div class="custom-selected-item gap-2 flex"><span>${mobCode}</span> <span class="custom-value">${value}</span> </div> `;
-                    },
-                    onSelect: (item) => {
-                        console.log(item)
-                        const selectedCountry = item;
-                        this.toggleOptSendVisibility(selectedCountry === 'IN');
-                    }
-                });
-            },
-            setupLoginListeners() {
-                this.optSendDiv.addEventListener('click', () => {
-                    this.handleSendOtp('sms')
-
-                })
-                this.whatsappOtpSendDiv.addEventListener('click', () => {
-                    this.handleSendOtp('wa')
-                })
-                this.mobNumberInput.addEventListener('keydown', function(event) {
-                    if (event.key === 'Enter') {
-                        event.preventDefault();
-                        loginManager.handleSendOtp('wa')
-                    }
-                });
-                this.otpVerify.addEventListener('click', () => {
-                    this.handleVerifyOtp();
-                })
-
-                this.otpInputs[3].addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter') {
-                        event.preventDefault(); // Prevent form submission or other default actions
-
-                        loginManager.handleVerifyOtp();
-                    }
-                })
-                this.changeNumberBtn.addEventListener('click', () => {
-
-                    this.otpInputs.forEach((input) => {
-                        input.value = '' // Clears each OTP input field
-                        input.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
-                    });
-
-                    this.sendOtpContainer.style.display = 'flex';
-                    this.verifyOtpContainer.style.display = 'none';
-                })
-                this.resendBtn.addEventListener('click', function() {
-
-                    if (loginManager.isResendEnabled) { // Check if resend is enabled
-
-
-                        // Revert the changes
-                        loginManager.otpTimer.style.display = 'block'; // Make the timer visible again
-                        loginManager.resendBtn.style.opacity = '0.5'; // Reduce opacity to indicate it's disabled
-                        loginManager.resendBtn.style.pointerEvents = 'none'; // Disable the resend button by blocking pointer events
-                        loginManager.isResendEnabled = false; // Disable further resends
-
-                        // Call the function to send OTP
-                        APIService.sendOtp();
-
-                        // Restart the countdown
-                        loginManager.activeResendOtp();
-                    } else {
-                        console.log('Resend is disabled. Please wait for the timer.');
-                    }
-                });
-                this.loginWidgetContainer.addEventListener('click', (event) => {
-
-                    if (!this.otpWidget.contains(event.target)) {
-                        loginManager.closeOtpWidget(); // Only close if the click was outside the otpWidget
-                    }
-                });
-
-            },
-            async handleSendOtp(otpMode) {
-
-                let mobileData = this.getMobileData();
-                let countryCode = mobileData.countryCode;
-                let mobNumber = mobileData.mobNumber;
-
-                if (countryCode === "91" && mobNumber !== 10) {
-                    insertAlertBelowElement(this.otpInputContainer, 'Invalid mobile number');
-                    return;
-                } else if (mobNumber === "" || !/^\d+$/.test(mobNumber)) {
-                    insertAlertBelowElement(this.otpInputContainer, 'Invalid mobile number');
-                    return;
-                } else {
-                    removeAlertBelowElement(this.otpInputContainer);
-                }
-                let response = await APIService.sendOtp(otpMode, countryCode, mobNumber)
-
-                if (response) {
-                    console.log(response);
-                    this.sendOtpContainer.style.display = 'none';
-                    this.verifyOtpContainer.style.display = 'flex';
-                    document.querySelector('#mobNum').textContent = countryCode + " " + mobNumber
-                    this.otpInputs[0].focus();
-                    this.activeResendOtp()
-                } else {
-                    console.log('some error occurred')
-                }
-
-            },
-            async handleVerifyOtp() {
-                let fetchOtp = this.getOtpValue()
-
-                var aff_token = getCookie('etmref');
-
-                removeAlertBelowElement(this.otpContainer);
-
-                if (fetchOtp.length < 4) {
-                    insertAlertBelowElement(this.otpContainer, 'Enter a valid otp');
-                    return
-                } else {
-                    removeAlertBelowElement(this.otpContainer)
-                }
-
-                let response = await APIService.verifyOtp(fetchOtp, aff_token);
-
-                if (response.verified) {
-                    console.log(response)
-
-
-                    sessionStorage.setItem('userId', response.uid)
-
-
-
-                    // Store the object as a JSON string
-                    const userInfo = {
-                        userId: response.uid,
-                        countryCode: response.customer_country_code,
-                        mobNum: response.customer_mobile
-                    };
-                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-
-
-                    loginManager.closeOtpWidget();
-                    this.resetLoginWidget()
-                    window.userCheckMain()
-                    UIManager.handleNextBtn()
-                } else {
-                    insertAlertBelowElement(this.otpContainer, 'Incorrect OTP');
-                    return
-                }
-            },
-            resetLoginWidget() {
-                // Reset OTP inputs
-                this.otpInputs.forEach(input => {
-                    input.value = '';
-                    input.style.backgroundColor = 'rgba(14, 81, 160, 0.1)';
-                });
-
-                // Reset mobile number input
-                if (this.mobNumberInput) {
-                    this.mobNumberInput.value = '';
-                }
-
-                // Show send OTP container, hide verify container
-                if (this.sendOtpContainer) {
-                    this.sendOtpContainer.style.display = 'flex';
-                }
-                if (this.verifyOtpContainer) {
-                    this.verifyOtpContainer.style.display = 'none';
-                }
-
-
-
-                // Reset timer if it's running
-                if (this.countdown) {
-                    clearInterval(this.countdown);
-                }
-                if (this.otpTimer) {
-                    this.otpTimer.textContent = '';
-                }
-                if (this.resendBtn) {
-                    this.resendBtn.style.opacity = '0.5';
-                    this.resendBtn.style.pointerEvents = 'none';
-                }
-
-                // Set isResendEnabled to false
-                this.isResendEnabled = false;
-            },
-            isResendEnabled: false,
-            countdown: null,
-            async activeResendOtp() {
-
-                let timeLeft = 30; // Start the countdown from 30 seconds
-
-                // Clear any previous timer if it's running
-                if (this.countdown) {
-                    clearInterval(this.countdown);
-                }
-
-                // Initialize the countdown timer
-                this.countdown = setInterval(() => {
-                    this.otpTimer.textContent = `In ${timeLeft}s`; // Update the displayed time
-
-                    timeLeft--; // Decrease the time
-
-                    if (timeLeft < 0) {
-                        clearInterval(this.countdown); // Stop the countdown when it reaches 0
-                        this.otpTimer.style.display = 'none'; // Hide the timer
-                        this.resendBtn.style.opacity = '1'; // Make the resend button fully visible
-                        this.resendBtn.style.pointerEvents = 'auto'; // Enable clicking on the resend button
-                        this.isResendEnabled = true; // Enable resend when countdown ends
-                    }
-                }, 1000); // Run this function every 1 second (1000ms)
-            }
-
-        }
-        const ProgressManager = {
-            stages: {
-                GET_RATES: {
-                    step: 1,
-                    name: "Get Rates"
-                },
-                CHOOSE_PROVIDER: {
-                    step: 2,
-                    name: "Choose Provider"
-                },
-                CONTACT_DETAILS: {
-                    step: 3,
-                    name: "Contact Details"
-                },
-                REVIEW_PAYMENT: {
-                    step: 4,
-                    name: "Review & Payment"
-                },
-                COMPLETE_KYC: {
-                    step: 5,
-                    name: "Complete KYC"
-                }
-            },
-
-            updateProgress(stage) {
-                const stageInfo = this.stages[stage];
-                if (!stageInfo) return;
-
-                // Update mobile progress
-                this.updateMobileProgress(stageInfo);
-            },
-
-            updateMobileProgress(stageInfo) {
-                const progressBar = document.querySelector('#progressBarMain');
-                if (!progressBar) return;
-
-                const numberElement = progressBar.querySelector('#numberElement');
-                const stageNameElement = progressBar.querySelector('#stageNameElement');
-                const progressTrack = progressBar.querySelector('[role="progressbar"]');
-
-                // Animate number
-                let currentNumber = parseInt(numberElement.textContent);
-                this.animateNumber(currentNumber, stageInfo.step, numberElement);
-
-                // Update stage name with fade effect
-                stageNameElement.style.opacity = '0';
-                setTimeout(() => {
-                    stageNameElement.textContent = stageInfo.name;
-                    stageNameElement.style.opacity = '1';
-                }, 200);
-
-                // Animate progress bar width
-                const percentage = ((stageInfo.step - 1) / 4) * 100;
-                progressTrack.style.transition = 'width 100ms ease-in-out';
-                progressTrack.style.width = `${percentage}%`;
-            },
-
-            animateNumber(start, end, element) {
-                if (start === end) return;
-
-                const step = start < end ? 1 : -1;
-                let current = start;
-
-                const animate = () => {
-                    current += step;
-                    element.textContent = current;
-
-                    if ((step > 0 && current < end) || (step < 0 && current > end)) {
-                        setTimeout(animate, 200);
-                    }
-                };
-
-                animate();
-            }
-        };
-
-
-
-
-
-
-
-
-        async function initializeApp() {
-            try {
-                let orderType = AppState.mainState.orderType
-
-                await UIManager.init(orderType);
-            } catch (error) {
-                console.error('Init failed:', error);
-            }
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeApp);
-        } else {
-            initializeApp();
-        }
-    </script>
+            </section>
+            
+            
+
+
+             <!-- hero section contents end -->
+
+
+
+
+
+
+            <?php 
+            include $fold . 'includesv2/bankingPartners.php';
+            ?>
+            
+            <?php 
+            include $fold . 'includesv2/howItWorks.php';
+            ?>
+
+            <?php 
+            include $fold . 'includesv2/extravelmoneyNumbers.php';
+            ?>
+
+            <?php 
+            include $fold . 'includesv2/extravelMoneyServices.php';
+            ?>
+
+            <?php 
+            include $fold . 'includesv2/testimonial.php';
+            ?>
+
+            <?php 
+            include $fold . 'includesv2/features.php';
+            ?>
+
+
+            
+
+            <?php 
+            include $fold . 'includesv2/press.php';
+            
+            ?>
+            
+            
+
+
+
+
+
+
+
+
+
+             <?php 
+            // include $fold . 'includesv2/faq.php';
+            ?> 
+
+            <div class="mt-12 customMd:mt-24 h-1"></div>
+
+        </div>
+
+    </div>
+    <?php 
+    include $fold . 'includesv2/footer.php';
+    ?>
+    
+    
+    
+    <?php 
+    include $fold . 'includesv2/footerScripts.php';
+    ?>
+
+    
+
 
 </body>
 
