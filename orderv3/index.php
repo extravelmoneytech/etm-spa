@@ -248,7 +248,7 @@ include $fold . 'includesv2/head.php';
 
 
 
-    <script>
+    <!-- <script>
         const CONSTANTS = {
             ORDER_TYPES: {
                 moneyTransfer: 'mt',
@@ -1280,7 +1280,9 @@ include $fold . 'includesv2/head.php';
                                 // Handle selection - you can add your selection logic here
                                 console.log(`Selected bank: ${item.storeID}`);
                                 let result=await APIService.selectMtStore(item.storeID);
-                                console.log(result)
+                                if(result){
+                                    UIManager.handleNextBtn
+                                }
                             });
                         }
 
@@ -2575,9 +2577,11 @@ include $fold . 'includesv2/head.php';
         } else {
             initializeApp();
         }
-    </script>
+    </script> -->
 
 
+
+    <script type="module" src="../orderv3/main.js"></script>
 </body>
 
 </html>
