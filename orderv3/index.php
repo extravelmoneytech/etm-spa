@@ -110,6 +110,11 @@ include $fold . 'includesv2/head.php';
     .contactMainContainer #sectionContainer {
         max-width: none;
     }
+
+    .moneyTContainer::-webkit-scrollbar{
+        display: none;
+    }
+</style>
 </style>
 
 <body class="flex justify-center">
@@ -586,6 +591,31 @@ include $fold . 'includesv2/head.php';
                     // AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                 }
             },
+            async selectMtStore(store){
+                try {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
+                    const params = new URLSearchParams({
+                        action: 'select_store_mt',
+                        token: AppState.getState('token', 'mainState'),
+                        storeID: store
+                    });
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: params.toString()
+                    });
+                    if (!response.ok) throw new Error('Rate fetch failed');
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('API Error:', error);
+                    return [];
+                } finally {
+                    AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                }
+            },
             async getDeliveryDetails() {
                 try {
                     AppState.setProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true)
@@ -982,6 +1012,7 @@ include $fold . 'includesv2/head.php';
                 const data = await APIService.getRatesMt(AppState.getState('currentCity', 'mainState'));
 
                 UIManager.renderCardsMt(data.store_list)
+                document.querySelector('#mtSavings').textContent = data.savings+ ' INR';
 
             },
             initializeAddCurrencyDropdown(type) {
@@ -1245,9 +1276,11 @@ include $fold . 'includesv2/head.php';
                         // Add click handler for select button
                         const selectButton = card.querySelector('.select-button');
                         if (selectButton) {
-                            selectButton.addEventListener('click', () => {
+                            selectButton.addEventListener('click', async() => {
                                 // Handle selection - you can add your selection logic here
-                                console.log(`Selected bank: ${item.vendor_name}`);
+                                console.log(`Selected bank: ${item.storeID}`);
+                                let result=await APIService.selectMtStore(item.storeID);
+                                console.log(result)
                             });
                         }
 
