@@ -136,7 +136,6 @@ function toggleRadio(selected, other) {
     document.getElementById(other).classList.add('radio');
     document.getElementById(other).classList.remove('selectedRadio');
 
-
 }
 
 

@@ -1,16 +1,19 @@
-import { AppState, CONSTANTS } from '../orderv3/common.js';
+import { CONSTANTS } from '../orderv3/common.js';
 
 async function initializeApp() {
   try {
-    const orderType = AppState.mainState.orderType;
+    const orderType = sessionStorage.getItem('productPage')
+
+    
     
     
     if (orderType === CONSTANTS.ORDER_TYPES.moneyTransfer) {
-      const { MoneyTransferUIManager } = await import('./moneyTransfer.js');
-      await MoneyTransferUIManager.init();
+      console.log(sessionStorage.getItem('mtCity'));
+      const { mtUIManager } = await import('../orderv3/mtUiManager.js');
+      await mtUIManager.init();
     } else if (orderType === CONSTANTS.ORDER_TYPES.forexTransfer) {
-      const { ForexUIManager } = await import('../orderv3/forex.js');
-      console.log(ForexUIManager)
+      const { ForexUIManager } = await import('../orderv3/forexUIManager.js');
+      
       await ForexUIManager.init();
     }
   } catch (error) {

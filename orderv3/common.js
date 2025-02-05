@@ -27,134 +27,20 @@ export const CONSTANTS = {
     }
 };
 
-export const AppState = {
-    nextBtnState: {
-        active: false,
-        status: CONSTANTS.ORDER_STATES.GET_RATES
-    },
-    processingStates: {
-        initialDataLoading: false,
-        addingProduct: false,
-        editingProduct: false,
-        deletingProduct: false,
-        exchangeRateCalculation: false
-    },
-    mainState: {
-        currentCity: JSON.parse(sessionStorage.getItem('storedData'))[0].city,
-        token: sessionStorage.getItem('token'),
-        orderType: sessionStorage.getItem('productPage')
-    },
-    addProductState: {
-        selectedCurrency: null,
-        exchangeRate: null,
-        currencyQuantity: null,
-        productType: null,
-    },
-    editProductState: {
-        selectedCurrencyEdit: null,
-        currencyQuantityEdit: null,
-        exchangeRateEdit: null,
-        currencyRateEdit: null
-    },
-    deliveryState: {
-        doorDelivery: 1,
-        branch: null,
-        ddAddress: null,
-        ddLandMark: null
-    },
-    cardDataState: [],
-    contactData: {
-        countryCode: null,
-        email: null,
-        name: null,
-        mobile: null,
-        uid: null,
-        travelDate: null,
-        travelPurpose: null
-    },
-    kycData: {
-        education: [
-            "Passport",
-            "Pan Card",
-            "Confirmed Air Ticket",
-            "Valid Visa",
-            "University Admission Letter"
-        ],
-        immigration: [
-            "Passport",
-            "Pan Card",
-            "Confirmed Air Ticket",
-            "Valid Visa",
-            "Immigration Letter"
-        ],
-        employment: [
-            "Passport",
-            "Pan Card",
-            "Confirmed Air Ticket",
-            "Valid Visa",
-            "Work Contract Letter"
-        ],
-        holidayLeisure: [
-            "Passport",
-            "Pan Card",
-            "Onward Air Ticket",
-            "Valid Visa",
-            "Return Air Ticket"
-        ]
-    },
-    setState(key, value, state) {
-        this[state][key] = value;
-        this.updateDOM(key, value);
-    },
-    getState(key, state) {
-        return this[state][key];
-    },
-    updateDOM(key, value) {
-        switch (key) {
-            case 'selectedCurrency':
-                const selectedCurrencyElement = document.querySelector('[data-bind="selectedCurrency"]');
-                if (selectedCurrencyElement) selectedCurrencyElement.textContent = value || '';
-                calculations.getExchangeRateAddProduct(this.addProductState.selectedCurrency, this.addProductState.currencyQuantity, this.addProductState.productType);
-                break;
-            case 'exchangeRate':
-                const exchangeRateElement = document.querySelector('[data-bind="exchangeRate"]');
-                if (exchangeRateElement) exchangeRateElement.textContent = UIManager.formatAmount(value) || '';
-                break;
-            case 'currencyQuantity':
-                calculations.getExchangeRateAddProduct(this.addProductState.selectedCurrency, this.addProductState.currencyQuantity, this.addProductState.productType);
-                break;
-            case 'productType':
-                const productTypeElement = document.querySelector('[data-bind="bottomSheetProduct"]');
-                if (productTypeElement) {
-                    productTypeElement.textContent = value === CONSTANTS.PRODUCT_TYPES.currency ? 'Currency' : 'Forex Card';
-                }
-                break;
-            case 'selectedCurrencyEdit':
-                const selectedCurrencyEditElement = document.querySelector('[data-bind="selectedCurrencyEdit"]')
-                if (selectedCurrencyEditElement) selectedCurrencyEditElement.textContent = value || '';
-                break;
-            case 'exchangeRateEdit':
-                const exchangeRateEditElement = document.querySelector('[data-bind="exchangeRateEdit"]');
-                if (exchangeRateEditElement) exchangeRateEditElement.textContent = UIManager.formatAmount(value) || '';
-                break;
-            case 'currencyQuantityEdit':
-                calculations.getExchangeRateEditProduct(this.editProductState.currencyQuantityEdit, this.editProductState.currencyRateEdit);
-                const currencyQuantityEditElement = document.querySelector('#editCurrencyQuantity');
-                if (currencyQuantityEditElement) currencyQuantityEditElement.value = value || '';
-                break;
-            default:
-                console.warn(`No DOM updates defined for state key: ${key}`);
-        }
-    },
-    isProcessing() {
-        return Object.values(this.processingStates).some(state => state === true);
-    },
-
-    setProcessingState(state, value) {
-        this.processingStates[state] = value;
-        UIManager.updateProceedButtonState();
-    }
+export const currencyNames = {
+    USD: "US Dollar",
+    GBP: "British Pound",
+    AUD: "Australian Dollar",
+    CAD: "Canadian Dollar",
+    EUR: "Euro",
+    JPY: "Japanese Yen",
+    MYR: "Malaysian Ringgit",
+    NZD: "New Zealand Dollar",
+    SGD: "Singapore Dollar",
+    THB: "Thai Baht",
+    AED: "UAE Dirham"
 };
+
 
 export const TemplateCache = {
     cache: {},
@@ -305,8 +191,15 @@ export const loginManager = {
     countryCodeDropDown: null,
     countryCodeMain: null,
     optSendDiv: null,
+    handleNextBtn:null,
+    templateMainContainer:null,
+    token:null,
 
-    init() {
+    init(templateMainContainer,handleNextBtn,token) {
+        console.log(templateMainContainer,handleNextBtn,token)
+        this.templateMainContainer=templateMainContainer;
+        this.handleNextBtn=handleNextBtn;
+        this.token=token
         this.loginWidgetContainer = document.querySelector('#loginWidgetContainer')
         this.otpWidget = document.querySelector('.otpWidget')
         this.otpInputs = document.querySelectorAll('.otpInputBlock input');
@@ -337,12 +230,12 @@ export const loginManager = {
         document.querySelector('body').classList.add('snipContainer');
         this.mobNumberInput.focus()
 
-        UIManager.elements.templateMainContainer.style.display = 'none'
+        this.templateMainContainer.style.display = 'none'
     },
     async closeOtpWidget() {
 
         if (this.loginWidgetContainer) {
-            UIManager.elements.templateMainContainer.style.display = 'flex'
+            this.templateMainContainer.style.display = 'flex'
             // Reset widget state properly
             this.loginWidgetContainer.style.display = 'none';
             this.otpWidget.style.display = 'none';
@@ -475,7 +368,6 @@ export const loginManager = {
                 return ` <div class="custom-selected-item gap-2 flex"><span>${mobCode}</span> <span class="custom-value">${value}</span> </div> `;
             },
             onSelect: (item) => {
-                console.log(item)
                 const selectedCountry = item;
                 this.toggleOptSendVisibility(selectedCountry === 'IN');
             }
@@ -528,7 +420,7 @@ export const loginManager = {
                 loginManager.isResendEnabled = false; // Disable further resends
 
                 // Call the function to send OTP
-                APIService.sendOtp();
+                loginManager.sendOtp();
 
                 // Restart the countdown
                 loginManager.activeResendOtp();
@@ -575,10 +467,10 @@ export const loginManager = {
 
         try {
             this.toggleButtonLoader(btn, true)
-            let response = await APIService.sendOtp(otpMode, countryCode, mobNumber)
+            let response = await loginManager.sendOtp(otpMode, countryCode, mobNumber)
 
             if (response) {
-                console.log(response);
+
                 this.sendOtpContainer.style.display = 'none';
                 this.verifyOtpContainer.style.display = 'flex';
                 document.querySelector('#mobNum').textContent = countryCode + " " + mobNumber
@@ -596,6 +488,36 @@ export const loginManager = {
 
 
 
+    },
+    async sendOtp(otpMode, countryCode, mobNumber) {
+
+        try {
+  
+            const params = new URLSearchParams({
+                action: 'send_otp',
+                token: this.token,
+                country_code: countryCode,
+                mobile: mobNumber,
+                mode: otpMode
+            });
+  
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: params.toString(),
+            });
+  
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+  
+            const resp = await response.json(); // Use await to handle the promise returned by response.json()
+            return resp.status;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            // location.href='error.html'
+        }
+  
     },
     toggleButtonLoader(button, isLoading) {
         if (!button) return;
@@ -640,10 +562,9 @@ export const loginManager = {
         try {
 
             this.toggleButtonLoader(btn, true)
-            let response = await APIService.verifyOtp(fetchOtp, aff_token);
+            let response = await loginManager.verifyOtp(fetchOtp, aff_token);
 
             if (response.verified) {
-                console.log(response)
 
 
                 sessionStorage.setItem('userId', response.uid)
@@ -661,7 +582,7 @@ export const loginManager = {
 
 
                 window.userCheckMain()
-                UIManager.handleNextBtn()
+                this.handleNextBtn()
                 loginManager.closeOtpWidget();
                 this.resetLoginWidget()
             } else {
@@ -675,6 +596,33 @@ export const loginManager = {
         }
 
 
+    },
+    async verifyOtp(fetchOtp, aff_token) {
+        try {
+            const params = new URLSearchParams({
+                action: 'check_otp',
+                token: this.token,
+                otp: fetchOtp,
+                aff_token: aff_token
+            });
+  
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: params.toString(),
+            });
+  
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+  
+            const resp = await response.json(); // Use await to handle the promise returned by response.json()
+  
+            return resp;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            // location.href='error.html'
+        }
     },
     resetLoginWidget() {
         // Reset OTP inputs
@@ -740,4 +688,8 @@ export const loginManager = {
         }, 1000); // Run this function every 1 second (1000ms)
     }
 
+};
+
+export const formatAmount = (amount) => {
+    return `₹ ${parseFloat(amount).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
 };

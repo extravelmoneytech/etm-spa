@@ -1,0 +1,149 @@
+<div class="flex flex-col md:flex-row rounded-xl md:gap-12 w-full max-w-[1100px] border-0 md:border border-black/10 p-6">
+    <div class="w-full">
+
+
+
+        <div class="flex flex-col pb-6 ">
+
+
+
+
+
+
+
+            <div class="px-2 flex flex-col">
+
+
+                <span class="text-[#555555] text-[14px] font-normal">Enter Your Full Name</span>
+
+                <input class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none"
+                    type="text" id="customerName" data-save>
+
+            </div>
+
+
+            <div class="px-2 flex flex-col mt-4">
+
+
+                <span class="text-[#555555] text-[14px] font-normal ">Enter Your Email</span>
+
+                <input class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none"
+                    type="text" id="customerEmail" data-save>
+
+            </div>
+
+            <div class="px-2 flex flex-col mt-4">
+
+
+                <span class="text-[#555555] text-[14px] font-normal">Enter Your Phone Number</span>
+
+
+                <div class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none flex items-center justify-between cursor-not-allowed"
+                    id="customerMobile">
+                    <span></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25"
+                        viewBox="0,0,300,250">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                            font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            style="mix-blend-mode: normal">
+                            <g transform="scale(5.33333,5.33333)">
+                                <circle cx="24" cy="24" r="20" fill="#0e51a0"></circle>
+                                <path
+                                    d="M22.491,30.69c-0.576,0 -1.152,-0.22 -1.591,-0.659l-6.083,-6.084c-0.879,-0.878 -0.879,-2.303 0,-3.182c0.878,-0.879 2.304,-0.879 3.182,0l6.083,6.084c0.879,0.878 0.879,2.303 0,3.182c-0.439,0.439 -1.015,0.659 -1.591,0.659z"
+                                    fill="#ffffff"></path>
+                                <path
+                                    d="M22.491,30.69c-0.576,0 -1.152,-0.22 -1.591,-0.659c-0.879,-0.878 -0.879,-2.303 0,-3.182l9.539,-9.539c0.878,-0.879 2.304,-0.879 3.182,0c0.879,0.878 0.879,2.303 0,3.182l-9.539,9.539c-0.439,0.439 -1.015,0.659 -1.591,0.659z"
+                                    fill="#ffffff"></path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+            </div>
+
+            <div class="px-2 flex flex-col mt-4">
+
+                <span class="text-black/60 text-sm font-semibold pl-2">Enter University Name</span>
+
+                <input class="w-full border border-black/10 rounded-lg h-12 indent-3 mt-1 font-bold outline-none"
+                    type="text" id="customerUniversityName">
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="mt-6 w-full ">
+        <div class="border-2 border-primary-blue rounded-2xl py-4 ">
+
+
+
+
+            <div class="px-2 flex flex-col moneyT mb-4 hidden" id="branchDropDownContainer">
+
+                <span class="text-black/60 text-sm font-semibold pl-2 mb-2">Choose Branch Nearby</span>
+
+                <div id="branchDropDownMain" class="dropdownMain select-none" data-search="true" dataval="">
+                    <div class="selectedItem">
+
+                    </div>
+                    <ul id="branchDropDown" class="dropdownList overflow-scroll">
+                        <li value="aluva" id="branchDropdownItem" class="dropdownItem template">
+                            <span>Aluva2, Ernakulam</span>
+                        </li>
+
+                    </ul>
+                    <svg class="dropdownArrow" xmlns="http://www.w3.org/2000/svg" width="16" height="17"
+                        viewBox="0 0 16 17" fill="none">
+                        <path
+                            d="M13.354 6.85354L8.35403 11.8535C8.30759 11.9 8.25245 11.9369 8.19175 11.9621C8.13105 11.9872 8.06599 12.0002 8.00028 12.0002C7.93457 12.0002 7.86951 11.9872 7.80881 11.9621C7.74811 11.9369 7.69296 11.9 7.64653 11.8535L2.64653 6.85354C2.55271 6.75972 2.5 6.63247 2.5 6.49979C2.5 6.36711 2.55271 6.23986 2.64653 6.14604C2.74035 6.05222 2.8676 5.99951 3.00028 5.99951C3.13296 5.99951 3.26021 6.05222 3.35403 6.14604L8.00028 10.7929L12.6465 6.14604C12.693 6.09958 12.7481 6.06273 12.8088 6.03759C12.8695 6.01245 12.9346 5.99951 13.0003 5.99951C13.066 5.99951 13.131 6.01245 13.1917 6.03759C13.2524 6.06273 13.3076 6.09958 13.354 6.14604C13.4005 6.19249 13.4373 6.24764 13.4625 6.30834C13.4876 6.36904 13.5006 6.43409 13.5006 6.49979C13.5006 6.56549 13.4876 6.63054 13.4625 6.69124C13.4373 6.75193 13.4005 6.80708 13.354 6.85354Z"
+                            fill="black" />
+                    </svg>
+                </div>
+
+            </div>
+
+
+
+            <div class="px-2">
+                <div
+                    class=" p-4 bg-custom-gradient rounded-lg border border-black/0 flex-col justify-center items-start gap-2 inline-flex w-full">
+                    <p class=" text-xl font-semibold ">KYC Documents</p>
+                    <p class="text-black text-sm font-medium ">You need to submit the following documents after placing
+                        the
+                        order.</p>
+                    <div id="document-list"
+                        class="self-stretch py-1.5 rounded-lg flex-col justify-center items-start gap-1.5 flex">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div
+            class="bg-white py-4 rounded-t-3xl  fixed bottom-0 left-0 w-full flex items-center justify-center md:static">
+            <div class="max-w-[800px] md:max-w-none w-full px-5 md:px-0">
+                <div class="h-12 px-2 py-3 bg-primary-blue rounded-lg justify-center items-center gap-1 inline-flex  mt-4 cursor-pointer w-full"
+                    id="contactUpdateBtn">
+                    <div class="text-white text-[16px] font-bold">Proceed to Next</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M15.781 12.7823L8.28104 20.2823C8.21136 20.3519 8.12863 20.4072 8.03759 20.4449C7.94654 20.4826 7.84896 20.5021 7.75042 20.5021C7.65187 20.5021 7.55429 20.4826 7.46324 20.4449C7.3722 20.4072 7.28947 20.3519 7.21979 20.2823C7.15011 20.2126 7.09483 20.1299 7.05712 20.0388C7.01941 19.9478 7 19.8502 7 19.7516C7 19.6531 7.01941 19.5555 7.05712 19.4645C7.09483 19.3734 7.15011 19.2907 7.21979 19.221L14.1901 12.2516L7.21979 5.28226C7.07906 5.14153 7 4.95066 7 4.75164C7 4.55261 7.07906 4.36174 7.21979 4.22101C7.36052 4.08028 7.55139 4.00122 7.75042 4.00122C7.94944 4.00122 8.14031 4.08028 8.28104 4.22101L15.781 11.721C15.8508 11.7907 15.9061 11.8734 15.9438 11.9644C15.9816 12.0555 16.001 12.1531 16.001 12.2516C16.001 12.3502 15.9816 12.4478 15.9438 12.5388C15.9061 12.6299 15.8508 12.7126 15.781 12.7823Z"
+                            fill="white" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

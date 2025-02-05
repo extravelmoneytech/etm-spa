@@ -111,7 +111,7 @@ include $fold . 'includesv2/head.php';
         max-width: none;
     }
 
-    .moneyTContainer::-webkit-scrollbar{
+    #getRatesContainerMt::-webkit-scrollbar{
         display: none;
     }
 </style>
