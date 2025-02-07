@@ -150,6 +150,28 @@ const AppState = {
           "Return Air Ticket"
       ]
   },
+  progressStates: {
+      GET_RATES: {
+          step: 1,
+          name: "Get Rates"
+      },
+      CHOOSE_PROVIDER: {
+          step: 2,
+          name: "Delivery Details"
+      },
+      CONTACT_DETAILS: {
+          step: 3,
+          name: "Contact Details"
+      },
+      REVIEW_PAYMENT: {
+          step: 4,
+          name: "Review & Payment"
+      },
+      COMPLETE_KYC: {
+          step: 5,
+          name: "Complete KYC"
+      }
+  },
   setState(key, value, state) {
       this[state][key] = value;
       this.updateDOM(key, value);

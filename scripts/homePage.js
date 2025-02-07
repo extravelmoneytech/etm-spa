@@ -537,9 +537,8 @@ console.log(paramsData)
          
         let cityName=e.target.getAttribute('city');
         console.log(cityName,'nbvv')
-        if(cityName!=0){
-            console.log('cityName',cityName)
-            return
+        if(cityName!=="0"){
+            
             document.querySelector('#citySelector').value=cityName;
            await handleBuyCityWidgetTransmission();
         }else{

@@ -75,31 +75,11 @@ export const DropdownCache = {
 };
 
 export const ProgressManager = {
-    stages: {
-        GET_RATES: {
-            step: 1,
-            name: "Get Rates"
-        },
-        CHOOSE_PROVIDER: {
-            step: 2,
-            name: "Choose Provider"
-        },
-        CONTACT_DETAILS: {
-            step: 3,
-            name: "Contact Details"
-        },
-        REVIEW_PAYMENT: {
-            step: 4,
-            name: "Review & Payment"
-        },
-        COMPLETE_KYC: {
-            step: 5,
-            name: "Complete KYC"
-        }
-    },
 
-    updateProgress(stage) {
-        const stageInfo = this.stages[stage];
+    updateProgress(stage,stages) {
+        
+        const stageInfo = stages[stage];
+        console.log(stageInfo);
         if (!stageInfo) return;
 
         // Update mobile progress
@@ -466,7 +446,7 @@ export const loginManager = {
         }
 
         try {
-            this.toggleButtonLoader(btn, true)
+            ButtonLoader.toggleButtonLoader(btn, true)
             let response = await loginManager.sendOtp(otpMode, countryCode, mobNumber)
 
             if (response) {
@@ -483,7 +463,7 @@ export const loginManager = {
             console.error('Error sending OTP:', error);
         } finally {
             // Hide loader and restore button
-            this.toggleButtonLoader(btn, false);
+            ButtonLoader.toggleButtonLoader(btn, false);
         }
 
 
@@ -519,30 +499,6 @@ export const loginManager = {
         }
   
     },
-    toggleButtonLoader(button, isLoading) {
-        if (!button) return;
-
-        const contentElement = button.querySelector('.button-content');
-        const loaderElement = button.querySelector('.button-loader');
-
-        if (!contentElement || !loaderElement) return;
-
-        if (isLoading) {
-            // Show loader, hide content
-            contentElement.classList.add('hidden');
-            loaderElement.classList.remove('hidden');
-            button.disabled = true;
-            button.style.opacity = '0.7';
-            button.style.cursor = 'not-allowed';
-        } else {
-            // Hide loader, show content
-            contentElement.classList.remove('hidden');
-            loaderElement.classList.add('hidden');
-            button.disabled = false;
-            button.style.opacity = '1';
-            button.style.cursor = 'pointer';
-        }
-    },
     async handleVerifyOtp() {
         let fetchOtp = this.getOtpValue()
 
@@ -561,7 +517,7 @@ export const loginManager = {
 
         try {
 
-            this.toggleButtonLoader(btn, true)
+            ButtonLoader.toggleButtonLoader(btn, true)
             let response = await loginManager.verifyOtp(fetchOtp, aff_token);
 
             if (response.verified) {
@@ -592,7 +548,7 @@ export const loginManager = {
         } catch (error) {
             console.error(error)
         } finally {
-            this.toggleButtonLoader(btn, false)
+            ButtonLoader.toggleButtonLoader(btn, false)
         }
 
 
@@ -692,4 +648,115 @@ export const loginManager = {
 
 export const formatAmount = (amount) => {
     return `₹ ${parseFloat(amount).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
+};
+
+export const ProgressGenerator = {
+    generateProgressContainer(progressStates) {
+        const progressContainer = document.createElement('div');
+
+        // Generate mobile progress bar
+        const mobileProgress = this.generateMobileProgress();
+        progressContainer.appendChild(mobileProgress);
+
+        // Generate desktop progress bar
+        const desktopProgress = this.generateDesktopProgress(progressStates);
+        progressContainer.appendChild(desktopProgress);
+
+        // Insert after the back button
+        const backBtn = document.querySelector('#backBtn');
+        backBtn.parentNode.after(progressContainer);
+    },
+
+    generateMobileProgress() {
+        const mobileContainer = document.createElement('div');
+        mobileContainer.className = 'progressContainer px-5 md:hidden';
+
+        const progressBar = document.createElement('div');
+        progressBar.id = 'progressBarMain';
+        progressBar.className = 'w-full progressBar justify-start items-center gap-2 inline-flex mt-6';
+
+        progressBar.innerHTML = `
+            <div class="w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
+                <div>
+                    <span class="text-primary-blue text-lg font-bold" id="numberElement">1</span>
+                    <span class="text-black/40 text-base font-medium">/5</span>
+                </div>
+            </div>
+            <div class="text-black text-base font-bold leading-none" id="stageNameElement">Get Rates</div>
+            <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary-blue basis-4 w-[198px]" role="progressbar"></div>
+        `;
+
+        mobileContainer.appendChild(progressBar);
+        return mobileContainer;
+    },
+
+    generateDesktopProgress(progressStates) {
+        const desktopContainer = document.createElement('div');
+        desktopContainer.className = 'progressBar mb-0 md:mb-8 hidden md:block';
+
+        const progressBar = document.createElement('div');
+        progressBar.className = 'w-full justify-start items-center progressBar hidden md:inline-flex mt-8';
+
+        // Add initial line
+        const initialLine = `<div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#20bc73]"></div>`;
+
+        // Generate steps based on progressStates
+        const steps = Object.entries(progressStates).map(([key, state], index) => {
+            const isActive = index === 0;
+
+            return `
+                <div class="flex flex-col relative">
+                    <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 ${isActive ? 'border-[#20bc73]' : 'border-[#eaeef4]'} step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                        <span class="text-black text-xl font-bold">${state.step}</span>
+                    </div>
+                    <span class="step-label text-black ${isActive ? 'font-bold' : 'text-opacity-60 font-normal'} text-lg absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">${state.name}</span>
+                </div>
+                ${index < Object.entries(progressStates).length - 1 ? 
+                    `<div class="grow shrink basis-0 h-0.5 progress-line bg-[#eaeef4] border border-[#eaeef4]"></div>` : ''}
+            `;
+        }).join('');
+
+        // Add final line
+        const finalLine = `<div class="grow shrink basis-0 h-0.5 progress-line bg-[#eaeef4] border border-[#eaeef4]"></div>`;
+
+        progressBar.innerHTML = initialLine + steps + finalLine;
+        desktopContainer.appendChild(progressBar);
+        return desktopContainer;
+    }
+};
+
+export const ButtonLoader = {
+    toggleButtonLoader(button, isLoading) {
+        if (!button) return;
+
+        const mainContent = button.querySelector('.button-main');
+        const loaderContent = button.querySelector('.button-loader');
+
+        if (mainContent || loaderContent){
+            if (isLoading) {
+                // Show loader, hide content
+                mainContent.classList.add('hidden');
+                loaderContent.classList.remove('hidden');
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                button.disabled = true;
+            } else {
+                // Hide loader, show content
+                mainContent.classList.remove('hidden');
+                loaderContent.classList.add('hidden');
+                button.classList.remove('opacity-50', 'cursor-not-allowed');
+                button.disabled = false;
+            }
+        } else {
+            if (!button) return;
+            if (isLoading) {
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                button.disabled = true;
+            } else {
+                button.classList.remove('opacity-50', 'cursor-not-allowed');
+                button.disabled = false;
+            }
+        }
+
+        
+    }
 };

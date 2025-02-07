@@ -6,16 +6,25 @@
         <div class="flex flex-col mt-6 gap-4 moneyT">
             <div class="flex  gap-4 mb-4 justify-between" id="mtProduct">
                 <div class="flex flex-col gap-2">
-                    <span class=" text-[#0e51a0] text-sm font-medium  leading-relaxed tracking-tight">Currency</span>
-                    <span class=" text-[#111729] text-sm font-medium  leading-relaxed tracking-tight" id="currencyMt">USD@ 84.17</span>
+                    <span class="text-[#0e51a0] text-sm font-medium leading-relaxed tracking-tight">Currency</span>
+                    <span class="text-[#111729] text-sm font-medium leading-relaxed tracking-tight" id="currencyMt">
+                        <!-- Skeleton loader for currencyMt -->
+                        <div class="skeleton h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+                    </span>
                 </div>
                 <div class="flex flex-col gap-2 items-end">
-                    <span class=" text-[#0e51a0] text-sm font-medium  leading-relaxed tracking-tight">Fx Amount</span>
-                    <span class=" text-[#111729] text-sm font-medium  leading-relaxed tracking-tight" id="currencyMtAmnt">5000</span>
+                    <span class="text-[#0e51a0] text-sm font-medium leading-relaxed tracking-tight">Fx Amount</span>
+                    <span class="text-[#111729] text-sm font-medium leading-relaxed tracking-tight" id="currencyMtAmnt">
+                        <!-- Skeleton loader for currencyMtAmnt -->
+                        <div class="skeleton h-4 w-8 bg-gray-200 animate-pulse rounded"></div>
+                    </span>
                 </div>
                 <div class="flex flex-col gap-2 items-end">
-                    <span class=" text-[#0e51a0] text-sm font-medium  leading-relaxed tracking-tight">Amount in INR</span>
-                    <span class=" text-[#111729] text-sm font-medium  leading-relaxed tracking-tight" id="currencyMtAmntinr">₹ 4,84,000</span>
+                    <span class="text-[#0e51a0] text-sm font-medium leading-relaxed tracking-tight">Amount in INR</span>
+                    <span class="text-[#111729] text-sm font-medium leading-relaxed tracking-tight" id="currencyMtAmntinr">
+                        <!-- Skeleton loader for currencyMtAmntinr -->
+                        <div class="skeleton h-4 w-8 bg-gray-200 animate-pulse rounded"></div>
+                    </span>
                 </div>
             </div>
             
@@ -26,7 +35,7 @@
             </div>
             <div class="justify-between items-start inline-flex w-full mt-4">
                 <p class="text-[#677489] text-sm font-medium  tracking-tight">Bank Charges</p>
-                <p class="text-[#111729] text-sm font-medium  tracking-tight" id="bankCharges"></p>
+                <p class="text-[#111729] text-sm font-medium  tracking-tight" id="bankCharges">₹ 000</p>
             </div>
         </div>
         </div>
@@ -41,7 +50,7 @@
 
         </div>
 
-        <div id="discountInputContainer" style="display: none;">
+        <div id="discountInputContainer">
             <div class="h-10 w-full pl-3 pr-1 py-1 rounded-xl border border-[#e3e8ef] justify-start items-center gap-3 inline-flex">
                 <div class="grow shrink basis-0 h-6 justify-start items-center gap-2 flex">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -55,9 +64,29 @@
                 </div>
             </div>
         </div>
+        <div class="hidden flex-col gap-2 px-3 md:px-0" id="discountCouponRemoveContainer">
+            <p class="text-[#111729] text-base font-bold leading-relaxed tracking-tight">Discount Code</p>
+            <div class="h-10 pl-3 pr-1 py-1 rounded-xl border border-[#e3e8ef] justify-start items-center gap-3 inline-flex" id="couponRemove">
+                <div class="grow shrink basis-0 h-6 justify-start items-center gap-1 flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M16.3373 9.23137C16.4474 9.34167 16.5093 9.49117 16.5093 9.64706C16.5093 9.80294 16.4474 9.95245 16.3373 10.0627L10.8471 15.5529C10.7368 15.6631 10.5873 15.725 10.4314 15.725C10.2755 15.725 10.126 15.6631 10.0157 15.5529L7.66275 13.2C7.55884 13.0885 7.50227 12.941 7.50496 12.7886C7.50765 12.6362 7.56939 12.4908 7.67716 12.383C7.78494 12.2753 7.93034 12.2135 8.08273 12.2108C8.23512 12.2082 8.38261 12.2647 8.49412 12.3686L10.4314 14.3049L15.5059 9.23137C15.6162 9.12121 15.7657 9.05934 15.9216 9.05934C16.0775 9.05934 16.227 9.12121 16.3373 9.23137ZM22 12C22 13.9778 21.4135 15.9112 20.3147 17.5557C19.2159 19.2002 17.6541 20.4819 15.8268 21.2388C13.9996 21.9957 11.9889 22.1937 10.0491 21.8078C8.10929 21.422 6.32746 20.4696 4.92894 19.0711C3.53041 17.6725 2.578 15.8907 2.19215 13.9509C1.8063 12.0111 2.00433 10.0004 2.76121 8.17316C3.51809 6.3459 4.79981 4.78412 6.4443 3.6853C8.08879 2.58649 10.0222 2 12 2C14.6512 2.00311 17.1929 3.05768 19.0676 4.93237C20.9423 6.80706 21.9969 9.34879 22 12ZM20.8235 12C20.8235 10.2549 20.306 8.54893 19.3365 7.09791C18.367 5.64689 16.9889 4.51595 15.3766 3.84812C13.7643 3.18029 11.9902 3.00555 10.2786 3.34601C8.56702 3.68647 6.99482 4.52683 5.76083 5.76082C4.52683 6.99481 3.68647 8.56702 3.34602 10.2786C3.00556 11.9902 3.18029 13.7643 3.84813 15.3766C4.51596 16.9889 5.64689 18.367 7.09791 19.3365C8.54893 20.306 10.2549 20.8235 12 20.8235C14.3394 20.8209 16.5821 19.8905 18.2363 18.2363C19.8905 16.5821 20.8209 14.3393 20.8235 12Z" fill="#008E4C" />
+                    </svg>
+                    <div class="grow shrink basis-0 h-4 justify-start items-center gap-1 flex">
+                        <div class="text-[#008e4b] text-base font-semibold  leading-none couponCode">EXTRAVEL100</div>
+                    </div>
+                </div>
+                <div id="removeCoupon" class="w-[72px] self-stretch bg-[#e3373a]/5 rounded-lg justify-center items-center gap-2.5 flex cursor-pointer">
+                    <div class="text-[#e3373a] text-sm font-medium leading-tight tracking-tight select-none">Remove</div>
+                </div>
+            </div>
+            <div class="px-[9px] py-1 bg-[#20bc73]/10 rounded-lg justify-start items-center gap-1 inline-flex my-2">
+                
+                <div><span class="text-[#008e4b] text-[14px] font-bold  leading-[18px] couponCode">EXTRA100</span><span class="text-[#008e4b] text-[14px] font-normal leading-[18px]">  Successfully Applied, You saved  </span><span class="text-[#008e4b] text-[14px] font-bold leading-[18px]" id="discountRate">₹1500 </span><span class="text-[#008e4b] text-[14px] font-normal  leading-[18px]"> on this order.</span></div>
+            </div>
+        </div>
         
         <div class="moneyT px-3 pb-3">
-            <span class="text-black/60 text-xs font-normal  leading-[18px]" id="intermediatoryNote">Note: Intermediatory bank may charge US$ 15-30 for receiving the Wire Transfer. Kindly check with the beneficiary to find out the exact fee.</span>
+            <span class="text-black/60 text-xs font-normal  leading-[18px] hidden" id="intermediatoryNote">Note: Intermediatory bank may charge US$ 15-30 for receiving the Wire Transfer. Kindly check with the beneficiary to find out the exact fee.</span>
           <p class="text-black/60 text-xs font-normal  leading-[18px] mt-4"><span >TCS (Tax Collected at Source) may be applicable on your Wire Transfer. It is NOT an additional charge and can be claimed when filing Income Tax Returns. </span><a href="https://www.extravelmoney.com/tcs-tax-on-remittance-from-india/" target="_blank" class="text-[#0e51a0] text-xs font-normal  underline leading-[18px]"> Know more about TCS.</a></p>
         </div>
         
@@ -115,13 +144,30 @@
         <div class="text-black/60 text-xs font-normal mt-10"><span>By proceeding I agree to the </span><a class="cursor-pointer" target=_blank href="https://www.extravelmoney.com/terms/"><span class="underline">Terms & Conditions</span></a><span> and </span><a class="cursor-pointer" target=_blank href="https://www.extravelmoney.com/refund-policy/"><span class="underline">Cancellation & Refund Policy</span></a><span> of ExTravelmoney Technosol Pvt. Ltd.</span></div>
 
 
-        <div class="bg-white py-4 rounded-t-3xl  md:static fixed bottom-0 left-0 w-full flex items-center justify-center">
-        <div class="w-[90%] md:w-full h-12 px-2 py-3 bg-primary-blue rounded-lg justify-center items-center gap-1   flex md:inline-flex cursor-pointer" id="summaryConfirm">
-            <div class="text-white text-sm font-bold">Place Order</div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15.781 12.7823L8.28104 20.2823C8.21136 20.3519 8.12863 20.4072 8.03759 20.4449C7.94654 20.4826 7.84896 20.5021 7.75042 20.5021C7.65187 20.5021 7.55429 20.4826 7.46324 20.4449C7.3722 20.4072 7.28947 20.3519 7.21979 20.2823C7.15011 20.2126 7.09483 20.1299 7.05712 20.0388C7.01941 19.9478 7 19.8502 7 19.7516C7 19.6531 7.01941 19.5555 7.05712 19.4645C7.09483 19.3734 7.15011 19.2907 7.21979 19.221L14.1901 12.2516L7.21979 5.28226C7.07906 5.14153 7 4.95066 7 4.75164C7 4.55261 7.07906 4.36174 7.21979 4.22101C7.36052 4.08028 7.55139 4.00122 7.75042 4.00122C7.94944 4.00122 8.14031 4.08028 8.28104 4.22101L15.781 11.721C15.8508 11.7907 15.9061 11.8734 15.9438 11.9644C15.9816 12.0555 16.001 12.1531 16.001 12.2516C16.001 12.3502 15.9816 12.4478 15.9438 12.5388C15.9061 12.6299 15.8508 12.7126 15.781 12.7823Z" fill="white"/>
-              </svg>
-        </div>
+        <div class="bg-white py-4 rounded-t-3xl  fixed bottom-0 left-0 w-full flex items-center justify-center md:static">
+            <div class="max-w-[800px] md:max-w-none w-full px-5 md:px-0">
+                <div id="summaryConfirm" class="loadBtn h-12 px-2 py-3 bg-primary-blue rounded-lg justify-center items-center gap-1 inline-flex  mt-4 cursor-pointer w-full">
+                    <div class="justify-center items-center gap-1 inline-flex button-main">
+                        <div class="text-white text-sm font-bold">Place Order</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M15.781 12.7823L8.28104 20.2823C8.21136 20.3519 8.12863 20.4072 8.03759 20.4449C7.94654 20.4826 7.84896 20.5021 7.75042 20.5021C7.65187 20.5021 7.55429 20.4826 7.46324 20.4449C7.3722 20.4072 7.28947 20.3519 7.21979 20.2823C7.15011 20.2126 7.09483 20.1299 7.05712 20.0388C7.01941 19.9478 7 19.8502 7 19.7516C7 19.6531 7.01941 19.5555 7.05712 19.4645C7.09483 19.3734 7.15011 19.2907 7.21979 19.221L14.1901 12.2516L7.21979 5.28226C7.07906 5.14153 7 4.95066 7 4.75164C7 4.55261 7.07906 4.36174 7.21979 4.22101C7.36052 4.08028 7.55139 4.00122 7.75042 4.00122C7.94944 4.00122 8.14031 4.08028 8.28104 4.22101L15.781 11.721C15.8508 11.7907 15.9061 11.8734 15.9438 11.9644C15.9816 12.0555 16.001 12.1531 16.001 12.2516C16.001 12.3502 15.9816 12.4478 15.9438 12.5388C15.9061 12.6299 15.8508 12.7126 15.781 12.7823Z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <div class="button-loader hidden">
+                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                            </circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
         </div>
          
         

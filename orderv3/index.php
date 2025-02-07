@@ -114,7 +114,25 @@ include $fold . 'includesv2/head.php';
     #getRatesContainerMt::-webkit-scrollbar{
         display: none;
     }
-</style>
+    @media screen and (max-width:950px) {
+        .deliveryMainContainer .borderSectionCart{
+            border: none;
+        }
+        .deliveryMainContainer .headSectionCart{
+            display: none;
+        }
+        .deliveryMainContainer .amountSectionCart{
+            display: none;
+        }
+        .deliveryMainContainer #cartSection{
+            padding-bottom: 0;
+        }
+        .deliveryMainContainer .btncontainerCart{
+            padding: 0;
+        }
+        
+    }
+
 </style>
 
 <body class="flex justify-center">
@@ -130,66 +148,6 @@ include $fold . 'includesv2/head.php';
                 <svg id="backBtn" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M27.9998 15.9999C27.9998 16.2652 27.8945 16.5195 27.7069 16.7071C27.5194 16.8946 27.265 16.9999 26.9998 16.9999H7.41356L14.7073 24.2924C14.8002 24.3854 14.8739 24.4957 14.9242 24.6171C14.9745 24.7384 15.0004 24.8686 15.0004 24.9999C15.0004 25.1313 14.9745 25.2614 14.9242 25.3828C14.8739 25.5042 14.8002 25.6145 14.7073 25.7074C14.6144 25.8004 14.5041 25.8741 14.3827 25.9243C14.2613 25.9746 14.1312 26.0005 13.9998 26.0005C13.8684 26.0005 13.7383 25.9746 13.6169 25.9243C13.4955 25.8741 13.3852 25.8004 13.2923 25.7074L4.29231 16.7074C4.19933 16.6146 4.12557 16.5043 4.07525 16.3829C4.02493 16.2615 3.99902 16.1314 3.99902 15.9999C3.99902 15.8685 4.02493 15.7384 4.07525 15.617C4.12557 15.4956 4.19933 15.3853 4.29231 15.2924L13.2923 6.29245C13.4799 6.1048 13.7344 5.99939 13.9998 5.99939C14.2652 5.99939 14.5197 6.1048 14.7073 6.29245C14.895 6.48009 15.0004 6.73458 15.0004 6.99995C15.0004 7.26531 14.895 7.5198 14.7073 7.70745L7.41356 14.9999H26.9998C27.265 14.9999 27.5194 15.1053 27.7069 15.2928C27.8945 15.4804 27.9998 15.7347 27.9998 15.9999Z" fill="black" />
                 </svg>
-            </div>
-            <div class="progressContainer px-5 md:hidden">
-
-                <div id="progressBarMain"
-                    class="w-full progressBar justify-start items-center gap-2 inline-flex mt-6">
-                    <div
-                        class=" w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div><span class="text-primary-blue text-lg font-bold " id="numberElement">1</span><span
-                                class="text-black/40 text-base font-medium " id="">/5</span></div>
-                    </div>
-                    <div class="text-black text-base font-bold leading-none" id="stageNameElement">Get Rates</div>
-                    <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary-blue basis-4 w-[198px]"
-                        role="progressbar"></div>
-                </div>
-            </div>
-
-
-            <div class="progressBar mb-0 md:mb-8 hidden md:block">
-                <div class="w-full justify-start items-center progressBar hidden md:inline-flex mt-8">
-                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73]"></div>
-                    <div class="flex flex-col relative">
-                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#20bc73] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold">1</span>
-                        </div>
-                        <span class="step-label text-black text-lg font-bold absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Get Rates</span>
-                    </div>
-
-                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold">2</span>
-                        </div>
-                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Delivery Details</span>
-                    </div>
-
-                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold">3</span>
-                        </div>
-                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Contact Details</span>
-                    </div>
-
-                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold">4</span>
-                        </div>
-                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Review & Payment</span>
-                    </div>
-
-                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
-                    <div class="flex flex-col relative">
-                        <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 border-[#eaeef4] step-circle flex-col justify-center items-center gap-2.5 inline-flex">
-                            <span class="text-black text-xl font-bold">5</span>
-                        </div>
-                        <span class="step-label text-black text-opacity-60 text-lg font-normal absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">Complete KYC</span>
-                    </div>
-                    <div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#eaeef4]"></div>
-                </div>
             </div>
 
 

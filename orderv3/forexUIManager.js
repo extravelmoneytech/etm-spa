@@ -1,5 +1,5 @@
 import { APIService, calculations, AppState } from '../orderv3/forexProcess.js';
-import { DropdownCache, ProgressManager, TemplateCache, CONSTANTS,currencyNames,formatAmount, loginManager } from '../orderv3/common.js';
+import { DropdownCache, ProgressManager, TemplateCache, CONSTANTS, currencyNames, formatAmount, loginManager, ProgressGenerator, ButtonLoader } from '../orderv3/common.js';
 
 
 
@@ -11,6 +11,9 @@ export const ForexUIManager = {
         this.cacheStaticElements();
         let forexContainer = await TemplateCache.get(CONSTANTS.TEMPLATE_NAMES.FOREX_CONTAINER);
         this.elements.templateContainer.innerHTML = forexContainer;
+
+        // Generate and insert progress container
+        ProgressGenerator.generateProgressContainer(AppState.progressStates);
 
         this.cacheForexElements();
         await this.loadForexData();
@@ -36,26 +39,18 @@ export const ForexUIManager = {
             nextBtn: document.querySelector('#proceedBtn'),
             cartTotal: document.querySelector('#cartTotal')
         }
-        
-    },
-    cacheMoneyTransferElements() {
-        this.elements = {
 
-        }
     },
     setupForexListeners() {
         this.elements.addCurrencyBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.currency, 'addProduct'));
         this.elements.addForexBtn?.addEventListener('click', () => this.openBottomSheet(CONSTANTS.PRODUCT_TYPES.forexCard, 'addProduct'));
 
-       
+
 
         this.assignNextButton(this.elements.nextBtn);
     },
-    setupMoneyTransferListeners() {
-
-    },
     handleProductAddBtnVisibility(val) {
-        
+
         if (!val) {
             this.elements.addCurrencyBtn.style.display = 'none';
             this.elements.addForexBtn.style.display = 'none';
@@ -64,12 +59,12 @@ export const ForexUIManager = {
             this.elements.addForexBtn.style.display = 'inline-flex';
         }
     },
-    manageSetProcessingState(key, value){
-       let state= AppState.setProcessingState(key, value)
-     
-       if(state){
-        this.updateProceedButtonState();
-       }
+    manageSetProcessingState(key, value) {
+        let state = AppState.setProcessingState(key, value)
+
+        if (state) {
+            this.updateProceedButtonState();
+        }
     },
     setupAddBottomSheetListeners(type) {
         const closeButton = document.querySelector('#closeBottomSheet');
@@ -85,7 +80,7 @@ export const ForexUIManager = {
         })
         addProductBtn.addEventListener('click', async () => {
             const data = await APIService.addProduct('add');
-        
+
             this.manageProcessingData(data);
             this.closeBottomSheet()
         })
@@ -116,7 +111,7 @@ export const ForexUIManager = {
                         clickedCard.totalINR = AppState.getState('exchangeRateEdit', 'editProductState');
                     }
 
-                    
+
                     this.manageProcessingData(AppState.cardDataState);
                     this.closeBottomSheet();
 
@@ -163,17 +158,17 @@ export const ForexUIManager = {
             }
         });
     },
-    async manageProcessingData(data){
-       let processedData= await calculations.processCardData(data);
-       ForexUIManager.renderCards(processedData);
+    async manageProcessingData(data) {
+        let processedData = await calculations.processCardData(data);
+        ForexUIManager.renderCards(processedData);
 
-          if (data.length == 3) {
-              ForexUIManager.handleProductAddBtnVisibility(false)
-          } else {
-              ForexUIManager.handleProductAddBtnVisibility(true)
-          }
-          let cartTotal = await calculations.calculateTotalAmount(processedData);
-          await ForexUIManager.updateCart(cartTotal)
+        if (data.length == 3) {
+            ForexUIManager.handleProductAddBtnVisibility(false)
+        } else {
+            ForexUIManager.handleProductAddBtnVisibility(true)
+        }
+        let cartTotal = await calculations.calculateTotalAmount(processedData);
+        await ForexUIManager.updateCart(cartTotal)
     },
 
     async openBottomSheet(type, mode, rowId = null) {
@@ -309,11 +304,15 @@ export const ForexUIManager = {
         }
     },
     async renderCards(data) {
-
         const container = document.getElementById('cardContainer');
         if (!container || !data?.length) return;
         try {
             ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
+            
+            // Hide all skeleton cards
+            const skeletonCards = container.querySelectorAll('.skeleton-card');
+            skeletonCards.forEach(card => card.style.display = 'none');
+            
             const template = await TemplateCache.get('getRatesCard');
             const fragment = document.createDocumentFragment();
             data.forEach((item, index) => {
@@ -358,90 +357,6 @@ export const ForexUIManager = {
             ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
         }
     },
-    async renderCardsMt(data) {
-        const container = document.getElementById('mtcardContainer');
-        if (!container || !data?.length) return;
-
-        try {
-            // Get the template
-            const template = await TemplateCache.get('getRatesCardMt');
-            const fragment = document.createDocumentFragment();
-
-            data.forEach((item) => {
-                const div = document.createElement('div');
-                div.className = 'mb-4';
-
-                // Create a temporary container with the template HTML
-                let cardHTML = template;
-
-                // Create the card element
-                div.innerHTML = cardHTML;
-                const card = div.firstElementChild;
-
-                // Update card elements directly
-                const bankLogo = card.querySelector('.bank-logo');
-                if (bankLogo) {
-                    bankLogo.src = `/assets/images/banklogos/${item.logo}.png`;
-                    bankLogo.alt = `${item.vendor_name} Logo`;
-                }
-
-                const bankName = card.querySelector('.bank-name');
-                if (bankName) {
-                    bankName.textContent = item.vendor_name;
-                }
-
-                const supportedServices = card.querySelector('.supported-services');
-                if (supportedServices) {
-                    let services = [];
-                    if (item.online_kyc === "1") services.push("Online KYC");
-                    if (item.pg === "1") services.push("Online Payment");
-                    if (item.zero_benf_bank_charge) services.push("Zero Beneficiary Bank Charges");
-                    supportedServices.textContent = services.join(" • ");
-                }
-
-                const bankCharges = card.querySelector('.bank-charges');
-                if (bankCharges) {
-                    bankCharges.textContent = item.bank_charges === "0" ?
-                        "Free" :
-                        `₹ ${parseInt(item.bank_charges).toLocaleString('en-IN')}`;
-                }
-
-                const totalAmount = card.querySelector('.total-amount');
-                if (totalAmount) {
-                    totalAmount.textContent = `₹ ${parseInt(item.inr_total).toLocaleString('en-IN')}`;
-                }
-
-                // Add click handler for select button
-                const selectButton = card.querySelector('.select-button');
-                if (selectButton) {
-                    selectButton.addEventListener('click', async () => {
-                        
-                        let result = await APIService.selectMtStore(item.storeID);
-                        if (result) {
-                            ForexUIManager.handleNextBtn
-                        }
-                    });
-                }
-
-                // Add branches information if available
-                if (item.branch_locations && item.branch_locations.length > 0) {
-                    const supportedServices = card.querySelector('.supported-services');
-                    if (supportedServices) {
-                        supportedServices.textContent += ` • ${item.branch_locations.length} Branches Available`;
-                    }
-                }
-
-                fragment.appendChild(card);
-            });
-
-            // Clear container and append new cards
-            container.innerHTML = '';
-            container.appendChild(fragment);
-
-        } catch (error) {
-            console.error('Card render error:', error);
-        }
-    },
     async updateCart(val) {
 
         if (this.elements.cartTotal) {
@@ -461,29 +376,19 @@ export const ForexUIManager = {
     updateProceedButtonState() {
         const proceedBtn = this.elements.nextBtn;
         const backBtn = this.elements.backBtn;
-        
+
         const addProductBtn = document.querySelector('#addProductBtn');
         const editProductBtn = document.querySelector('#editProductBtn');
 
-        const updateButtonState = (button, isDisabled) => {
-
-            if (!button) return;
-            if (isDisabled) {
-                button.classList.add('opacity-50', 'cursor-not-allowed');
-                button.disabled = true;
-            } else {
-                button.classList.remove('opacity-50', 'cursor-not-allowed');
-                button.disabled = false;
-            }
-        };
+        
 
         // If processing, disable all buttons
         if (AppState.isProcessing()) {
-            
-            updateButtonState(proceedBtn, true);
-            updateButtonState(backBtn, true);
-            updateButtonState(addProductBtn, true);
-            updateButtonState(editProductBtn, true);
+
+            ButtonLoader.toggleButtonLoader(proceedBtn, true);
+            ButtonLoader.toggleButtonLoader(backBtn, true);
+            ButtonLoader.toggleButtonLoader(addProductBtn, true);
+            ButtonLoader.toggleButtonLoader(editProductBtn, true);
             AppState.nextBtnState.active = false;
             return;
         }
@@ -491,22 +396,22 @@ export const ForexUIManager = {
         // Only check card data length on GET_RATES page
         if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.GET_RATES) {
             if (AppState.cardDataState.length > 0) {
-                updateButtonState(proceedBtn, false);
+                ButtonLoader.toggleButtonLoader(proceedBtn, false);
                 AppState.nextBtnState.active = true;
             } else {
-                updateButtonState(proceedBtn, true);
+                ButtonLoader.toggleButtonLoader(proceedBtn, true);
                 AppState.nextBtnState.active = false;
             }
         } else {
             // For all other pages, next button should be enabled
-            updateButtonState(proceedBtn, false);
+            ButtonLoader.toggleButtonLoader(proceedBtn, false);
             AppState.nextBtnState.active = true;
         }
 
         // Enable all other buttons when not processing
-        updateButtonState(backBtn, false);
-        updateButtonState(addProductBtn, false);
-        updateButtonState(editProductBtn, false);
+        ButtonLoader.toggleButtonLoader(backBtn, false);
+        ButtonLoader.toggleButtonLoader(addProductBtn, false);
+        ButtonLoader.toggleButtonLoader(editProductBtn, false);
     },
 
     assignNextButton(element) {
@@ -514,12 +419,15 @@ export const ForexUIManager = {
         if (this.elements.nextBtn) {
             this.elements.nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             this.elements.nextBtn.disabled = false;
+            // Remove old event listener
+            this.elements.nextBtn.removeEventListener('click', this.handleNextBtn.bind(this));
         }
 
         // Assign new next button
         if (element) {
             this.elements.nextBtn = element;
-            element.addEventListener('click', () => this.handleNextBtn());
+            // Add new event listener
+            element.addEventListener('click', this.handleNextBtn.bind(this));
 
             // Update the state of the new button based on current app state
             this.updateProceedButtonState();
@@ -529,8 +437,8 @@ export const ForexUIManager = {
     },
     async handleNextBtn() {
 
-        
-        
+
+
 
 
         if (!userCheck()) {
@@ -578,12 +486,12 @@ export const ForexUIManager = {
                 deliverySection.innerHTML = template;
 
                 const sectionContainer = document.getElementById('sectionContainer');
+                document.querySelector('#forexContainerMain').classList.add('deliveryMainContainer')
                 sectionContainer.appendChild(deliverySection);
 
-                const cartContainer = document.getElementById('cartSection')
-                cartContainer.classList.add('hideCartSection')
 
-                ProgressManager.updateProgress('CHOOSE_PROVIDER');
+
+                ProgressManager.updateProgress('CHOOSE_PROVIDER', AppState.progressStates);
 
                 // Update app state
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
@@ -594,7 +502,7 @@ export const ForexUIManager = {
                 return
             }
             if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
-                
+
 
                 let ddLandMark = document.querySelector('#ddLandMark').value;
                 let ddAddress = document.querySelector('#ddAddress').value;
@@ -630,13 +538,15 @@ export const ForexUIManager = {
                     }
                 }
                 ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                
+
 
                 let status = await APIService.updateDeliveryDetails();
 
                 if (status) {
-                    
-                    ProgressManager.updateProgress('CONTACT_DETAILS');
+                    const cartContainer = document.getElementById('cartSection')
+                    cartContainer.classList.add('hideCartSection')
+
+                    ProgressManager.updateProgress('CONTACT_DETAILS', AppState.progressStates);
                     // Hide current content
                     const deliveryDetailsContainer = document.querySelector('#deliveryDetailsSection');
                     if (deliveryDetailsContainer) deliveryDetailsContainer.style.display = 'none';
@@ -648,16 +558,16 @@ export const ForexUIManager = {
                     contactSection.innerHTML = template;
 
                     const sectionContainer = document.getElementById('sectionContainer');
-
+                    document.querySelector('#forexContainerMain').classList.remove('deliveryMainContainer')
                     document.querySelector('#forexContainerMain').classList.add('contactMainContainer')
 
                     sectionContainer.appendChild(contactSection);
 
                     AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
-
+                    ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                     await this.initializeContactDetailsComponents()
 
-                    ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                    
                 }
                 return
 
@@ -681,14 +591,14 @@ export const ForexUIManager = {
                 }
 
                 ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-                
+
 
                 let response = await APIService.updateContactDetails()
 
 
                 if (response.status) {
-                    
-                    ProgressManager.updateProgress('REVIEW_PAYMENT');
+
+                    ProgressManager.updateProgress('REVIEW_PAYMENT', AppState.progressStates);
                     // Hide current content
                     const contactDetailsSection = document.querySelector('#contactDetailsSection');
                     if (contactDetailsSection) contactDetailsSection.style.display = 'none';
@@ -702,18 +612,22 @@ export const ForexUIManager = {
                     sectionContainer.appendChild(summarySection);
 
                     AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.REVIEW_PAYMENT;
-                    await this.initializeSummaryComponents()
                     ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
+                    await this.initializeSummaryComponents();
+
+                    
                 }
 
                 return
             }
             if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
+                ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
                 let data = await APIService.placeOrder();
-         
+
                 if (data.status) {
                     sessionStorage.setItem('orderId', data.orderID);
                     sessionStorage.setItem('customerName', AppState.contactData.name);
+                    ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
                     window.location.href = '/orderv2/Complete-KYC';
                 }
 
@@ -884,12 +798,12 @@ export const ForexUIManager = {
             });
 
             if (data.travel_date != "") {
- 
+
                 // AppState.contactData.travelDate = data.travel_date;
                 // window.setPickerDate(new Date(data.travel_date));
                 AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
             } else {
-      
+
                 AppState.contactData.travelDate = window.getFormatedDate(window.getSelectedDate())
             }
 
@@ -907,6 +821,7 @@ export const ForexUIManager = {
         }
     },
     updateKycList(value) {
+        
         const documentContainer = document.querySelector('#document-list');
         documentContainer.innerHTML = ''
         let docs = AppState.kycData[value]
@@ -936,8 +851,10 @@ export const ForexUIManager = {
 
 
         // Update UI based on delivery option
+        paymentInfoText.innerHTML=''
         if (summaryData.delivery_opted === '0') {
             doorDeliveryElement.style.display = "none";
+            
             paymentInfoText.innerHTML = `Visit store before <b>${summaryData.delivery_on}</b>. Full/partial payment required before store visit. Payment instructions will be shared on your registered email after KYC verification.`;
         } else {
             deliveryFee.innerHTML = '₹' + summaryData.door_fee;
@@ -974,7 +891,7 @@ export const ForexUIManager = {
         });
     },
     async initializeLoginWidget() {
-        loginManager.init(this.elements.templateMainContainer,this.handleNextBtn,AppState.mainState.token);
+        loginManager.init(this.elements.templateMainContainer, this.handleNextBtn, AppState.mainState.token);
 
         loginManager.openOtpWidget()
     },
@@ -989,11 +906,7 @@ export const ForexUIManager = {
                     deliveryDetailsSection.remove();
                 }
 
-                // Show cart section again
-                const cartSection = document.getElementById('cartSection');
-                if (cartSection) {
-                    cartSection.classList.remove('hideCartSection')
-                }
+                
 
                 // Show the rates container again
                 const getRatesContainer = document.querySelector('#getRatesContainer');
@@ -1001,7 +914,7 @@ export const ForexUIManager = {
                     getRatesContainer.style.display = 'block';
                 }
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.GET_RATES;
-                ProgressManager.updateProgress('GET_RATES');
+                ProgressManager.updateProgress('GET_RATES', AppState.progressStates);
                 break;
 
             case CONSTANTS.ORDER_STATES.CONTACT_DETAILS:
@@ -1010,18 +923,23 @@ export const ForexUIManager = {
                 if (contactDetailsSection) {
                     contactDetailsSection.remove();
                 }
+                // Show cart section again
+                const cartSection = document.getElementById('cartSection');
+                if (cartSection) {
+                    cartSection.classList.remove('hideCartSection')
+                }
                 document.querySelector('#forexContainerMain').classList.remove('contactMainContainer')
-
+                document.querySelector('#forexContainerMain').classList.add('deliveryMainContainer')
                 // Show delivery details section
                 const deliverySection = document.querySelector('#deliveryDetailsSection');
                 if (deliverySection) {
                     deliverySection.style.display = 'block';
                 }
-                
+
                 // Update the state BEFORE reassigning the button
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.DELIVERY_DETAILS;
-                ProgressManager.updateProgress('CHOOSE_PROVIDER');
-                
+                ProgressManager.updateProgress('CHOOSE_PROVIDER', AppState.progressStates);
+
                 // Reassign the button after state update
                 const nextBtn = document.querySelector('#proceedBtn');
                 if (nextBtn) {
@@ -1040,28 +958,112 @@ export const ForexUIManager = {
                 if (contactSection) {
                     contactSection.style.display = 'block';
                 }
+                
+                // Reset the state before reinitializing
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
-                ProgressManager.updateProgress('CONTACT_DETAILS');
+                ProgressManager.updateProgress('CONTACT_DETAILS', AppState.progressStates);
+                
+                // Reinitialize contact details components
+                this.initializeContactDetailsComponents();
                 break;
 
             default:
                 window.location = '/'
         }
 
+        // Clear any pending processing states
+        ForexUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
         
-
-        // Re-assign the appropriate next button after state change
-        if (currentStatus === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
-            this.assignNextButton(document.querySelector('#proceedBtn'));
-        } else if (currentStatus === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
-            this.assignNextButton(document.querySelector('#contactUpdateBtn'));
-        } else if (currentStatus === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT) {
-            this.assignNextButton(document.querySelector('#summaryConfirm'));
+        // Reset button states before reassigning
+        if (this.elements.nextBtn) {
+            this.elements.nextBtn.removeEventListener('click', this.handleNextBtn.bind(this));
+            this.elements.nextBtn = null;
         }
 
-        // Explicitly set next button to active since we have valid data
+        // Re-assign the appropriate next button after state change
+        const nextButton = currentStatus === CONSTANTS.ORDER_STATES.REVIEW_PAYMENT ? 
+            document.querySelector('#contactUpdateBtn') :
+            document.querySelector('#proceedBtn');
+        
+        if (nextButton) {
+            this.assignNextButton(nextButton);
+        }
+
+        // Update button state
         AppState.nextBtnState.active = true;
         this.updateProceedButtonState();
-    }
+    },
+    generateProgressContainer() {
+        const progressContainer = document.createElement('div');
+        progressContainer.className = 'px-5';
 
+        // Generate mobile progress bar
+        const mobileProgress = this.generateMobileProgress();
+        progressContainer.appendChild(mobileProgress);
+
+        // Generate desktop progress bar
+        const desktopProgress = this.generateDesktopProgress();
+        progressContainer.appendChild(desktopProgress);
+
+        // Insert after the back button
+        const backBtn = document.querySelector('#backBtn');
+        backBtn.parentNode.after(progressContainer);
+    },
+
+    generateMobileProgress() {
+        const mobileContainer = document.createElement('div');
+        mobileContainer.className = 'progressContainer px-5 md:hidden';
+
+        const progressBar = document.createElement('div');
+        progressBar.id = 'progressBarMain';
+        progressBar.className = 'w-full progressBar justify-start items-center gap-2 inline-flex mt-6';
+
+        progressBar.innerHTML = `
+            <div class="w-10 aspect-square bg-white rounded-3xl border-2 border-primary-blue flex-col justify-center items-center gap-2.5 inline-flex">
+                <div>
+                    <span class="text-primary-blue text-lg font-bold" id="numberElement">1</span>
+                    <span class="text-black/40 text-base font-medium">/5</span>
+                </div>
+            </div>
+            <div class="text-black text-base font-bold leading-none" id="stageNameElement">Get Rates</div>
+            <div class="flex flex-1 shrink gap-2.5 self-stretch my-auto h-0.5 border border-primary-blue basis-4 w-[198px]" role="progressbar"></div>
+        `;
+
+        mobileContainer.appendChild(progressBar);
+        return mobileContainer;
+    },
+
+    generateDesktopProgress() {
+        const desktopContainer = document.createElement('div');
+        desktopContainer.className = 'progressBar mb-0 md:mb-8 hidden md:block';
+
+        const progressBar = document.createElement('div');
+        progressBar.className = 'w-full justify-start items-center progressBar hidden md:inline-flex mt-8';
+
+        // Add initial line
+        const initialLine = `<div class="grow shrink basis-0 h-0.5 progress-line bg-[#20bc73] border border-[#20bc73]"></div>`;
+
+        // Generate steps based on AppState.progressStates
+        const steps = Object.entries(AppState.progressStates).map(([key, state], index) => {
+            const isActive = index === 0;
+
+            return `
+                <div class="flex flex-col relative">
+                    <div class="w-12 h-12 p-2.5 bg-white rounded-[30px] border-2 ${isActive ? 'border-[#20bc73]' : 'border-[#eaeef4]'} step-circle flex-col justify-center items-center gap-2.5 inline-flex">
+                        <span class="text-black text-xl font-bold">${state.step}</span>
+                    </div>
+                    <span class="step-label text-black ${isActive ? 'font-bold' : 'text-opacity-60 font-normal'} text-lg absolute -bottom-12 min-w-48 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">${state.name}</span>
+                </div>
+                ${index < Object.entries(AppState.progressStates).length - 1 ?
+                    `<div class="grow shrink basis-0 h-0.5 progress-line bg-[#eaeef4] border border-[#eaeef4]"></div>` : ''}
+            `;
+        }).join('');
+
+        // Add final line
+        const finalLine = `<div class="grow shrink basis-0 h-0.5 progress-line bg-[#eaeef4] border border-[#eaeef4]"></div>`;
+
+        progressBar.innerHTML = initialLine + steps + finalLine;
+        desktopContainer.appendChild(progressBar);
+        return desktopContainer;
+    }
 };

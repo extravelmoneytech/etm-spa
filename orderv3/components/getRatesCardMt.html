@@ -1,54 +1,68 @@
 <div id="mtcardTemplate" class="mtCard flex flex-col border border-primary-blue p-2 py-4 rounded-2xl">
-            <div class="px-4 flex flex-col justify-center items-start border-b border-black/10 pb-3">
-                <img src="" alt="Bank Logo" class="bank-logo " style="width:auto; height:32px;">
-                <p class="text-black text-lg mt-2 font-semibold bank-name"></p>
+    <div class="px-4 flex flex-col justify-center items-start border-b border-black/10 pb-3">
+        <img src="" alt="Bank Logo" class="bank-logo " style="width:auto; height:32px;">
+        <p class="text-black text-lg mt-2 font-semibold bank-name"></p>
 
 
 
-                <div class="flex justify-between items-end w-full">
+        <div class="flex justify-between items-end w-full">
 
-                    <div>
+            <div>
 
-                        <p class="text-black/40 text-xs font-normal mt-3 supported-services"></p>
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-            </div>
-
-            <div class="px-4 flex justify-between items-center mt-4 flex-col w-full customMd:flex-row">
-                <div class="flex justify-between items-center w-full">
-                    <div class="flex flex-col ">
-                        <p class="text-black/40 text-xs font-normal">Bank Charges</p>
-                        <p class="text-black text-xs font-normal bank-charges"></p>
-                    </div>
-
-                    <div class="flex flex-col ml-auto mr-8">
-                        <div class="text-black/40 text-xs font-normal">TOTAL AMOUNT</div>
-                        <div class="text-black text-lg font-bold leading-[27px] total-amount"></div>
-                    </div>
-                </div>
-
-
-                <div
-                    class="select-button cursor-pointer customMd:max-w-[10rem] h-12 pl-4 pr-2.5 py-3 bg-[#0e51a0] rounded-[30px] justify-center items-center gap-0.5 inline-flex mt-4 w-full">
-                    <div class="text-white text-sm font-medium">Select</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M9.53104 3.96896L17.031 11.469C17.1008 11.5386 17.1561 11.6213 17.1938 11.7124C17.2316 11.8034 17.251 11.901 17.251 11.9996C17.251 12.0981 17.2316 12.1957 17.1938 12.2868C17.1561 12.3778 17.1008 12.4606 17.031 12.5302L9.53104 20.0302C9.39031 20.1709 9.19944 20.25 9.00042 20.25C8.80139 20.25 8.61052 20.1709 8.46979 20.0302C8.32906 19.8895 8.25 19.6986 8.25 19.4996C8.25 19.3006 8.32906 19.1097 8.46979 18.969L15.4401 11.9996L8.46979 5.03021C8.40011 4.96052 8.34483 4.8778 8.30712 4.78675C8.26941 4.69571 8.25 4.59813 8.25 4.49958C8.25 4.40104 8.26941 4.30345 8.30712 4.21241C8.34483 4.12136 8.40011 4.03864 8.46979 3.96896C8.53947 3.89927 8.6222 3.844 8.71324 3.80629C8.80429 3.76858 8.90187 3.74916 9.00042 3.74916C9.09896 3.74916 9.19654 3.76858 9.28759 3.80629C9.37863 3.844 9.46136 3.89927 9.53104 3.96896Z"
-                            fill="white" />
-                    </svg>
-                </div>
-
-
+                <p class="text-black/40 text-xs font-normal mt-3 supported-services"></p>
             </div>
 
 
 
         </div>
+
+
+
+
+
+    </div>
+
+    <div class="px-4 flex justify-between items-center mt-4 flex-col w-full customMd:flex-row">
+        <div class="flex justify-between items-center w-full">
+            <div class="flex flex-col ">
+                <p class="text-black/40 text-xs font-normal">Bank Charges</p>
+                <p class="text-black text-xs font-normal bank-charges"></p>
+            </div>
+
+            <div class="flex flex-col ml-auto mr-8">
+                <div class="text-black/40 text-xs font-normal">TOTAL AMOUNT</div>
+                <div class="text-black text-lg font-bold leading-[27px] total-amount"></div>
+            </div>
+        </div>
+
+
+        <div class="w-full select-button loadBtn cursor-pointer customMd:max-w-[10rem] h-12 pl-4 pr-2.5 py-3 bg-[#0e51a0] rounded-[30px] mt-4 justify-center items-center gap-0.5 inline-flex">
+            <div
+                class="justify-center items-center gap-0.5 inline-flex  w-full button-main">
+                <div class="text-white text-sm font-medium">Select</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M9.53104 3.96896L17.031 11.469C17.1008 11.5386 17.1561 11.6213 17.1938 11.7124C17.2316 11.8034 17.251 11.901 17.251 11.9996C17.251 12.0981 17.2316 12.1957 17.1938 12.2868C17.1561 12.3778 17.1008 12.4606 17.031 12.5302L9.53104 20.0302C9.39031 20.1709 9.19944 20.25 9.00042 20.25C8.80139 20.25 8.61052 20.1709 8.46979 20.0302C8.32906 19.8895 8.25 19.6986 8.25 19.4996C8.25 19.3006 8.32906 19.1097 8.46979 18.969L15.4401 11.9996L8.46979 5.03021C8.40011 4.96052 8.34483 4.8778 8.30712 4.78675C8.26941 4.69571 8.25 4.59813 8.25 4.49958C8.25 4.40104 8.26941 4.30345 8.30712 4.21241C8.34483 4.12136 8.40011 4.03864 8.46979 3.96896C8.53947 3.89927 8.6222 3.844 8.71324 3.80629C8.80429 3.76858 8.90187 3.74916 9.00042 3.74916C9.09896 3.74916 9.19654 3.76858 9.28759 3.80629C9.37863 3.844 9.46136 3.89927 9.53104 3.96896Z"
+                        fill="white" />
+                </svg>
+            </div>
+
+            <div class="button-loader hidden">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                    </circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>

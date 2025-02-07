@@ -1,5 +1,5 @@
 import { APIService, AppState } from '../orderv3/mtProcess.js';
-import { DropdownCache, ProgressManager, TemplateCache, CONSTANTS, currencyNames, formatAmount, loginManager } from '../orderv3/common.js';
+import { DropdownCache, ProgressManager, TemplateCache, CONSTANTS, currencyNames, formatAmount, loginManager, ProgressGenerator, ButtonLoader } from '../orderv3/common.js';
 
 
 
@@ -12,6 +12,9 @@ export const mtUIManager = {
 
         let mtContainer = await TemplateCache.get(CONSTANTS.TEMPLATE_NAMES.MONEYTRANSFER_CONTAINER);
         this.elements.templateContainer.innerHTML = mtContainer;
+
+        // Generate and insert progress container
+        ProgressGenerator.generateProgressContainer(AppState.progressStates);
 
         this.cacheMoneyTransferElements();
         await this.loadMoneyTransferData();
@@ -60,11 +63,15 @@ export const mtUIManager = {
         const container = document.getElementById('mtcardContainer');
         if (!container || !data?.length) return;
 
+
+
         try {
             // Get the template
             const template = await TemplateCache.get('getRatesCardMt');
             const fragment = document.createDocumentFragment();
 
+
+            
             data.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = 'mb-4';
@@ -113,11 +120,13 @@ export const mtUIManager = {
                 const selectButton = card.querySelector('.select-button');
                 if (selectButton) {
                     selectButton.addEventListener('click', async () => {
-
+                        ButtonLoader.toggleButtonLoader(selectButton, true);
                         let result = await APIService.selectMtStore(item.storeID);
                         console.log(result)
                         if (result) {
+
                             mtUIManager.handleNextBtn()
+                            ButtonLoader.toggleButtonLoader(selectButton, false);
                         }
                     });
                 }
@@ -147,32 +156,22 @@ export const mtUIManager = {
         const proceedBtn = this.elements.nextBtn;
         const backBtn = this.elements.backBtn;
 
-        const updateButtonState = (button, isDisabled) => {
 
-            if (!button) return;
-            if (isDisabled) {
-                button.classList.add('opacity-50', 'cursor-not-allowed');
-                button.disabled = true;
-            } else {
-                button.classList.remove('opacity-50', 'cursor-not-allowed');
-                button.disabled = false;
-            }
-        };
 
         // If processing, disable all buttons
         if (AppState.isProcessing()) {
 
-            updateButtonState(proceedBtn, true);
-            updateButtonState(backBtn, true);
+            ButtonLoader.toggleButtonLoader(proceedBtn, true);
+            ButtonLoader.toggleButtonLoader(backBtn, true);
             AppState.nextBtnState.active = false;
             return;
         }
 
-        updateButtonState(proceedBtn, false);
+        ButtonLoader.toggleButtonLoader(proceedBtn, false);
         AppState.nextBtnState.active = true;
 
         // Enable all other buttons when not processing
-        updateButtonState(backBtn, false);
+        ButtonLoader.toggleButtonLoader(backBtn, false);
     },
 
     assignNextButton(element) {
@@ -245,6 +244,7 @@ export const mtUIManager = {
                 document.querySelector('#moneyTContainer').classList.add('contactMainContainer')
 
                 sectionContainer.appendChild(contactSection);
+                ProgressManager.updateProgress('CONTACT_DETAILS', AppState.progressStates);
 
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
 
@@ -254,75 +254,7 @@ export const mtUIManager = {
                 return
 
             }
-            if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.DELIVERY_DETAILS) {
 
-
-                let ddLandMark = document.querySelector('#ddLandMark').value;
-                let ddAddress = document.querySelector('#ddAddress').value;
-
-                let branch = AppState.deliveryState.branch;
-
-                AppState.setState('ddAddress', ddAddress, 'deliveryState');
-                AppState.setState('ddLandMark', ddLandMark, 'deliveryState');
-
-
-                if (!branch || branch === 'Select') {
-                    insertAlertBelowElement(document.querySelector('#cityDropDown'), 'Select a branch')
-                    return
-                } else {
-                    removeAlertBelowElement(document.querySelector('#cityDropDown'))
-                }
-                // Simple validation
-
-
-                if (AppState.deliveryState.doorDelivery) {
-                    if (!ddAddress || ddAddress.trim() === "") {
-                        insertAlertBelowElement(document.querySelector('#ddAddress'), 'Enter a valid address')
-                        return
-                    } else {
-                        removeAlertBelowElement(document.querySelector('#ddAddress'))
-                    }
-
-                    if (!ddLandMark || ddLandMark.trim() === "") {
-                        insertAlertBelowElement(document.querySelector('#ddLandMark'), 'Enter a valid landmark')
-                        return
-                    } else {
-                        removeAlertBelowElement(document.querySelector('#ddLandMark'))
-                    }
-                }
-                mtUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, true);
-
-
-                let status = await APIService.updateDeliveryDetails();
-
-                if (status) {
-
-                    ProgressManager.updateProgress('CONTACT_DETAILS');
-                    // Hide current content
-                    const deliveryDetailsContainer = document.querySelector('#deliveryDetailsSection');
-                    if (deliveryDetailsContainer) deliveryDetailsContainer.style.display = 'none';
-
-                    // Load and append delivery details template
-                    const template = await TemplateCache.get('contactDetails');
-                    const contactSection = document.createElement('div');
-                    contactSection.id = 'contactDetailsSection';
-                    contactSection.innerHTML = template;
-
-                    const sectionContainer = document.getElementById('sectionContainer');
-
-                    document.querySelector('#moneyTContainer').classList.add('contactMainContainer')
-
-                    sectionContainer.appendChild(contactSection);
-
-                    AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
-
-                    await this.initializeContactDetailsComponents()
-
-                    mtUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
-                }
-                return
-
-            }
             if (AppState.nextBtnState.status === CONSTANTS.ORDER_STATES.CONTACT_DETAILS) {
 
 
@@ -359,7 +291,7 @@ export const mtUIManager = {
 
                 if (response.status) {
 
-                    ProgressManager.updateProgress('REVIEW_PAYMENT');
+                    ProgressManager.updateProgress('REVIEW_PAYMENT', AppState.progressStates);
                     // Hide current content
                     const contactDetailsSection = document.querySelector('#contactDetailsSection');
                     if (contactDetailsSection) contactDetailsSection.style.display = 'none';
@@ -626,17 +558,23 @@ export const mtUIManager = {
 
         document.querySelector('#currencyMt').textContent = `${summaryData.order_details[0].currency} @ ${summaryData.order_details[0].rate}`;
         document.querySelector('#currencyMtAmnt').textContent = summaryData.order_details[0].amount;
-        document.querySelector('#currencyMtAmntinr').textContent = `₹  ${formatAmount(summaryData.order_details[0].amount * summaryData.order_details[0].rate)}`
-        summaryData.zero_bb_charge ? document.querySelector('#intermediatoryNote').style.display = 'none' : ''
-        document.querySelector('#gstMt').innerHTML = '₹ ' + summaryData.gst;
-        document.querySelector('#bankCharges').innerHTML = summaryData.bank_charges;
-        document.querySelector('#totalAmnt').innerHTML =  formatAmount(summaryData.total);
+        document.querySelector('#currencyMtAmntinr').textContent = ` ${formatAmount(summaryData.order_details[0].amount * summaryData.order_details[0].rate)}`
+        !summaryData.zero_bb_charge ? document.querySelector('#intermediatoryNote').style.display = 'block' : ''
+        document.querySelector('#gstMt').innerHTML = formatAmount(summaryData.gst);
+        document.querySelector('#bankCharges').innerHTML = formatAmount(summaryData.bank_charges);
+        document.querySelector('#totalAmnt').innerHTML = formatAmount(summaryData.total);
+
+        if (summaryData.discount !=="") {
+            mtUIManager.intiateDiscountSection(summaryData.coupon_applied, summaryData.discount);
+        } else {
+            mtUIManager.intiateDiscountSection()
+        }
 
         document.getElementById('radio1').addEventListener('click', function () {
             mtUIManager.toggleRadio(this, 'radio2');
             AppState.paymentState.paymentType = 'neft'
         });
-        
+
         document.getElementById('radio2').addEventListener('click', function () {
             mtUIManager.toggleRadio(this, 'radio1');
             AppState.paymentState.paymentType = 'pg'
@@ -646,12 +584,101 @@ export const mtUIManager = {
         mtUIManager.manageSetProcessingState(CONSTANTS.PROCESSING_STATES.INITIAL_LOAD, false);
 
     },
+    intiateDiscountSection(coupon = null, discount = null) {
+
+        let trigger = document.querySelector('#discountCodeTrigger')
+        let discountInputContainer = document.querySelector('#discountInputContainer')
+        let discountInput = document.querySelector('#discountInput')
+        let discountApplyBtn = document.querySelector('#applyCoupon')
+        let discountRemoveContainer = document.querySelector('#discountCouponRemoveContainer');
+        let couponCode = document.querySelectorAll('.couponCode');
+        let discountRate = document.querySelector('#discountRate')
+        let discountRemoveBtn = document.querySelector('#removeCoupon')
+    
+        if (coupon && discount) {
+            trigger.style.display = 'none'
+            discountInputContainer.style.display = 'none'
+            discountRemoveContainer.style.display = 'flex'
+            couponCode.forEach(item => {
+                item.textContent = coupon;
+            })
+            discountRate.textContent = ' ₹' + discount
+            discountRemoveBtn.addEventListener('click', () => {
+                mtUIManager.removeCoupon()
+            })
+    
+        }
+        else {
+            discountRemoveContainer.style.display = 'none';
+            trigger.style.display = 'flex'
+            // Store initial state and create event handler once
+            let isApplyBtnHandlerAttached = false;
+            
+            trigger.addEventListener('click', () => {
+                const isHidden = discountInputContainer.style.display === 'none';
+                
+                discountInputContainer.style.display = isHidden ? 'flex' : 'none';
+                
+                if (isHidden) {
+                    discountInput.focus();
+                    
+                    // Only attach event handler once
+                    if (!isApplyBtnHandlerAttached) {
+                        discountApplyBtn.addEventListener('click', () => 
+                            mtUIManager.handleApplyCoupon(discountInput.value)
+                        );
+                        isApplyBtnHandlerAttached = true;
+                    }
+                } else {
+                    removeAlertBelowElement(discountInputContainer);
+                }
+            });
+        }
+    
+    },
+    async handleApplyCoupon(val) {
+        if (!val || val.trim() === "") {
+            insertAlertBelowElement(discountInputContainer, 'Enter a valid coupon code!');
+            return;
+        } else {
+            removeAlertBelowElement(discountInputContainer);
+
+            try {
+                const resp = await APIService.applyCoupon(val);
+                console.log(resp);
+
+                if (resp.status) {
+                    mtUIManager.initializeSummaryComponents();
+                }
+                if (resp.status == 2) {
+                    insertAlertBelowElement(discountInputContainer, 'Coupon only valid for order of minimum ₹' + resp.min_order);
+                    return;
+                }
+                if (resp.status == 0) {
+                    insertAlertBelowElement(discountInputContainer, 'Enter a valid coupon code!');
+                    return;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    },
+    async removeCoupon() {
+        try {
+            const resp = await APIService.removeCoupon();
+            if (resp) {
+                mtUIManager.initializeSummaryComponents();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
     async toggleRadio(selected, other) {
         selected.classList.add('selectedRadioSummary');
         selected.classList.remove('radio');
         document.getElementById(other).classList.add('radio');
         document.getElementById(other).classList.remove('selectedRadioSummary');
-    
+
     },
     async initializeLoginWidget() {
         console.log(this.elements.templateMainContainer)
@@ -677,7 +704,7 @@ export const mtUIManager = {
                     getRatesContainer.style.display = 'block';
                 }
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.GET_RATES;
-                ProgressManager.updateProgress('GET_RATES');
+                ProgressManager.updateProgress('GET_RATES', AppState.progressStates);
                 break;
 
             case CONSTANTS.ORDER_STATES.REVIEW_PAYMENT:
@@ -692,7 +719,7 @@ export const mtUIManager = {
                     contactSection.style.display = 'block';
                 }
                 AppState.nextBtnState.status = CONSTANTS.ORDER_STATES.CONTACT_DETAILS;
-                ProgressManager.updateProgress('CONTACT_DETAILS');
+                ProgressManager.updateProgress('CONTACT_DETAILS', AppState.progressStates);
                 break;
 
             default:
